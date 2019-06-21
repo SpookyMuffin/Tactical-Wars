@@ -94,7 +94,7 @@ public class Unit : MonoBehaviour
         x2 = Tile.GetComponent<Tile>().x;
         y2 = Tile.GetComponent<Tile>().y;
         distancia = Mathf.Sqrt(Mathf.Pow(x2 - x1, 2f) + Mathf.Pow(y2 - y1, 2f));
-        if ( distancia > 1 || steps == 0) return;
+        if ( distancia > 1 || steps == 0 || Tile.GetComponent<Tile>().notWalkable == true) return;
 
         //Liberamos la anterior casilla
         this.Tile.GetComponent<Tile>().obj = null;
