@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44750726, g: 0.49745917, b: 0.57531, a: 1}
+  m_IndirectSpecularColor: {r: 0.4475075, g: 0.49745977, b: 0.57531065, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -979,16 +979,16 @@ PrefabInstance:
       propertyPath: notWalkable
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3553781884885284163, guid: 1044033a8b2adc7488f0851a8e93421f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3553781884885284165, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c0d660c0333c4224098a02ecd84d6232, type: 2}
+    - target: {fileID: 3553781884885284163, guid: 1044033a8b2adc7488f0851a8e93421f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1044033a8b2adc7488f0851a8e93421f, type: 3}
 --- !u!4 &876788139 stripped
@@ -1407,6 +1407,11 @@ PrefabInstance:
       propertyPath: obj
       value: 
       objectReference: {fileID: 5854493303918389834}
+    - target: {fileID: 3553781884786969982, guid: 1044033a8b2adc7488f0851a8e93421f,
+        type: 3}
+      propertyPath: notWalkable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3553781884885284165, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1516,7 +1521,7 @@ MonoBehaviour:
   EnemyCombustible: 100
   PrecioTank: 20
   gastoCombustibleTank: 5
-  combustiblePlump: 5
+  combustiblePump: 5
   racionesCamp: 10
   goldmarkEdificio: 1
   goldmarkTurno: 1
