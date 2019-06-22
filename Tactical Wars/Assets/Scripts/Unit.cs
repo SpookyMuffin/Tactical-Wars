@@ -60,6 +60,9 @@ public class Unit : MonoBehaviour
 
     }
 
+    //Funcion para conquistar un edificio.
+    //Recibe el gameobject que debe ser un edificio
+    //Material con el que se reemplazara el actual al conquistar.
     public void Conquer(GameObject Target, Material mat)
     {
         double distancia = 99;
@@ -83,7 +86,7 @@ public class Unit : MonoBehaviour
 
     }
 
-    //Mover a una casilla adyacente TODO
+    //Mover a una casilla adyacente
     public void Move(GameObject Tile)
     {
         Debug.Log("me ejecuto");
@@ -129,6 +132,7 @@ public class Unit : MonoBehaviour
         info5.GetComponent<Text>().text = "Unidad: " + type;
     }
 
+    //Funcion para rotar la unidad
     void RotateUnit(int x1, int y1, int x2, int y2)
     {
         if (y2 > y1)
