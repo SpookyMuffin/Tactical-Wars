@@ -54,6 +54,7 @@ public class aStar : MonoBehaviour
             get
             {
                 return Grid[0].Count;
+                
             }
         }
         int GridCols
@@ -125,6 +126,7 @@ public class aStar : MonoBehaviour
 
         private List<Node> GetAdjacentNodes(Node n)
         {
+            Debug.Log("busco adyacentes para el nodo" + n.Position.x+","+n.Position.y);
             List<Node> temp = new List<Node>();
 
             int row = (int)n.Position.y;
@@ -133,18 +135,22 @@ public class aStar : MonoBehaviour
             if (row + 1 < GridRows)
             {
                 temp.Add(Grid[col][row + 1]);
+                Debug.Log("1");
             }
             if (row - 1 >= 0)
             {
                 temp.Add(Grid[col][row - 1]);
+                Debug.Log("2");
             }
             if (col - 1 >= 0)
             {
                 temp.Add(Grid[col - 1][row]);
+                Debug.Log("3");
             }
             if (col + 1 < GridCols)
             {
                 temp.Add(Grid[col + 1][row]);
+                Debug.Log("");
             }
 
             return temp;

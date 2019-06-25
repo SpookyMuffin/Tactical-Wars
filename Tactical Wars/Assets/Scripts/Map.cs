@@ -41,15 +41,18 @@ public class Map : MonoBehaviour
 
     public void Pathfinding()
     {
-        Vector2 inicio = new Vector2(0, 1);
-        Vector2 destino = new Vector2(2, 1);
+        Vector2 inicio = new Vector2(0, 0);
+        Vector2 destino = new Vector2(2, 0);
         Stack<aStar.Node> path;
         List<List<aStar.Node>> pathmap = MakeMapPath();
         aStar.Astar AEstrella = new aStar.Astar(pathmap);
         aStar.Node aux;
 
+
+
         path = AEstrella.FindPath(inicio, destino);
-        for(int i = 0; i < path.Count; i++)
+        int n = path.Count;
+        for (int i = 0; i < n; i++)
         {
             aux = path.Pop();
             Debug.Log("x: " + aux.Position.x + " " + "y: " + aux.Position.y);

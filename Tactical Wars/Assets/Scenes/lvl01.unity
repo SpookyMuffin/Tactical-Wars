@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4475075, g: 0.49745977, b: 0.57531065, a: 1}
+  m_IndirectSpecularColor: {r: 0.44750726, g: 0.49745917, b: 0.57531, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -192,6 +192,11 @@ PrefabInstance:
         type: 3}
       propertyPath: x
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553781884786969982, guid: 1044033a8b2adc7488f0851a8e93421f,
+        type: 3}
+      propertyPath: notWalkable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3553781884885284165, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
@@ -977,7 +982,7 @@ PrefabInstance:
     - target: {fileID: 3553781884786969982, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
       propertyPath: notWalkable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3553781884885284165, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
@@ -1410,7 +1415,7 @@ PrefabInstance:
     - target: {fileID: 3553781884786969982, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
       propertyPath: notWalkable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3553781884885284165, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
@@ -3182,6 +3187,11 @@ PrefabInstance:
       propertyPath: x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3553781884786969982, guid: 1044033a8b2adc7488f0851a8e93421f,
+        type: 3}
+      propertyPath: notWalkable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3553781884885284165, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3310,6 +3320,11 @@ PrefabInstance:
       propertyPath: obj
       value: 
       objectReference: {fileID: 1189923722}
+    - target: {fileID: 3553781884786969982, guid: 1044033a8b2adc7488f0851a8e93421f,
+        type: 3}
+      propertyPath: notWalkable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3553781884885284165, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
