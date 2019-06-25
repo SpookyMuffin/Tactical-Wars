@@ -150,7 +150,7 @@ public class aStar : MonoBehaviour
             if (col + 1 < GridCols)
             {
                 temp.Add(Grid[col + 1][row]);
-                Debug.Log("");
+                Debug.Log("4");
             }
 
             return temp;

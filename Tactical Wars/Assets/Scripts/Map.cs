@@ -52,10 +52,12 @@ public class Map : MonoBehaviour
 
         path = AEstrella.FindPath(inicio, destino);
         int n = path.Count;
+        Debug.Log("Numero de nodos para el camino: " + n);
         for (int i = 0; i < n; i++)
         {
             aux = path.Pop();
             Debug.Log("x: " + aux.Position.x + " " + "y: " + aux.Position.y);
+            Debug.Log("Padre: "+ aux.Parent.Position.x + "," + aux.Parent.Position.y);
         }
 
     }
