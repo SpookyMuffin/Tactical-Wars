@@ -26,5 +26,7 @@ public class Pathfinding : MonoBehaviour
     {
         List<Node> Closed;
         List<Node> Open;
+
+
     }
 }
