@@ -7,10 +7,10 @@ public class Pathfinding : MonoBehaviour
 {
     public class Node
     {
-        public Node Parent;
-        public Vector2 Pos;
+        Node Parent;
+        Vector2 Pos;
         public float G, H, F;
-        public bool Walkable;
+        bool Walkable;
 
         public Node(Vector2 posicion, bool valido)
         {
@@ -21,16 +21,10 @@ public class Pathfinding : MonoBehaviour
             Pos = posicion;
             Walkable = valido;
         }
-        public float GetAndSetHValue()
+        public float GetHValue()
         {
             F = G + H;
             return F;
-        }
-        public void SetHValue(Vector2 current, Vector2 end, Node n)
-        {
-            float distance;
-            distance = Mathf.Sqrt(Mathf.Pow(end.x - current.x, 2f) + Mathf.Pow(end.y - current.y, 2f));
-            n.H = distance;
         }
     }
     public class ASTAR
@@ -50,7 +44,6 @@ public class Pathfinding : MonoBehaviour
                 {
                     Map[i, j] = new Node(new Vector2(Tiles[i, j].GetComponent<Tile>().x,
                         Tiles[i, j].GetComponent<Tile>().y), !Tiles[i, j].GetComponent<Tile>().notWalkable);
-                    
                 }
             }
         }
@@ -62,9 +55,10 @@ public class Pathfinding : MonoBehaviour
             MapCols = c;
         }
 
-        public List<Node> FindPath(Vector2 start, Vector2 end)
+        public Stack<Node> FindPath(Vector2 start, Vector2 end)
         {
-            
+            Stack<Node> Path = new Stack<Node>();
+
             List<Node> Closed = new List<Node>();
             List<Node> Open = new List<Node>();
 
@@ -73,80 +67,17 @@ public class Pathfinding : MonoBehaviour
 
             Node Q;
 
-            List<Node> temp;
-   
+            Closed.Add(Start);
 
-            Open.Add(Start);
-
-            while(Open.Count != 0 && !Closed.Exists(x => x.Pos == end))
+            while(Closed.Count != 0)
             {
-                Open = Open.OrderBy(x => x.F).ToList();
-                Q = Open[0];
-                Open.Remove(Q);
-                temp = GetAdjacentNodes(Q);
-
-               /*Debug.Log("Adyacentes de " + Q.Pos);
-                foreach (Node x in temp)
-                {
-                    Debug.Log(x.Pos);
-                }*/
+                Closed = Closed.OrderBy(x => x.F).ToList();
 
 
-                SetPartentToList(temp, Q);
-
-                foreach(Node n in temp)
-                {
-                    if(!Closed.Contains(n) && n.Walkable)
-                    {
-                        if (!Open.Contains(n))
-                        {
-                            n.G = n.Parent.G + 1;
-                            n.SetHValue(n.Pos, end, n);
-                            n.GetAndSetHValue();
-                            Open.Add(n);
-                        }
-                    }
-                    
-                }
-                Closed.Add(Q);
             }
 
-            return Closed;
+            return Path;
         }
 
-        private List<Node> GetAdjacentNodes(Node n)
-        {
-            List<Node> lista = new List<Node>();
-            int row = (int)n.Pos.x;
-            int col = (int)n.Pos.y;
-
-            if (col + 1 < MapRows)
-            {
-                lista.Add(Map[row,col + 1]);
-            }
-            if (col - 1 >= 0)
-            {
-                lista.Add(Map[row,col - 1]);
-            }
-            if (row - 1 >= 0)
-            {
-                lista.Add(Map[row - 1,col]);
-            }
-            if (row + 1 < MapCols)
-            {
-                lista.Add(Map[row + 1,col]);
-            }
-
-            return lista;
-
-        }
-
-        private void SetPartentToList(List<Node> list, Node parent)
-        {
-            foreach (Node n in list)
-            {
-                n.Parent = parent;
-            }
-        }
     }
 }

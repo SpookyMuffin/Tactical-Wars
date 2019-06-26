@@ -17,8 +17,6 @@ public class mouseActions : MonoBehaviour
     public Material mat1;
     //Mapa
     public GameObject map;
-    //Comprobador
-    bool Click2 = false;
 
 
 
@@ -30,7 +28,6 @@ public class mouseActions : MonoBehaviour
             //Esperamos a que se presione el click izquierdo y almacenamos en hit1 lo que se ha clickado
             if (Input.GetMouseButtonDown(0))
             {
-                Click2 = true;
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit1, 100)
                     && !EventSystem.current.IsPointerOverGameObject())
                 {
@@ -48,7 +45,7 @@ public class mouseActions : MonoBehaviour
 
                 }
             }
-            if (Input.GetMouseButtonDown(1) && Click2)
+            if (Input.GetMouseButtonDown(1))
             {
                 //Pasamos a clickar el segundo objeto con el click derecho
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit2, 100) &&
@@ -79,6 +76,7 @@ public class mouseActions : MonoBehaviour
                     //siempre que sea una posicion permitida
                     if (hit2.collider.gameObject.tag == "Tile" && hit1.collider.gameObject.tag == "Unit" && hit1.collider.gameObject.GetComponent<Unit>().playable == true)
                     {
+                        Debug.Log("me intento mover");
                         resourceManager.GetComponent<Resources>().MoverTank(0); 
                         hit1.collider.gameObject.GetComponent<Unit>().Move(hit2.collider.gameObject);
                         hit1.collider.gameObject.GetComponent<Unit>().Display();
