@@ -43,8 +43,10 @@ public class Map : MonoBehaviour
 
     private void Start()
     {
-       Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
-       camino = pathF.FindPath(new Vector2(0,0),new Vector2(1,0));
+
+        Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
+        camino = pathF.FindPath(new Vector2(0,0),new Vector2(2,2));
+        Debug.Log("Nodos " + camino.Count);
        foreach(Pathfinding.Node n in camino)
        {
 
