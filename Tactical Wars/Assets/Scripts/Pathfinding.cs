@@ -85,6 +85,7 @@ public class Pathfinding : MonoBehaviour
                 Open.Remove(Q);
                 temp = GetAdjacentNodes(Q);
 
+                //debug para ver si todo esta correcto
                /*Debug.Log("Adyacentes de " + Q.Pos);
                 foreach (Node x in temp)
                 {

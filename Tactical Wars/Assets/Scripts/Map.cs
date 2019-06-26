@@ -52,7 +52,7 @@ public class Map : MonoBehaviour
 
     }
 
-    //Para mostrar las rejillas
+    //Para mostrar las rejillas 
     public void MostrarGrid()
     {
        
