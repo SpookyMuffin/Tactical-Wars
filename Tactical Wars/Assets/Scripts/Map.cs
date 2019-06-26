@@ -5,11 +5,8 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public static int x = 3; //Numero de columnas de casillas
-    public static int y = 3; //Numero de filas de casillas
-
-    public static GameObject[,] mTiles = new GameObject[x,y]; //Matirz de casillas
-    public static GameObject[,] mGrid = new GameObject[x, y]; //Matirz de grids
+    public int ROWS = 3; //Numero de columnas de casillas
+    public int COLS = 3; //Numero de filas de casillas
 
     //Materiales para indicar las casillas y enemigso
     public Material neutral, enemy, ally;
@@ -17,26 +14,42 @@ public class Map : MonoBehaviour
     //Vectores de casillas y grids
     GameObject[] Grid;
     GameObject[] tiles;
+    public GameObject[,] mTiles;
+    public GameObject[,] mGrid;
+    List<Pathfinding.Node> camino;
 
-    
 
     void Awake()
-    { 
-        //Creamos la matriz de casillas
-        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile"); //ponemos todas las casillas en un vector
+    {
+      mTiles = new GameObject[ROWS, COLS]; //Matirz de casillas
+      mGrid = new GameObject[ROWS, COLS]; //Matirz de grids
+
+    //Creamos la matriz de casillas
+    GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile"); //ponemos todas las casillas en un vector
         Grid = GameObject.FindGameObjectsWithTag("GridPanel"); //grid en vector
 
         //Las metemos en la matriz
         int k = 0;
-        for (int i = 0; i < x; i++)
+        for (int i = 0; i < ROWS; i++)
         {
-            for (int j = 0; j < y; j++)
+            for (int j = 0; j < COLS; j++)
             {
                 mTiles[i, j] = tiles[k];
                 mGrid[i, j] = Grid[k];
                 k++;
             }
         }
+    }
+
+    private void Start()
+    {
+        Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
+       camino = pathF.FindPath(new Vector2(0,0),new Vector2(2,2));
+       foreach(Pathfinding.Node n in camino)
+        {
+            Debug.Log(n.Pos);
+        }
+
     }
 
     //Para mostrar las rejillas
