@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public static int x = 3; //Numero de columnas de casillas
-    public static int y = 3; //Numero de filas de casillas
+    public static int ROWS = 3; //Numero de columnas de casillas
+    public static int COLS = 3; //Numero de filas de casillas
 
-    public static GameObject[,] mTiles = new GameObject[x,y]; //Matirz de casillas
-    public static GameObject[,] mGrid = new GameObject[x, y]; //Matirz de grids
+    public static GameObject[,] mTiles = new GameObject[ROWS,COLS]; //Matirz de casillas
+    public static GameObject[,] mGrid = new GameObject[ROWS, COLS]; //Matirz de grids
 
     //Materiales para indicar las casillas y enemigso
     public Material neutral, enemy, ally;
@@ -28,9 +28,9 @@ public class Map : MonoBehaviour
 
         //Las metemos en la matriz
         int k = 0;
-        for (int i = 0; i < x; i++)
+        for (int i = 0; i < ROWS; i++)
         {
-            for (int j = 0; j < y; j++)
+            for (int j = 0; j < COLS; j++)
             {
                 mTiles[i, j] = tiles[k];
                 mGrid[i, j] = Grid[k];
