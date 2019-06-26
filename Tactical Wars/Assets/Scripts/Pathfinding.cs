@@ -121,7 +121,7 @@ public class Pathfinding : MonoBehaviour
             int row = (int)n.Pos.x;
             int col = (int)n.Pos.y;
 
-            if (col + 1 < MapRows)
+            if (col + 1 < MapCols)
             {
                 lista.Add(Map[row,col + 1]);
             }
@@ -133,7 +133,7 @@ public class Pathfinding : MonoBehaviour
             {
                 lista.Add(Map[row - 1,col]);
             }
-            if (row + 1 < MapCols)
+            if (row + 1 < MapRows)
             {
                 lista.Add(Map[row + 1,col]);
             }

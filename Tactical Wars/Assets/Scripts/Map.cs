@@ -21,11 +21,11 @@ public class Map : MonoBehaviour
 
     void Awake()
     {
-      mTiles = new GameObject[ROWS, COLS]; //Matirz de casillas
-      mGrid = new GameObject[ROWS, COLS]; //Matirz de grids
+        mTiles = new GameObject[ROWS, COLS]; //Matirz de casillas
+        mGrid = new GameObject[ROWS, COLS]; //Matirz de grids
 
-    //Creamos la matriz de casillas
-    GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile"); //ponemos todas las casillas en un vector
+        //Creamos la matriz de casillas
+        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile"); //ponemos todas las casillas en un vector
         Grid = GameObject.FindGameObjectsWithTag("GridPanel"); //grid en vector
 
         //Las metemos en la matriz
@@ -43,12 +43,13 @@ public class Map : MonoBehaviour
 
     private void Start()
     {
-        Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
-       camino = pathF.FindPath(new Vector2(0,0),new Vector2(2,2));
+       Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
+       camino = pathF.FindPath(new Vector2(0,0),new Vector2(1,0));
        foreach(Pathfinding.Node n in camino)
-        {
+       {
+
             Debug.Log(n.Pos);
-        }
+       }
 
     }
 
