@@ -89,7 +89,6 @@ public class Unit : MonoBehaviour
     //Mover a una casilla adyacente
     public void Move(GameObject Tile)
     {
-        Debug.Log("me ejecuto");
         double distancia = 1000f;
         int x1, y1, x2, y2;
         x1 = this.Tile.GetComponent<Tile>().x;
