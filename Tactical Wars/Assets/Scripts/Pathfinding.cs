@@ -21,16 +21,18 @@ public class Pathfinding : MonoBehaviour
             Pos = posicion;
             Walkable = valido;
         }
-        public float GetAndSetHValue()
+        public float GetAndSetFValue(Vector2 End)
         {
+            SetHValue(End);
             F = G + H;
             return F;
         }
-        public void SetHValue(Vector2 current, Vector2 end, Node n)
+        public void SetHValue(Vector2 end)
         {
             float distance;
+            Vector2 current = Pos;
             distance = Mathf.Sqrt(Mathf.Pow(end.x - current.x, 2f) + Mathf.Pow(end.y - current.y, 2f));
-            n.H = distance;
+            H = distance;
         }
     }
     public class ASTAR
@@ -43,6 +45,7 @@ public class Pathfinding : MonoBehaviour
         public void SetMap(GameObject[,] Tiles, int ROWS, int COLS)
         {
             Map = new Node[ROWS, COLS];
+            Node Q = new Node(new Vector2(0, 0), true);
             
             for (int i = 0; i < ROWS; i++)
             {
@@ -52,6 +55,7 @@ public class Pathfinding : MonoBehaviour
                         Tiles[i, j].GetComponent<Tile>().y), !Tiles[i, j].GetComponent<Tile>().notWalkable);
                     
                 }
+
             }
         }
 
@@ -74,7 +78,6 @@ public class Pathfinding : MonoBehaviour
             Node Q;
 
             List<Node> temp;
-   
 
             Open.Add(Start);
 
@@ -85,26 +88,20 @@ public class Pathfinding : MonoBehaviour
                 Open.Remove(Q);
                 temp = GetAdjacentNodes(Q);
 
-                //debug para ver si todo esta correcto
-               /*Debug.Log("Adyacentes de " + Q.Pos);
-                foreach (Node x in temp)
-                {
-                    Debug.Log(x.Pos);
-                }*/
 
 
                 SetPartentToList(temp, Q);
 
                 foreach(Node n in temp)
                 {
-                    if(!Closed.Contains(n) && n.Walkable)
+                    if (!Closed.Contains(n) && n.Walkable)
                     {
                         if (!Open.Contains(n))
                         {
                             n.G = n.Parent.G + 1;
-                            n.SetHValue(n.Pos, end, n);
-                            n.GetAndSetHValue();
+                            n.GetAndSetFValue(end);
                             Open.Add(n);
+                            
                         }
                     }
                     
