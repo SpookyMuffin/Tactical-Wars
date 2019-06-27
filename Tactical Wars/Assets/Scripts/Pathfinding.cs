@@ -68,12 +68,12 @@ public class Pathfinding : MonoBehaviour
 
         public List<Node> FindPath(Vector2 start, Vector2 end)
         {
-            
+
             List<Node> Closed = new List<Node>();
             List<Node> Open = new List<Node>();
 
-            Node Start = new Node(start, true);
-            Node End = new Node(end, true);
+            Node Start = Map[(int)start.x, (int)start.y];
+            Node End = Map[(int)end.x,(int)end.y];
 
             Node Q;
 
@@ -103,11 +103,13 @@ public class Pathfinding : MonoBehaviour
                             Open.Add(n);
                             
                         }
-                    }
+                    }                   
+                    
                     
                 }
                 Closed.Add(Q);
             }
+            
 
             return Closed;
         }
