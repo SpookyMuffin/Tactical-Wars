@@ -75,7 +75,7 @@ public class Pathfinding : MonoBehaviour
             Node Start = Map[(int)start.x, (int)start.y];
             Node End = Map[(int)end.x,(int)end.y];
 
-            Node Q;
+            Node Q = Start;
 
             List<Node> temp;
 
@@ -90,7 +90,7 @@ public class Pathfinding : MonoBehaviour
 
 
 
-                SetPartentToList(temp, Q);
+                //SetPartentToList(temp, Q);
 
                 foreach(Node n in temp)
                 {
@@ -98,20 +98,35 @@ public class Pathfinding : MonoBehaviour
                     {
                         if (!Open.Contains(n))
                         {
+                            n.Parent = Q;
                             n.G = n.Parent.G + 1;
                             n.GetAndSetFValue(end);
                             Open.Add(n);
                             
                         }
-                    }                   
-                    
+                    }
                     
                 }
                 Closed.Add(Q);
             }
-            
+            List<Node> Path = new List<Node>();
+            // construct path, if end was not closed return null
+            if (!Closed.Exists(x => x.Pos == end))
+            {
+                return null;
+            }
 
-            return Closed;
+            // if all good, return path
+            Node tempNode = Closed[Closed.IndexOf(Q)];
+            while (tempNode.Parent != null)
+            {
+                Path.Add(tempNode);
+
+                tempNode = tempNode.Parent;
+
+            }
+
+            return Path;
         }
 
         private List<Node> GetAdjacentNodes(Node n)
