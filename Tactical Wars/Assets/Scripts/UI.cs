@@ -12,10 +12,7 @@ public class UI : MonoBehaviour
     public GameObject infoPanel;
     public GameObject info1, info2, info3, info4, info5, info6;
 
-    private void Update()
-    {
-        
-    }
+    public GameObject passButton, waitButton;
 
     public void RefreshResources(int G, int R, int C)
     {
@@ -25,7 +22,7 @@ public class UI : MonoBehaviour
 
     }
 
-    public void SwitchStatPanelUnit(int type,int health,int steps,int power,bool action, string Casilla)
+    public void SwitchStatPanelUnit(int type, int health, int steps, int power, bool action, string Casilla)
     {
 
         info1.GetComponent<Text>().text = " Tipo de unidad " + type;
@@ -37,7 +34,7 @@ public class UI : MonoBehaviour
 
     }
 
-    public void SwitchStatPanelBuilding(int type, int status,int progress, string casilla)
+    public void SwitchStatPanelBuilding(int type, int status, int progress, string casilla)
     {
         info1.GetComponent<Text>().text = "status: " + status;
         info2.GetComponent<Text>().text = "progress: " + progress;
@@ -46,4 +43,11 @@ public class UI : MonoBehaviour
         info5.GetComponent<Text>().text = "GM: " + 20;
         info6.GetComponent<Text>().text = "Recurso " + 20;
     }
+
+    public void Pass(bool estado)
+    {
+        passButton.SetActive(estado);
+        waitButton.SetActive(!estado);
+    }
+
 }

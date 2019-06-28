@@ -678,7 +678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a1bbb3ac3bb0647bbdf1dd93674f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TurnManager: {fileID: 1011905878}
 --- !u!4 &676998050
 Transform:
   m_ObjectHideFlags: 0
@@ -1607,8 +1606,7 @@ MonoBehaviour:
   turn: 1
   resourceManager: {fileID: 1029314598}
   IA: {fileID: 676998048}
-  passButton: {fileID: 1542003249}
-  waitButton: {fileID: 622678310}
+  UI: {fileID: 1613983726}
 --- !u!4 &1011905880
 Transform:
   m_ObjectHideFlags: 0
@@ -3035,6 +3033,15 @@ MonoBehaviour:
   GoldmarkText: {fileID: 1998137240}
   RacionesText: {fileID: 916132924}
   CombustibleText: {fileID: 1831680251}
+  infoPanel: {fileID: 1430486500}
+  info1: {fileID: 1657125429}
+  info2: {fileID: 2048941411}
+  info3: {fileID: 1950115055}
+  info4: {fileID: 1484968061}
+  info5: {fileID: 586338748}
+  info6: {fileID: 978272524}
+  passButton: {fileID: 1542003249}
+  waitButton: {fileID: 622678310}
 --- !u!4 &1613983728
 Transform:
   m_ObjectHideFlags: 0
@@ -3905,6 +3912,11 @@ PrefabInstance:
       propertyPath: Tile
       value: 
       objectReference: {fileID: 1176981931}
+    - target: {fileID: 3591178934942496261, guid: b9cdabc805b89a544a06561fcc23ebd6,
+        type: 3}
+      propertyPath: UI
+      value: 
+      objectReference: {fileID: 1613983726}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdabc805b89a544a06561fcc23ebd6, type: 3}
 --- !u!1 &5854493303918389834 stripped
@@ -3995,6 +4007,11 @@ PrefabInstance:
       propertyPath: progress
       value: 99
       objectReference: {fileID: 0}
+    - target: {fileID: 7563220939206866566, guid: efce56f20381a8047b361bd30f71d1b3,
+        type: 3}
+      propertyPath: UI
+      value: 
+      objectReference: {fileID: 1613983726}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efce56f20381a8047b361bd30f71d1b3, type: 3}
 --- !u!1001 &8244758801620699681
@@ -4069,5 +4086,10 @@ PrefabInstance:
       propertyPath: Tile
       value: 
       objectReference: {fileID: 1605353653}
+    - target: {fileID: 8244758802663752106, guid: b754d01755c1689488295edab8dc366a,
+        type: 3}
+      propertyPath: UI
+      value: 
+      objectReference: {fileID: 1613983726}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b754d01755c1689488295edab8dc366a, type: 3}

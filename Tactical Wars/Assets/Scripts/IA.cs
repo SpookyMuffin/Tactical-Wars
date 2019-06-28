@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class IA : MonoBehaviour
 {
-    public GameObject TurnManager;
+    GameObject TurnManager;
+    GameObject[] Units;
+    GameObject[] IAUnits;
+    GameObject[] PlayerUnits;
+    GameObject[] Buildings;
+    GameObject[] IABuildings;
+    GameObject[] PlayerBuildings;
 
     public void IATurn()
     {
@@ -13,7 +19,7 @@ public class IA : MonoBehaviour
     }
     IEnumerator Example()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         TurnManager.GetComponent<Turns>().Pass(1);
     }
 }

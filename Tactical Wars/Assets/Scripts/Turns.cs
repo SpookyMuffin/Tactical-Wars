@@ -8,18 +8,16 @@ public class Turns : MonoBehaviour
     public GameObject resourceManager; //Gestor de recursos
     public GameObject IA;
 
-    public GameObject passButton, waitButton;
+    public GameObject UI;
 
     //Pasamos de turno, y actualizamos los recursos y el turno
     public void Pass(int who)
     {
         if (who == 0)
         {
-            passButton.SetActive(false);
-            waitButton.SetActive(true);
+          UI.GetComponent<UI>().Pass(false);
             turn = false;
             resourceManager.GetComponent<Resources>().EndTurnResources(0);
-
             IA.GetComponent<IA>().IATurn();
 
         }
@@ -28,8 +26,7 @@ public class Turns : MonoBehaviour
 
             turn = true;
             resourceManager.GetComponent<Resources>().EndTurnResources(1);
-            waitButton.SetActive(false);
-            passButton.SetActive(true);
+            UI.GetComponent<UI>().Pass(true);
         }
 
     }
