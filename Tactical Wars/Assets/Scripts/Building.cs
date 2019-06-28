@@ -10,19 +10,10 @@ public class Building : MonoBehaviour
     public int progress = 0; // Progreso de conquista de un edificio, si llega a -100 se pone a propiedad del enemigo, 100 de alidado.
                              //Tiene que llegar a -100 o a 100 para cambiar de bando, si esta entre 100 y -100, es del ultimo propietario
     public int type = 99; //Tipo del edifico  0 = cuartel general, 1 = campamento 2 = pump
-    GameObject info1, info2, info3, info4,info5; //Usado para actualizar la initerfaz
 
 
-    void Start()
-    {
-        //Buscamos todos los textos de la interfaz
-        info1 = GameObject.FindGameObjectWithTag("info1");
-        info2 = GameObject.FindGameObjectWithTag("info2");
-        info3 = GameObject.FindGameObjectWithTag("info3");
-        info4 = GameObject.FindGameObjectWithTag("info4");
-        info5 = GameObject.FindGameObjectWithTag("info5");
+    public GameObject UI;
 
-    }
 
     //Funcion para conquista de un edificio
     //Who = 0 es del jugador
@@ -75,10 +66,6 @@ public class Building : MonoBehaviour
     //Funcion para refrescar la interfaz con los parametros de este edificio.
     public void Display()
     {
-        info1.GetComponent<Text>().text = "status: " + status;
-        info2.GetComponent<Text>().text = "progress: " + progress;
-        info3.GetComponent<Text>().text = "type: " + type;
-        info4.GetComponent<Text>().text = "casilla: " + Tile.name;
-        info5.GetComponent<Text>().text = "numrecursos: " + 20;
+        UI.GetComponent<UI>().SwitchStatPanelBuilding(type, status, progress, Tile.name);
     }
 }

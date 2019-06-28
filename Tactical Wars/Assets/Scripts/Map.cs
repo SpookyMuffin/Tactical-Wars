@@ -41,7 +41,7 @@ public class Map : MonoBehaviour
         }
     }
 
-    private void Start()
+   /* private void Start()
     {
 
         Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
@@ -55,8 +55,8 @@ public class Map : MonoBehaviour
             }
         }
       
-
-    }
+    
+    }*/
 
     //Para mostrar las rejillas 
     public void MostrarGrid()

@@ -20,21 +20,10 @@ public class Unit : MonoBehaviour
 
 
     //Casilla en la que se encuentra
-    public GameObject Tile; 
+    public GameObject Tile;
 
     //Usados para la interfaz
-    GameObject info1, info2, info3, info4, info5; 
-
-    void Start()
-    {
-        //Recopilamos para actualizar la interfaz
-        info1 = GameObject.FindGameObjectWithTag("info1");
-        info2 = GameObject.FindGameObjectWithTag("info2");
-        info3 = GameObject.FindGameObjectWithTag("info3");
-        info4 = GameObject.FindGameObjectWithTag("info4");
-        info5 = GameObject.FindGameObjectWithTag("info5");
-
-    }
+    public GameObject UI;
 
     //Ataca a otra unidad
     public void Attack(GameObject Target)
@@ -124,11 +113,7 @@ public class Unit : MonoBehaviour
     //Usada para actualizar la interfaz con los datos de esta unidad
     public void Display()
     {
-        info1.GetComponent<Text>().text = "Health: " + health;
-        info2.GetComponent<Text>().text = "movimientos: " + steps;
-        info3.GetComponent<Text>().text = "Ataque: " + action;
-        info4.GetComponent<Text>().text = "casilla: " + Tile.name;
-        info5.GetComponent<Text>().text = "Unidad: " + type;
+        UI.GetComponent<UI>().SwitchStatPanelUnit(type,health,steps,power,action,Tile.name);
     }
 
     //Funcion para rotar la unidad

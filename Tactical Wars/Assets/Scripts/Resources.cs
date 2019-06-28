@@ -24,27 +24,14 @@ public class Resources : MonoBehaviour
     public int goldmarkTurno = 1; //Monedas por defecto ganada cada turno
 
     //Usados para actualizar la interfaz
-    public GameObject GoldmarkText;
-    public GameObject RacionesText;
-    public GameObject CombustibleText;
+    public GameObject UI;
 
     //Usado para los edificios
     public GameObject buildingManager;
 
     private void Start()
     {
-        //Al principio de la partida actualizamos los recursos
-        RefreshResource(1);
-        RefreshResource(2);
-        RefreshResource(3);
-    }
-
-    //Funcion utilizada para actualizar la interfaz en el caso de que se gaste o ganen recursos
-    public void RefreshResource(int resource)
-    {
-        if(resource == 1) GoldmarkText.GetComponent<Text>().text = "Goldmarks: " + Goldmarks;
-        if(resource == 2) RacionesText.GetComponent<Text>().text = "Raciones: " + Raciones;
-        if(resource == 3) CombustibleText.GetComponent<Text>().text = "Combustible: " + Combustible;
+        UI.GetComponent<UI>().RefreshResources(Goldmarks,Raciones,Combustible);
     }
 
     //Resta el combustible usado por mover una casilla un tanque
@@ -55,7 +42,7 @@ public class Resources : MonoBehaviour
         if (who == 0)
         {
             Combustible = Combustible - gastoCombustibleTank;
-            RefreshResource(3);
+            UI.GetComponent<UI>().RefreshResources(Goldmarks, Raciones, Combustible);
         }
         else if( who == 1)
         {
@@ -70,7 +57,7 @@ public class Resources : MonoBehaviour
         if (who == 0)
         {
             Goldmarks -= PrecioTank;
-            RefreshResource(1);
+            UI.GetComponent<UI>().RefreshResources(Goldmarks, Raciones, Combustible);
         }
         else if(who == 1)
         {
@@ -123,9 +110,7 @@ public class Resources : MonoBehaviour
             EndTurnPump(0);
             EndTurnCamp(0);
             Goldmarks += goldmarkTurno;
-            RefreshResource(1);
-            RefreshResource(2);
-            RefreshResource(3);
+            UI.GetComponent<UI>().RefreshResources(Goldmarks, Raciones, Combustible);
         }
         else if (who == 1)
         {
