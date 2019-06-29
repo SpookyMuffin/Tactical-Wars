@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IA : MonoBehaviour
 {
-    GameObject TurnManager;
+    public GameObject TurnManager;
     GameObject[] Units;
     GameObject[] IAUnits;
     GameObject[] PlayerUnits;
