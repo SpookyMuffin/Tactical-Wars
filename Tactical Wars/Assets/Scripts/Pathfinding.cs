@@ -68,7 +68,7 @@ public class Pathfinding : MonoBehaviour
 
         public List<Node> FindPath(Vector2 start, Vector2 end)
         {
-
+            Map[(int)end.x, (int)end.y].Walkable = true;
             List<Node> Closed = new List<Node>();
             List<Node> Open = new List<Node>();
 
@@ -110,9 +110,11 @@ public class Pathfinding : MonoBehaviour
                 Closed.Add(Q);
             }
             List<Node> Path = new List<Node>();
+
             // construct path, if end was not closed return null
             if (!Closed.Exists(x => x.Pos == end))
             {
+                Debug.Log("No encontre el camino");
                 return null;
             }
 
@@ -120,7 +122,8 @@ public class Pathfinding : MonoBehaviour
             Node tempNode = Closed[Closed.IndexOf(Q)];
             while (tempNode.Parent != null)
             {
-                Path.Add(tempNode);
+               // Path.Add(tempNode);
+                Path.Insert(0, tempNode);
 
                 tempNode = tempNode.Parent;
 

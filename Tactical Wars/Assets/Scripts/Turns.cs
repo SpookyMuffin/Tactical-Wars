@@ -15,17 +15,24 @@ public class Turns : MonoBehaviour
     {
         if (who == 0)
         {
-          UI.GetComponent<UI>().Pass(false);
             turn = false;
+            UI.GetComponent<UI>().Pass(false);
             resourceManager.GetComponent<Resources>().EndTurnResources(0);
+            foreach (GameObject x in GameObject.FindGameObjectsWithTag("Unit"))
+            {
+                if (x.GetComponent<Unit>().playable == true) x.GetComponent<Unit>().RefreshSteps();
+            }
             IA.GetComponent<IA>().IATurn();
 
         }
         else
         {
-
             turn = true;
             resourceManager.GetComponent<Resources>().EndTurnResources(1);
+            foreach (GameObject x in GameObject.FindGameObjectsWithTag("Unit"))
+            {
+                if (x.GetComponent<Unit>().playable == false) x.GetComponent<Unit>().RefreshSteps();
+            }
             UI.GetComponent<UI>().Pass(true);
         }
 

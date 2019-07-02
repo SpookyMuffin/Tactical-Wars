@@ -14,11 +14,12 @@ public class mouseActions : MonoBehaviour
     public GameObject turnManager; //Informacion del turno y sus funciones
 
     //Material aliado
-    public Material mat1;
+    public Material PlayerMat;
     //Mapa
     public GameObject map;
     //Comprobador
-    bool Click2 = false;
+    bool CompClick2 = false;
+    GameObject click1,click2;
 
 
 
@@ -30,58 +31,66 @@ public class mouseActions : MonoBehaviour
             //Esperamos a que se presione el click izquierdo y almacenamos en hit1 lo que se ha clickado
             if (Input.GetMouseButtonDown(0))
             {
-                Click2 = true;
+                CompClick2 = true;
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit1, 100)
                     && !EventSystem.current.IsPointerOverGameObject())
                 {
+                    if (hit1.collider != null) click1 = hit1.collider.gameObject;
+
                     //Comprobamos que se ha seleccionado y actualizamos la interfaz con sus propiedades
                     Debug.Log("Click Izq: " + hit1.collider);
-                    if (hit1.collider.gameObject.tag == "Unit")
+                    if (click1.tag == "Unit")
                     {
-                        hit1.collider.gameObject.GetComponent<Unit>().Display();
+                        click1.GetComponent<Unit>().Display();
                     }
-                    if (hit1.collider.gameObject.tag == "Building")
+                    if (click1.tag == "Building")
                     {
-                        hit1.collider.gameObject.GetComponent<Building>().Display();
+                       click1.GetComponent<Building>().Display();
                     }
 
 
                 }
             }
-            if (Input.GetMouseButtonDown(1) && Click2)
+            if (Input.GetMouseButtonDown(1) && CompClick2)
             {
                 //Pasamos a clickar el segundo objeto con el click derecho
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit2, 100) &&
                     !EventSystem.current.IsPointerOverGameObject())
                 {
+                    if(hit2.collider != null) click2 = hit2.collider.gameObject;
                     Debug.Log("Click Derecho: " + hit2.collider);
                     //Combate TODO
                     //Si lo que seleccionamos con el click derecho es una unidad, haremos la accion de combatir
-                    if (hit2.collider.gameObject.tag == "Unit")
+                    if (click2.gameObject.tag == "Unit")
                     {
                         //Si es una unidad aliada a una enemiga atacara
                         //Si es una infanteria o opuede que meta un ingeniero puede que repare el tank si el objetivo es aliado
 
-                        hit1.collider.gameObject.GetComponent<Unit>().Attack(hit2.collider.gameObject);
-                        hit2.collider.gameObject.GetComponent<Unit>().Display();
+                        click1.GetComponent<Unit>().Attack(click2);
+                        click2.GetComponent<Unit>().Display();
                     }
 
                     //Conquista TODO
                     //Si lo segundo que seleccionamos es un edificio procederemos a la conquista si es posible
-                    if (hit2.collider.gameObject.tag == "Building")
+                    if (click2.tag == "Building" &&click1.gameObject.tag == "Unit" 
+                        && click1.GetComponent<Unit>().playable == true)
                     {
-                        hit1.collider.gameObject.GetComponent<Unit>().Conquer(hit2.collider.gameObject, mat1);
-                        hit2.collider.gameObject.GetComponent<Building>().Display();
+                        click1.GetComponent<Unit>().Conquer(click2, PlayerMat);
+                        click2.GetComponent<Building>().Display();
                     }
 
                     //Movimiento TODO
                     //Si lo segundo que seleccionamos es una casilla, haremos el proceso de movernos
                     //siempre que sea una posicion permitida
-                    if (hit2.collider.gameObject.tag == "Tile" && hit1.collider.gameObject.tag == "Unit" && hit1.collider.gameObject.GetComponent<Unit>().playable == true)
+                    if (click1.tag == "Unit")
                     {
-                        resourceManager.GetComponent<Resources>().MoverTank(0); 
-                        hit1.collider.gameObject.GetComponent<Unit>().Move(hit2.collider.gameObject);
-                        hit1.collider.gameObject.GetComponent<Unit>().Display();
+                        if(click2.tag == "Tile" && click1.GetComponent<Unit>().playable == true)
+                        {
+                            resourceManager.GetComponent<Resources>().MoverTank(0);
+                            click1.GetComponent<Unit>().Move(click2);
+                            click1.GetComponent<Unit>().Display();
+                        }
+
                     }
                 }
             }

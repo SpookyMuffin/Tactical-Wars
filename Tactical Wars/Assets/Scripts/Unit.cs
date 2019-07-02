@@ -108,6 +108,7 @@ public class Unit : MonoBehaviour
     public void RefreshSteps()
     {
         if (type == 0) steps = tankSteps;
+        action = true;
     }
 
     //Usada para actualizar la interfaz con los datos de esta unidad
@@ -136,5 +137,10 @@ public class Unit : MonoBehaviour
         {
             this.transform.rotation = Quaternion.Euler(0, 90, 0);
         }
+    }
+
+    public Vector2 getPos()
+    {
+        return new Vector2(Tile.GetComponent<Tile>().x, Tile.GetComponent<Tile>().y);
     }
 }

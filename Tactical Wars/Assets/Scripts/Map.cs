@@ -16,7 +16,7 @@ public class Map : MonoBehaviour
     GameObject[] tiles;
     public GameObject[,] mTiles;
     public GameObject[,] mGrid;
-    List<Pathfinding.Node> camino;
+   
 
 
     void Awake()
@@ -41,22 +41,22 @@ public class Map : MonoBehaviour
         }
     }
 
-   /* private void Start()
-    {
-
+     /*private void Start()
+     {
+        List<Pathfinding.Node> camino;
         Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
-        camino = pathF.FindPath(new Vector2(0,0),new Vector2(2,2));
+         camino = pathF.FindPath(new Vector2(0,0),new Vector2(2,2));
 
-        if(camino != null){
+        if (camino != null)
+        {
             foreach (Pathfinding.Node n in camino)
             {
 
                 Debug.Log(n.Pos);
             }
+
         }
-      
-    
-    }*/
+     }*/
 
     //Para mostrar las rejillas 
     public void MostrarGrid()
@@ -84,4 +84,22 @@ public class Map : MonoBehaviour
             x.GetComponent<Renderer>().material = neutral;
         }
     }
+    public List<GameObject> GetPath(Vector2 Start, Vector2 End)
+    {
+        List<Pathfinding.Node> camino;
+        List<GameObject> ruta = new List<GameObject>();
+        Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
+        camino = pathF.FindPath(Start,End);
+
+        if (camino != null)
+        {
+            foreach (Pathfinding.Node n in camino)
+            {
+                ruta.Add(mTiles[(int)n.Pos.x, (int)n.Pos.y]);
+            }
+        }
+        return ruta;
+    }
+
+    
 }
