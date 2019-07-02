@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public int ROWS = 3; //Numero de columnas de casillas
-    public int COLS = 3; //Numero de filas de casillas
+    public int ROWS = 4; //Numero de filas de casillas
+    public int COLS = 5; //Numero de columnas de casillas
 
     //Materiales para indicar las casillas y enemigso
     public Material neutral, enemy, ally;
@@ -19,13 +19,13 @@ public class Map : MonoBehaviour
    
 
 
-    void Awake()
+    void SetMap()
     {
         mTiles = new GameObject[ROWS, COLS]; //Matirz de casillas
         mGrid = new GameObject[ROWS, COLS]; //Matirz de grids
-
+        int x, y;
         //Creamos la matriz de casillas
-        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile"); //ponemos todas las casillas en un vector
+        tiles = GameObject.FindGameObjectsWithTag("Tile"); //ponemos todas las casillas en un vector
         Grid = GameObject.FindGameObjectsWithTag("GridPanel"); //grid en vector
 
         //Las metemos en la matriz
@@ -34,29 +34,36 @@ public class Map : MonoBehaviour
         {
             for (int j = 0; j < COLS; j++)
             {
-                mTiles[i, j] = tiles[k];
+               
+                x = tiles[k].GetComponent<Tile>().x;
+                y = tiles[k].GetComponent<Tile>().y;
+                mTiles[x, y] = tiles[k];
                 mGrid[i, j] = Grid[k];
                 k++;
             }
         }
     }
+    private void Awake()
+    {
+        SetMap();
+    }
 
-     /*private void Start()
-     {
-        List<Pathfinding.Node> camino;
-        Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
-         camino = pathF.FindPath(new Vector2(0,0),new Vector2(2,2));
+    /*private void Start()
+    {
+       List<Pathfinding.Node> camino;
+       Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
+        camino = pathF.FindPath(new Vector2(0,0),new Vector2(2,2));
 
-        if (camino != null)
-        {
-            foreach (Pathfinding.Node n in camino)
-            {
+       if (camino != null)
+       {
+           foreach (Pathfinding.Node n in camino)
+           {
 
-                Debug.Log(n.Pos);
-            }
+               Debug.Log(n.Pos);
+           }
 
-        }
-     }*/
+       }
+    }*/
 
     //Para mostrar las rejillas 
     public void MostrarGrid()

@@ -55,7 +55,6 @@ public class Pathfinding : MonoBehaviour
                         Tiles[i, j].GetComponent<Tile>().y), !Tiles[i, j].GetComponent<Tile>().notWalkable);
                     
                 }
-
             }
         }
 

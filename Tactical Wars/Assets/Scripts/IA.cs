@@ -14,16 +14,12 @@ public class IA : MonoBehaviour
     {
         int tempSteps;
         FindUnits();
-        
-
-        foreach (GameObject x in IAUnits)
-        {
-            tempSteps = x.GetComponent<Unit>().steps;
-            Path = Map.GetComponent<Map>().GetPath(x.GetComponent<Unit>().getPos(), PlayerUnits[0].GetComponent<Unit>().getPos());
-            StartCoroutine(move(tempSteps,x,Path));
-        }
-
-        
+         foreach (GameObject x in IAUnits)
+         {
+             tempSteps = x.GetComponent<Unit>().steps;
+             Path = Map.GetComponent<Map>().GetPath(x.GetComponent<Unit>().getPos(), PlayerUnits[0].GetComponent<Unit>().getPos());
+             StartCoroutine(move(tempSteps, x, Path));
+         }
     }
     IEnumerator move(int steps, GameObject unit, List<GameObject> path)
     {

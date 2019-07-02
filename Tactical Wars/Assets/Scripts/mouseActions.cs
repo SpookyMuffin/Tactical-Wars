@@ -38,7 +38,7 @@ public class mouseActions : MonoBehaviour
                     if (hit1.collider != null) click1 = hit1.collider.gameObject;
 
                     //Comprobamos que se ha seleccionado y actualizamos la interfaz con sus propiedades
-                    Debug.Log("Click Izq: " + hit1.collider);
+                   // Debug.Log("Click Izq: " + hit1.collider);
                     if (click1.tag == "Unit")
                     {
                         click1.GetComponent<Unit>().Display();
@@ -58,7 +58,7 @@ public class mouseActions : MonoBehaviour
                     !EventSystem.current.IsPointerOverGameObject())
                 {
                     if(hit2.collider != null) click2 = hit2.collider.gameObject;
-                    Debug.Log("Click Derecho: " + hit2.collider);
+                   // Debug.Log("Click Derecho: " + hit2.collider);
                     //Combate TODO
                     //Si lo que seleccionamos con el click derecho es una unidad, haremos la accion de combatir
                     if (click2.gameObject.tag == "Unit")
