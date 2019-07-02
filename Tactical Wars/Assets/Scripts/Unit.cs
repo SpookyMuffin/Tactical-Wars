@@ -43,7 +43,12 @@ public class Unit : MonoBehaviour
         if (distancia > 1 || action == false) return;
         
         Target.GetComponent<Unit>().health -= power;
-        if (Target.GetComponent<Unit>().health < 1) Destroy(Target);
+
+        if (Target.GetComponent<Unit>().health < 1)
+        {
+            Target.GetComponent<Unit>().Tile.GetComponent<Tile>().obj = null;
+            Destroy(Target);
+        }
         action = false;
         RotateUnit(x1, y1, x2, y2);
 

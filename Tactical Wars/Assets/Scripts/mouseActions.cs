@@ -58,10 +58,10 @@ public class mouseActions : MonoBehaviour
                     !EventSystem.current.IsPointerOverGameObject())
                 {
                     if(hit2.collider != null) click2 = hit2.collider.gameObject;
-                   // Debug.Log("Click Derecho: " + hit2.collider);
+                    // Debug.Log("Click Derecho: " + hit2.collider);
                     //Combate TODO
                     //Si lo que seleccionamos con el click derecho es una unidad, haremos la accion de combatir
-                    if (click2.gameObject.tag == "Unit")
+                    if (click2.gameObject.tag == "Unit" && click1.gameObject.GetComponent<Unit>().playable == true)
                     {
                         //Si es una unidad aliada a una enemiga atacara
                         //Si es una infanteria o opuede que meta un ingeniero puede que repare el tank si el objetivo es aliado

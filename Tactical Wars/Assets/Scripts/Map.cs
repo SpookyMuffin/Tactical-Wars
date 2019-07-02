@@ -39,8 +39,9 @@ public class Map : MonoBehaviour
                 x = tiles[k].GetComponent<Tile>().x;
                 y = tiles[k].GetComponent<Tile>().y;
                 mTiles[x, y] = tiles[k];
-                mGrid[i, j] = Grid[k];
+                mGrid[x, x] = tiles[k].transform.GetChild(0).gameObject;
                 k++;
+                tiles[k].transform.GetChild(0);
             }
         }
     }
