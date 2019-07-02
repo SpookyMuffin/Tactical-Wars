@@ -17,6 +17,7 @@ public class Map : MonoBehaviour
     public GameObject[,] mTiles;
     public GameObject[,] mGrid;
    
+    //CAMBIAR GRID COMO LO HE HECHO CON TILES, SI NO NO LO ORDENAAAAAAAAAAAAAA
 
 
     void SetMap()
