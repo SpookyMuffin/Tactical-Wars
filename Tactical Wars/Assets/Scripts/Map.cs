@@ -12,22 +12,16 @@ public class Map : MonoBehaviour
     public Material neutral, enemy, ally;
     public Material emptyTile, CanMove, cantMove;
     //Vectores de casillas y grids
-    GameObject[] Grid;
     GameObject[] tiles;
     public GameObject[,] mTiles;
-    public GameObject[,] mGrid;
-   
-    //CAMBIAR GRID COMO LO HE HECHO CON TILES, SI NO NO LO ORDENAAAAAAAAAAAAAA
 
 
     void SetMap()
     {
         mTiles = new GameObject[ROWS, COLS]; //Matirz de casillas
-        mGrid = new GameObject[ROWS, COLS]; //Matirz de grids
         int x, y;
         //Creamos la matriz de casillas
         tiles = GameObject.FindGameObjectsWithTag("Tile"); //ponemos todas las casillas en un vector
-        Grid = GameObject.FindGameObjectsWithTag("GridPanel"); //grid en vector
 
         //Las metemos en la matriz
         int k = 0;
@@ -39,9 +33,7 @@ public class Map : MonoBehaviour
                 x = tiles[k].GetComponent<Tile>().x;
                 y = tiles[k].GetComponent<Tile>().y;
                 mTiles[x, y] = tiles[k];
-                mGrid[x, x] = tiles[k].transform.GetChild(0).gameObject;
                 k++;
-                tiles[k].transform.GetChild(0);
             }
         }
     }
@@ -67,32 +59,6 @@ public class Map : MonoBehaviour
        }
     }*/
 
-    //Para mostrar las rejillas 
-    public void MostrarGrid()
-    {
-       
-        foreach (GameObject x in Grid)
-        {
-            x.SetActive(true);
-        }
-    }
-
-    //Ocultar rejillas
-    public void OcultarGrid()
-    {
-        foreach (GameObject x in Grid)
-        {
-            x.SetActive(false);
-        }
-    }
-
-    public void ResetColorGrid()
-    {
-        foreach (GameObject x in Grid)
-        {
-            x.GetComponent<Renderer>().material = neutral;
-        }
-    }
     public List<GameObject> GetPath(Vector2 Start, Vector2 End)
     {
         List<Pathfinding.Node> camino;

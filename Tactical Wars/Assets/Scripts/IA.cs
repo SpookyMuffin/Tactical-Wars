@@ -8,39 +8,53 @@ public class IA : MonoBehaviour
     public GameObject Map;
     List<GameObject> IAUnits = new List<GameObject>();
     List<GameObject> PlayerUnits = new List<GameObject>();
-    List<GameObject> Path;
+
+
 
     public void IATurn()
     {
-        int tempSteps;
+
         FindUnits();
-         foreach (GameObject x in IAUnits)
-         {
-             tempSteps = x.GetComponent<Unit>().steps;
-             Path = Map.GetComponent<Map>().GetPath(x.GetComponent<Unit>().getPos(), PlayerUnits[0].GetComponent<Unit>().getPos());
-             StartCoroutine(move(tempSteps, x, Path));
-         }
+        StartCoroutine(move(0));
+      
     }
-    IEnumerator move(int steps, GameObject unit, List<GameObject> path)
+    IEnumerator move(int numUnit)
     {
+        Debug.Log(numUnit);
+        GameObject nearest;
+        nearest = encuentraMasCercano(IAUnits[numUnit]);
+        List<GameObject> Path;
+        Path = Map.GetComponent<Map>().GetPath(IAUnits[numUnit].GetComponent<Unit>().getPos(), nearest.GetComponent<Unit>().getPos());
+
+        int tempSteps = IAUnits[numUnit].GetComponent<Unit>().steps;
         int k = 0;
-        for (int i = 0; i < steps; i++)
+        while (k < Path.Count && IAUnits[numUnit].GetComponent<Unit>().steps > 0 && Path[k].GetComponent<Tile>().notWalkable == false)
         {
-            if (k < Path.Count)
-            {
-                
-                unit.GetComponent<Unit>().Move(Path[k]);
-                k++;
-                yield return new WaitForSeconds(1f);
-            }
+
+            IAUnits[numUnit].GetComponent<Unit>().Move(Path[k]);
+            k++;
+            Debug.Log("muevo");
+            yield return new WaitForSeconds(1f);
         }
-        yield return endTurn();
-        
+
+        if (CalculaDistanciaEuclidea(IAUnits[numUnit].GetComponent<Unit>().Tile.GetComponent<Tile>().x, IAUnits[numUnit].GetComponent<Unit>().Tile.GetComponent<Tile>().y,
+            nearest.GetComponent<Unit>().Tile.GetComponent<Tile>().x, nearest.GetComponent<Unit>().Tile.GetComponent<Tile>().y) <= 1)
+        {
+            IAUnits[numUnit].GetComponent<Unit>().Attack(nearest);
+            Debug.Log("ataco");
+            yield return new WaitForSeconds(1f);
+        }
+
+
+        numUnit++;
+        if(numUnit < IAUnits.Count) yield return move(numUnit);
+        else yield return endTurn();
     }
     IEnumerator endTurn()
     {
         TurnManager.GetComponent<Turns>().Pass(1);
-        yield return new WaitForSeconds(0f);
+        Debug.Log("Pulso el end");
+        yield return new WaitForSeconds(0);
 
     }
 
@@ -60,6 +74,30 @@ public class IA : MonoBehaviour
             }
         }
 
+    }
+    float CalculaDistanciaEuclidea(int x1, int y1, int x2, int y2)
+    {
+        return Mathf.Sqrt(Mathf.Pow(x2 - x1, 2f) + Mathf.Pow(y2 - y1, 2f));
+    }
+    
+    GameObject encuentraMasCercano(GameObject x)
+    {
+        GameObject nearObject = PlayerUnits[0];
+        float temp = 999; ;
+        float distNearest = 999;
+        foreach (GameObject playerUnit in PlayerUnits)
+        {
+            temp = CalculaDistanciaEuclidea(x.GetComponent<Unit>().Tile.GetComponent<Tile>().x, x.GetComponent<Unit>().Tile.GetComponent<Tile>().y,
+                playerUnit.GetComponent<Unit>().Tile.GetComponent<Tile>().x, playerUnit.GetComponent<Unit>().Tile.GetComponent<Tile>().y);
+            if (temp < distNearest)
+            {
+
+                distNearest = temp;
+                nearObject = playerUnit;
+            }
+
+        }
+        return nearObject;
     }
 
 }

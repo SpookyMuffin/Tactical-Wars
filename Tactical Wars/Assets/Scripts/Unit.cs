@@ -50,6 +50,7 @@ public class Unit : MonoBehaviour
             Destroy(Target);
         }
         action = false;
+        steps = 0;
         RotateUnit(x1, y1, x2, y2);
 
     }
@@ -76,6 +77,7 @@ public class Unit : MonoBehaviour
         if (playable == true) Target.gameObject.GetComponent<Building>().Conquer(0,mat);
         else Target.gameObject.GetComponent<Building>().Conquer(1,mat);
         action = false;
+        steps = 0;
         RotateUnit(x1, y1, x2, y2);
 
     }
