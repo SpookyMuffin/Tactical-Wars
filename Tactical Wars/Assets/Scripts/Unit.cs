@@ -25,6 +25,8 @@ public class Unit : MonoBehaviour
     //Usados para la interfaz
     public GameObject UI;
 
+    public GameObject resourceManager;
+
     //Ataca a otra unidad
     public void Attack(GameObject Target)
     {
@@ -85,6 +87,15 @@ public class Unit : MonoBehaviour
     //Mover a una casilla adyacente
     public void Move(GameObject Tile)
     {
+        if (playable == true && resourceManager.GetComponent<Resources>().Combustible < resourceManager.GetComponent<Resources>().gastoCombustibleTank)
+        {
+            return;
+        }
+        else if (playable == false && resourceManager.GetComponent<Resources>().EnemyCombustible < resourceManager.GetComponent<Resources>().gastoCombustibleTank)
+        {
+            return;
+
+        }
         double distancia = 1000f;
         int x1, y1, x2, y2;
         x1 = this.Tile.GetComponent<Tile>().x;
@@ -108,7 +119,16 @@ public class Unit : MonoBehaviour
         RotateUnit(x1, y1, x2, y2);
         //Restamos los movimientos y refrescamos la interfaz
         steps--;
-                            
+        if (playable == true)
+        {
+            resourceManager.GetComponent<Resources>().MoverTank(0);
+        }
+        else if (playable == false)
+        {
+            resourceManager.GetComponent<Resources>().MoverTank(1);
+
+        }
+
     }
 
     //Para refrescar al final de turnos los movimientos de cada unidad

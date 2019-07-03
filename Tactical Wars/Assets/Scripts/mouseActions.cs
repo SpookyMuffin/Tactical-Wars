@@ -86,7 +86,6 @@ public class mouseActions : MonoBehaviour
                     {
                         if(click2.tag == "Tile" && click1.GetComponent<Unit>().playable == true)
                         {
-                            resourceManager.GetComponent<Resources>().MoverTank(0);
                             click1.GetComponent<Unit>().Move(click2);
                             click1.GetComponent<Unit>().Display();
                         }

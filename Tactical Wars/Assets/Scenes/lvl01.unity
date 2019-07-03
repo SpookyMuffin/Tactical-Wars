@@ -131,7 +131,12 @@ PrefabInstance:
     - target: {fileID: 8244758802663752107, guid: b754d01755c1689488295edab8dc366a,
         type: 3}
       propertyPath: m_Name
-      value: AllyTank (1)
+      value: Alfa verde
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244758802663752107, guid: b754d01755c1689488295edab8dc366a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8244758802663752108, guid: b754d01755c1689488295edab8dc366a,
         type: 3}
@@ -466,7 +471,7 @@ Transform:
   m_Children:
   - {fileID: 1900199397}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &203793527
 MonoBehaviour:
@@ -750,12 +755,6 @@ MonoBehaviour:
   Tank: {fileID: 8392602809330147808, guid: b754d01755c1689488295edab8dc366a, type: 3}
   resourceManager: {fileID: 1029314598}
   Tile: {fileID: 2081029618}
---- !u!1 &408064489 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8244758802663752107, guid: b754d01755c1689488295edab8dc366a,
-    type: 3}
-  m_PrefabInstance: {fileID: 28099809}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &433448269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -861,7 +860,7 @@ PrefabInstance:
     - target: {fileID: 6983174899297962396, guid: b9cdabc805b89a544a06561fcc23ebd6,
         type: 3}
       propertyPath: m_Name
-      value: Tank (1)
+      value: Beta rojo
       objectReference: {fileID: 0}
     - target: {fileID: 6983174899297932412, guid: b9cdabc805b89a544a06561fcc23ebd6,
         type: 3}
@@ -901,7 +900,7 @@ PrefabInstance:
     - target: {fileID: 6983174899297932412, guid: b9cdabc805b89a544a06561fcc23ebd6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6983174899297932412, guid: b9cdabc805b89a544a06561fcc23ebd6,
         type: 3}
@@ -938,6 +937,11 @@ PrefabInstance:
       propertyPath: steps
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3591178934942496261, guid: b9cdabc805b89a544a06561fcc23ebd6,
+        type: 3}
+      propertyPath: resourceManager
+      value: 
+      objectReference: {fileID: 1029314598}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdabc805b89a544a06561fcc23ebd6, type: 3}
 --- !u!1001 &541612974
@@ -1311,6 +1315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TurnManager: {fileID: 1011905878}
   Map: {fileID: 203793525}
+  IAMaterial: {fileID: 2100000, guid: 463052f3f7389124f9e7b34b0b931d0d, type: 2}
 --- !u!4 &676998050
 Transform:
   m_ObjectHideFlags: 0
@@ -1323,7 +1328,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &774673051
 PrefabInstance:
@@ -1570,7 +1575,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &861432778
 GameObject:
@@ -1678,11 +1683,11 @@ PrefabInstance:
         type: 3}
       propertyPath: obj
       value: 
-      objectReference: {fileID: 408064489}
+      objectReference: {fileID: 0}
     - target: {fileID: 3553781884786969982, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
       propertyPath: notWalkable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3553781884885284165, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
@@ -2342,10 +2347,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Goldmarks: 100
   Raciones: 100
-  Combustible: 100
+  Combustible: 5
   EnemyGoldmarks: 100
   EnemyRaciones: 100
-  EnemyCombustible: 100
+  EnemyCombustible: 5
   PrecioTank: 20
   gastoCombustibleTank: 5
   combustiblePump: 5
@@ -2802,7 +2807,7 @@ RectTransform:
   - {fileID: 622678311}
   - {fileID: 1430486501}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3267,7 +3272,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1484968061
 GameObject:
@@ -3634,7 +3639,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1657125429
 GameObject:
@@ -4230,7 +4235,7 @@ Transform:
   - {fileID: 1142409102}
   - {fileID: 371292272}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1950115055
 GameObject:
@@ -4311,12 +4316,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950115055}
   m_CullTransparentMesh: 0
---- !u!1 &1961961808 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3553781884786969983, guid: 1044033a8b2adc7488f0851a8e93421f,
-    type: 3}
-  m_PrefabInstance: {fileID: 879374883}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1981840897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4501,6 +4500,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998137240}
   m_CullTransparentMesh: 0
+--- !u!1 &2021949665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3553781884786969983, guid: 1044033a8b2adc7488f0851a8e93421f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2068954856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2048941411
 GameObject:
   m_ObjectHideFlags: 0
@@ -4625,7 +4630,7 @@ Transform:
   m_Children:
   - {fileID: 1391056264}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!1001 &2068954856
 PrefabInstance:
@@ -4738,7 +4743,7 @@ PrefabInstance:
     - target: {fileID: 6983174899297962396, guid: b9cdabc805b89a544a06561fcc23ebd6,
         type: 3}
       propertyPath: m_Name
-      value: Tank
+      value: Alfa rojo
       objectReference: {fileID: 0}
     - target: {fileID: 6983174899297932412, guid: b9cdabc805b89a544a06561fcc23ebd6,
         type: 3}
@@ -4815,6 +4820,11 @@ PrefabInstance:
       propertyPath: steps
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3591178934942496261, guid: b9cdabc805b89a544a06561fcc23ebd6,
+        type: 3}
+      propertyPath: resourceManager
+      value: 
+      objectReference: {fileID: 1029314598}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdabc805b89a544a06561fcc23ebd6, type: 3}
 --- !u!1 &5854493303918389834 stripped
@@ -4903,7 +4913,7 @@ PrefabInstance:
     - target: {fileID: 7563220939206866566, guid: efce56f20381a8047b361bd30f71d1b3,
         type: 3}
       propertyPath: progress
-      value: 99
+      value: -99
       objectReference: {fileID: 0}
     - target: {fileID: 7563220939206866566, guid: efce56f20381a8047b361bd30f71d1b3,
         type: 3}
@@ -4922,12 +4932,12 @@ PrefabInstance:
     - target: {fileID: 8244758802663752107, guid: b754d01755c1689488295edab8dc366a,
         type: 3}
       propertyPath: m_Name
-      value: AllyTank
+      value: Beta verde
       objectReference: {fileID: 0}
     - target: {fileID: 8244758802663752108, guid: b754d01755c1689488295edab8dc366a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.26
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8244758802663752108, guid: b754d01755c1689488295edab8dc366a,
         type: 3}
@@ -4937,7 +4947,7 @@ PrefabInstance:
     - target: {fileID: 8244758802663752108, guid: b754d01755c1689488295edab8dc366a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.94
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8244758802663752108, guid: b754d01755c1689488295edab8dc366a,
         type: 3}
@@ -4983,7 +4993,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Tile
       value: 
-      objectReference: {fileID: 1961961808}
+      objectReference: {fileID: 2021949665}
     - target: {fileID: 8244758802663752106, guid: b754d01755c1689488295edab8dc366a,
         type: 3}
       propertyPath: UI
@@ -4994,5 +5004,10 @@ PrefabInstance:
       propertyPath: steps
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8244758802663752106, guid: b754d01755c1689488295edab8dc366a,
+        type: 3}
+      propertyPath: resourceManager
+      value: 
+      objectReference: {fileID: 1029314598}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b754d01755c1689488295edab8dc366a, type: 3}

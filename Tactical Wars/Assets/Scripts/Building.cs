@@ -68,4 +68,9 @@ public class Building : MonoBehaviour
     {
         UI.GetComponent<UI>().SwitchStatPanelBuilding(type, status, progress, Tile.name);
     }
+
+    public Vector2 getPos()
+    {
+        return new Vector2(Tile.GetComponent<Tile>().x, Tile.GetComponent<Tile>().y);
+    }
 }
