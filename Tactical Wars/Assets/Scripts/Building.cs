@@ -60,7 +60,7 @@ public class Building : MonoBehaviour
                 status = 2;
                 this.GetComponent<Renderer>().material = mat;
             }
-        }
+        }  
     }
 
     //Funcion para refrescar la interfaz con los parametros de este edificio.

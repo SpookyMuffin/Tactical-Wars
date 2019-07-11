@@ -13,7 +13,7 @@ public class Turns : MonoBehaviour
     //Pasamos de turno, y actualizamos los recursos y el turno
     public void Pass(int who)
     {
-        if (who == 0)
+        if (who == 0 && turn == true)
         {
             turn = false;
             UI.GetComponent<UI>().Pass(false);
@@ -25,7 +25,7 @@ public class Turns : MonoBehaviour
             IA.GetComponent<IA>().IATurn();
 
         }
-        else
+        else if(who == 1 && turn == false)
         {
             turn = true;
             resourceManager.GetComponent<Resources>().EndTurnResources(1);

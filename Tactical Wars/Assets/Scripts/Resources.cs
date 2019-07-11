@@ -52,19 +52,22 @@ public class Resources : MonoBehaviour
     }
 
     //Resta goldmarks por generar una unidad tipo tank
-    public void GenerarTank(int who)
+    public bool GenerarTank(int who)
     {
-        if (who == 0)
+        if (who == 0 && Goldmarks > PrecioTank)
         {
             Goldmarks -= PrecioTank;
             UI.GetComponent<UI>().RefreshResources(Goldmarks, Raciones, Combustible);
+            return true;
         }
-        else if(who == 1)
+        else if(who == 1 && EnemyGoldmarks > PrecioTank)
         {
             EnemyGoldmarks -= PrecioTank;
+            return true;
         }
 
-        
+        return false;
+
     }
 
     //Añade el combustible por acabar el turno por cada edificio pumps que controlemos

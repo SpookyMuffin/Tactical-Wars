@@ -4,26 +4,47 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    public GameObject Tank;
+    public GameObject AllyTank;
+    public GameObject EnemyTank;
     public GameObject resourceManager;
-    public GameObject Tile;
+    public GameObject UI;
+    public GameObject Tile0;
+    public GameObject Tile1;
+    public GameObject turnManager;
+    
 
-    //Funcion para generar una unidad. Type = 0 genera un tank
-    /*public void AllySpawnUnit1(int type)
+    public void AllySpawnTank(int spawn)
     {
-        //Posicion del spawn
-        int x = 0;
-        int y = 0;
-        if (resourceManager.GetComponent<Resources>().Goldmarks >= resourceManager.GetComponent<Resources>().PrecioTank && Map.mTiles[x, y].GetComponent<Tile>().notWalkable == false)
+        if(turnManager.GetComponent<Turns>().turn == true && resourceManager.GetComponent<Resources>().GenerarTank(0) == true)
         {
-            //instanciamos el tank y lo incializamos
-            Instantiate(Tank);
-            Tank.GetComponent<Unit>().Tile = Map.mTiles[x, y];
-            Tank.transform.position = Map.mTiles[x, y].transform.position;
-            Map.mTiles[x, y].GetComponent<Tile>().obj = Tank;
-            Map.mTiles[x, y].GetComponent<Tile>().notWalkable = true;
-            resourceManager.GetComponent<Resources>().GenerarTank(0);
-        }
+            Instantiate(AllyTank);
+            if (AllyTank.GetComponent<Unit>().initialiteUnit(Tile0))
+            {
+                AllyTank.GetComponent<Unit>().type = 0;
+                AllyTank.GetComponent<Unit>().playable = true;
+                AllyTank.GetComponent<Unit>().UI = UI;
+                AllyTank.GetComponent<Unit>().resourceManager = resourceManager;
+            }
+            else Destroy(AllyTank);
 
-    }*/
+
+        }
+    }
+    public void EnemySpawnTank(int spawn)
+    {
+        if (turnManager.GetComponent<Turns>().turn == false && resourceManager.GetComponent<Resources>().GenerarTank(1) == true)
+        {
+            
+            if (Tile1.GetComponent<Tile>().notWalkable == false)
+            {
+                Instantiate(EnemyTank);
+                EnemyTank.GetComponent<Unit>().initialiteUnit(Tile1);
+                EnemyTank.GetComponent<Unit>().type = 0;
+                EnemyTank.GetComponent<Unit>().playable = false;
+                EnemyTank.GetComponent<Unit>().UI = UI;
+                EnemyTank.GetComponent<Unit>().resourceManager = resourceManager;
+            }
+        }
+    }
+
 }

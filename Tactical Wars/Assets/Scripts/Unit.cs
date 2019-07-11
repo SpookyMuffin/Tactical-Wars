@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
-    public int tankSteps = 3;
-
     //Caracteristicas de la unidad
     public int type; //Tipo de la unidad 0 = tank, 1  = infanteria
     public int health = 100; //Vida de la unidad
@@ -17,6 +15,8 @@ public class Unit : MonoBehaviour
     public bool action = true; //Si puede atacar o conquistar
     public bool playable = true; //Si la podemos controlar
 
+    public int TankPower = 50;
+    public int TankSteps = 3;
 
 
     //Casilla en la que se encuentra
@@ -26,6 +26,26 @@ public class Unit : MonoBehaviour
     public GameObject UI;
 
     public GameObject resourceManager;
+
+
+    public bool initialiteUnit(GameObject spawnTile)
+    {
+        if (spawnTile.GetComponent<Tile>().notWalkable == true) return false;
+        else if (type == 0)
+        {
+            health = 100;
+            steps = 0;
+            power = TankPower;
+            action = false;
+            Tile = spawnTile;
+            spawnTile.GetComponent<Tile>().obj = this.gameObject;
+            spawnTile.GetComponent<Tile>().notWalkable = true;
+            this.gameObject.transform.position = spawnTile.transform.position;
+            return true;
+        }
+        return false;
+    }
+
 
     //Ataca a otra unidad
     public void Attack(GameObject Target)
@@ -74,7 +94,7 @@ public class Unit : MonoBehaviour
         x2 = Target.GetComponent<Building>().Tile.GetComponent<Tile>().x;
         y2 = Target.GetComponent<Building>().Tile.GetComponent<Tile>().y;
         distancia = Mathf.Sqrt(Mathf.Pow(x2 - x1, 2f) + Mathf.Pow(y2 - y1, 2f));
-        if (distancia > 1 || action == false) return;
+        if (distancia > 1) return;
 
         if (playable == true) Target.gameObject.GetComponent<Building>().Conquer(0,mat);
         else Target.gameObject.GetComponent<Building>().Conquer(1,mat);
@@ -134,7 +154,7 @@ public class Unit : MonoBehaviour
     //Para refrescar al final de turnos los movimientos de cada unidad
     public void RefreshSteps()
     {
-        if (type == 0) steps = tankSteps;
+        if (type == 0) steps = TankSteps;
         action = true;
     }
 

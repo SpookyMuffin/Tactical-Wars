@@ -6,6 +6,8 @@ public class IA : MonoBehaviour
 {
     public GameObject TurnManager;
     public GameObject Map;
+    public GameObject resourceManager;
+    public GameObject spawn;
 
     List<GameObject> IAUnits = new List<GameObject>();
     List<GameObject> PlayerUnits = new List<GameObject>();
@@ -20,17 +22,20 @@ public class IA : MonoBehaviour
 
     public void IATurn()
     {
-
-
-        StartCoroutine(move(0));
-      
+        StartCoroutine(Move(0)); 
     }
-    IEnumerator move(int numUnit)
+    IEnumerator Move(int numUnit)
     {
+        if (resourceManager.GetComponent<Resources>().EnemyGoldmarks > resourceManager.GetComponent<Resources>().PrecioTank) spawn.GetComponent<Spawn>().EnemySpawnTank(0);
+        yield return new WaitForSeconds(1f);
         FindUnitsAndBuildings();
         Debug.Log(numUnit);
         GameObject nearest;
         nearest = encuentraMasCercano(IAUnits[numUnit]);
+        bool HasCombustible;
+        if (resourceManager.GetComponent<Resources>().EnemyCombustible >= resourceManager.GetComponent<Resources>().gastoCombustibleTank) HasCombustible = true;
+        else HasCombustible = false;
+
         if (nearest != null)
         {
             Debug.Log("Nearest tag: " + nearest.tag);
@@ -39,7 +44,7 @@ public class IA : MonoBehaviour
             else Path = Map.GetComponent<Map>().GetPath(IAUnits[numUnit].GetComponent<Unit>().getPos(), nearest.GetComponent<Building>().getPos());
             int tempSteps = IAUnits[numUnit].GetComponent<Unit>().steps;
             int k = 0;
-            while (k < Path.Count && IAUnits[numUnit].GetComponent<Unit>().steps > 0 && Path[k].GetComponent<Tile>().notWalkable == false)
+            while (k < Path.Count && IAUnits[numUnit].GetComponent<Unit>().steps > 0 && Path[k].GetComponent<Tile>().notWalkable == false && HasCombustible == true)
             {
 
                 IAUnits[numUnit].GetComponent<Unit>().Move(Path[k]);
@@ -74,7 +79,7 @@ public class IA : MonoBehaviour
             }
 
             numUnit++;
-            if (numUnit < IAUnits.Count) yield return move(numUnit);
+            if (numUnit < IAUnits.Count) yield return Move(numUnit);
             else yield return endTurn();
         }
         else yield return endTurn();
