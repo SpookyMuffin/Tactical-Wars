@@ -15,8 +15,8 @@ public class Unit : MonoBehaviour
     public bool action = true; //Si puede atacar o conquistar
     public bool playable = true; //Si la podemos controlar
 
-    public int TankPower = 50;
-    public int TankSteps = 3;
+    int TankPower = 50;
+    int TankSteps = 3;
 
 
     //Casilla en la que se encuentra

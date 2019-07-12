@@ -26,8 +26,12 @@ public class IA : MonoBehaviour
     }
     IEnumerator Move(int numUnit)
     {
-        if (resourceManager.GetComponent<Resources>().EnemyGoldmarks > resourceManager.GetComponent<Resources>().PrecioTank) spawn.GetComponent<Spawn>().EnemySpawnTank(0);
-        yield return new WaitForSeconds(1f);
+        if (resourceManager.GetComponent<Resources>().EnemyGoldmarks > resourceManager.GetComponent<Resources>().PrecioTank)
+        {
+            spawn.GetComponent<Spawn>().EnemySpawnTank(0);
+            yield return new WaitForSeconds(1f);
+        }
+        
         FindUnitsAndBuildings();
         Debug.Log(numUnit);
         GameObject nearest;
