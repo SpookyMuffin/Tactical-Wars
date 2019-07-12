@@ -87,7 +87,7 @@ public class Unit : MonoBehaviour
         //Si es ya esta conquistado, impedimos conquista
         if (action == false) return;
         if (playable == true && Target.GetComponent<Building>().status == 1) return;
-        if (playable == false && Target.GetComponent<Building>().status == 1) return;
+        if (playable == false && Target.GetComponent<Building>().status == 2) return;
 
         x1 = this.Tile.GetComponent<Tile>().x;
         y1 = this.Tile.GetComponent<Tile>().y;
@@ -96,8 +96,15 @@ public class Unit : MonoBehaviour
         distancia = Mathf.Sqrt(Mathf.Pow(x2 - x1, 2f) + Mathf.Pow(y2 - y1, 2f));
         if (distancia > 1) return;
 
-        if (playable == true) Target.gameObject.GetComponent<Building>().Conquer(0,mat);
-        else Target.gameObject.GetComponent<Building>().Conquer(1,mat);
+        if (playable == true)
+        {
+            Target.gameObject.GetComponent<Building>().Conquer(0, mat);
+        }
+        else
+        {
+            Target.gameObject.GetComponent<Building>().Conquer(1, mat);
+
+        }
         action = false;
         steps = 0;
         RotateUnit(x1, y1, x2, y2);

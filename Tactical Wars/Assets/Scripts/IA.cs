@@ -120,10 +120,12 @@ public class IA : MonoBehaviour
             {
                 if (y.GetComponent<Building>().status == 0)
                 {
+
                     NeutralBuildings.Add(y);
                 }
                 else if (y.GetComponent<Building>().status == 1)
                 {
+
                     PlayerBuildings.Add(y);
                 }
                 else IABuildings.Add(y);
