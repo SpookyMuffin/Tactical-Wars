@@ -34,8 +34,12 @@ public class IA : MonoBehaviour
         
         FindUnitsAndBuildings();
         Debug.Log(numUnit);
-        GameObject nearest;
-        nearest = encuentraMasCercano(IAUnits[numUnit]);
+        GameObject nearest = null;
+        if(IAUnits.Count > 0)
+        {
+            nearest = encuentraMasCercano(IAUnits[numUnit]);
+        }
+
         bool HasCombustible;
         if (resourceManager.GetComponent<Resources>().EnemyCombustible >= resourceManager.GetComponent<Resources>().gastoCombustibleTank) HasCombustible = true;
         else HasCombustible = false;

@@ -68,6 +68,7 @@ public class Unit : MonoBehaviour
 
         if (Target.GetComponent<Unit>().health < 1)
         {
+            Target.GetComponent<Unit>().Tile.GetComponent<Tile>().notWalkable = false;
             Target.GetComponent<Unit>().Tile.GetComponent<Tile>().obj = null;
             Destroy(Target);
         }
