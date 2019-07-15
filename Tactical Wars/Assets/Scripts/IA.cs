@@ -26,11 +26,7 @@ public class IA : MonoBehaviour
     }
     IEnumerator Move(int numUnit)
     {
-        if (resourceManager.GetComponent<Resources>().EnemyGoldmarks > resourceManager.GetComponent<Resources>().PrecioTank)
-        {
-            spawn.GetComponent<Spawn>().EnemySpawnTank(0);
-            yield return new WaitForSeconds(1f);
-        }
+
         
         FindUnitsAndBuildings();
         Debug.Log(numUnit);
@@ -88,7 +84,16 @@ public class IA : MonoBehaviour
 
             numUnit++;
             if (numUnit < IAUnits.Count) yield return Move(numUnit);
-            else yield return endTurn();
+            else
+            {
+                if (resourceManager.GetComponent<Resources>().EnemyGoldmarks > resourceManager.GetComponent<Resources>().PrecioTank)
+                {
+                    Debug.Log("Intento Spawnear un tank");
+                    spawn.GetComponent<Spawn>().EnemySpawnTank(0);
+                    yield return new WaitForSeconds(1f);
+                }
+                yield return endTurn();
+            }
         }
         else yield return endTurn();
 

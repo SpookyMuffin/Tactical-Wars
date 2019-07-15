@@ -15,34 +15,38 @@ public class Spawn : MonoBehaviour
 
     public void AllySpawnTank(int spawn)
     {
-        if(turnManager.GetComponent<Turns>().turn == true && resourceManager.GetComponent<Resources>().GenerarTank(0) == true)
+        if (turnManager.GetComponent<Turns>().turn == true && Tile0.GetComponent<Tile>().notWalkable == false)
         {
-            Instantiate(AllyTank);
-            if (AllyTank.GetComponent<Unit>().initialiteUnit(Tile0))
+            Debug.Log("Paso el primer if"+Tile0.name);
+            if (resourceManager.GetComponent<Resources>().GenerarTank(0) == true)
             {
+                Debug.Log("Paso el 2º if");
+                Instantiate(AllyTank);
                 AllyTank.GetComponent<Unit>().type = 0;
                 AllyTank.GetComponent<Unit>().playable = true;
                 AllyTank.GetComponent<Unit>().UI = UI;
                 AllyTank.GetComponent<Unit>().resourceManager = resourceManager;
+                AllyTank.GetComponent<Unit>().initialiteUnit(Tile0);
+
             }
-            else Destroy(AllyTank);
-
-
         }
     }
+
     public void EnemySpawnTank(int spawn)
     {
-        if (turnManager.GetComponent<Turns>().turn == false && resourceManager.GetComponent<Resources>().GenerarTank(1) == true)
+        if (turnManager.GetComponent<Turns>().turn == false && Tile1.GetComponent<Tile>().notWalkable == false)
         {
             
-            if (Tile1.GetComponent<Tile>().notWalkable == false)
+            if (resourceManager.GetComponent<Resources>().GenerarTank(1) == true)
             {
                 Instantiate(EnemyTank);
-                EnemyTank.GetComponent<Unit>().initialiteUnit(Tile1);
                 EnemyTank.GetComponent<Unit>().type = 0;
                 EnemyTank.GetComponent<Unit>().playable = false;
                 EnemyTank.GetComponent<Unit>().UI = UI;
                 EnemyTank.GetComponent<Unit>().resourceManager = resourceManager;
+                EnemyTank.GetComponent<Unit>().initialiteUnit(Tile1);
+
+
             }
         }
     }

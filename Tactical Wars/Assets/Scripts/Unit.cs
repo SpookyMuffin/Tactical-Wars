@@ -33,6 +33,7 @@ public class Unit : MonoBehaviour
         if (spawnTile.GetComponent<Tile>().notWalkable == true) return false;
         else if (type == 0)
         {
+            this.gameObject.transform.position = spawnTile.transform.position;
             health = 100;
             steps = 0;
             power = TankPower;
@@ -40,7 +41,7 @@ public class Unit : MonoBehaviour
             Tile = spawnTile;
             spawnTile.GetComponent<Tile>().obj = this.gameObject;
             spawnTile.GetComponent<Tile>().notWalkable = true;
-            this.gameObject.transform.position = spawnTile.transform.position;
+            
             return true;
         }
         return false;
