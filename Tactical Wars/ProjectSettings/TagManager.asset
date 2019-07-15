@@ -10,6 +10,8 @@ TagManager:
   - Building
   - UI
   - RM
+  - Spawn
+  - init
   layers:
   - Default
   - TransparentFX

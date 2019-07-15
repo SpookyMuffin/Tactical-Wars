@@ -76,5 +76,8 @@ public class Map : MonoBehaviour
         return ruta;
     }
 
-    
+    public GameObject returnTile(Vector2 x)
+    {
+        return mTiles[(int)x.x, (int)x.y];
+    }
 }
