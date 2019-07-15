@@ -24,14 +24,14 @@ public class Resources : MonoBehaviour
     public int goldmarkTurno = 1; //Monedas por defecto ganada cada turno
 
     //Usados para actualizar la interfaz
-    public GameObject UI;
+    public GameObject interfaz;
 
     //Usado para los edificios
     public GameObject buildingManager;
 
     private void Start()
     {
-        UI.GetComponent<UI>().RefreshResources(Goldmarks,Raciones,Combustible);
+        interfaz.GetComponent<Interfaz>().RefreshResources(Goldmarks,Raciones,Combustible);
     }
 
     //Resta el combustible usado por mover una casilla un tanque
@@ -42,7 +42,7 @@ public class Resources : MonoBehaviour
         if (who == 0)
         {
             Combustible = Combustible - gastoCombustibleTank;
-            UI.GetComponent<UI>().RefreshResources(Goldmarks, Raciones, Combustible);
+            interfaz.GetComponent<Interfaz>().RefreshResources(Goldmarks, Raciones, Combustible);
         }
         else if( who == 1)
         {
@@ -57,7 +57,7 @@ public class Resources : MonoBehaviour
         if (who == 0 && Goldmarks > PrecioTank)
         {
             Goldmarks -= PrecioTank;
-            UI.GetComponent<UI>().RefreshResources(Goldmarks, Raciones, Combustible);
+            interfaz.GetComponent<Interfaz>().RefreshResources(Goldmarks, Raciones, Combustible);
             return true;
         }
         else if(who == 1 && EnemyGoldmarks > PrecioTank)
@@ -113,7 +113,7 @@ public class Resources : MonoBehaviour
             EndTurnPump(0);
             EndTurnCamp(0);
             Goldmarks += goldmarkTurno;
-            UI.GetComponent<UI>().RefreshResources(Goldmarks, Raciones, Combustible);
+            interfaz.GetComponent<Interfaz>().RefreshResources(Goldmarks, Raciones, Combustible);
         }
         else if (who == 1)
         {

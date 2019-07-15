@@ -8,7 +8,7 @@ public class Turns : MonoBehaviour
     public GameObject resourceManager; //Gestor de recursos
     public GameObject IA;
 
-    public GameObject UI;
+    public GameObject interfaz;
 
     //Pasamos de turno, y actualizamos los recursos y el turno
     public void Pass(int who)
@@ -16,7 +16,7 @@ public class Turns : MonoBehaviour
         if (who == 0 && turn == true)
         {
             turn = false;
-            UI.GetComponent<UI>().Pass(false);
+            interfaz.GetComponent<Interfaz>().Pass(false);
             resourceManager.GetComponent<Resources>().EndTurnResources(0);
             foreach (GameObject x in GameObject.FindGameObjectsWithTag("Unit"))
             {
@@ -33,7 +33,7 @@ public class Turns : MonoBehaviour
             {
                 if (x.GetComponent<Unit>().playable == false) x.GetComponent<Unit>().RefreshSteps();
             }
-            UI.GetComponent<UI>().Pass(true);
+            interfaz.GetComponent<Interfaz>().Pass(true);
         }
 
     }

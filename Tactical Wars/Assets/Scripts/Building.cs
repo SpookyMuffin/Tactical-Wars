@@ -86,7 +86,7 @@ public class Building : MonoBehaviour
     //Funcion para refrescar la interfaz con los parametros de este edificio.
     public void Display()
     {
-        interfaz.GetComponent<UI>().SwitchStatPanelBuilding(type, status, progress, Tile.name);
+        interfaz.GetComponent<Interfaz>().SwitchStatPanelBuilding(type, status, progress, Tile.name);
     }
 
     public Vector2 getPos()

@@ -172,7 +172,7 @@ public class Unit : MonoBehaviour
     //Usada para actualizar la interfaz con los datos de esta unidad
     public void Display()
     {
-        interfaz.GetComponent<UI>().SwitchStatPanelUnit(type,health,steps,power,action,Tile.name);
+        interfaz.GetComponent<Interfaz>().SwitchStatPanelUnit(type,health,steps,power,action,Tile.name);
     }
 
     //Funcion para rotar la unidad

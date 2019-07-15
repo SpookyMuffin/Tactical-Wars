@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour
+public class Interfaz : MonoBehaviour
 {
     public GameObject GoldmarkText;
     public GameObject RacionesText;
@@ -49,5 +49,4 @@ public class UI : MonoBehaviour
         passButton.SetActive(estado);
         waitButton.SetActive(!estado);
     }
-
 }
