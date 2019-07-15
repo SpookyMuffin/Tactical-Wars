@@ -13,7 +13,11 @@ public class Building : MonoBehaviour
 
 
     public GameObject UI;
-
+    public GameObject end;
+    public GameObject mouse;
+    public GameObject panel1;
+    public GameObject panel2;
+    public GameObject panel3;
 
     //Funcion para conquista de un edificio
     //Who = 0 es del jugador
@@ -39,6 +43,14 @@ public class Building : MonoBehaviour
                 progress = 100;
                 status = 1;
                 this.GetComponent<Renderer>().material = mat;
+                if(type == 0)
+                {
+                    mouse.SetActive(false);
+                    panel1.SetActive(false);
+                    panel2.SetActive(false);
+                    panel3.SetActive(true);
+
+                }
             }
         }
         if(who == 1 && status == 0)
@@ -59,6 +71,14 @@ public class Building : MonoBehaviour
                 progress = -100;
                 status = 2;
                 this.GetComponent<Renderer>().material = mat;
+                if (type == 0)
+                {
+                    mouse.SetActive(false);
+                    panel1.SetActive(false);
+                    panel2.SetActive(false);
+                    panel3.SetActive(true);
+
+                }
             }
         }  
     }

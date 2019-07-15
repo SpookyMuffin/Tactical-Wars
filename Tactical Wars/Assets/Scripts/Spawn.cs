@@ -7,7 +7,6 @@ public class Spawn : MonoBehaviour
     public GameObject AllyTank;
     public GameObject EnemyTank;
     public GameObject resourceManager;
-    public GameObject UI;
     public GameObject Tile0;
     public GameObject Tile1;
     public GameObject turnManager;
@@ -24,8 +23,6 @@ public class Spawn : MonoBehaviour
                 Instantiate(AllyTank);
                 AllyTank.GetComponent<Unit>().type = 0;
                 AllyTank.GetComponent<Unit>().playable = true;
-                AllyTank.GetComponent<Unit>().UI = UI;
-                AllyTank.GetComponent<Unit>().resourceManager = resourceManager;
                 AllyTank.GetComponent<Unit>().initialiteUnit(Tile0);
 
             }

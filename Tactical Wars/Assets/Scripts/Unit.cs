@@ -39,6 +39,8 @@ public class Unit : MonoBehaviour
             power = TankPower;
             action = false;
             Tile = spawnTile;
+            UI = GameObject.FindGameObjectWithTag("UI");
+            resourceManager = GameObject.FindGameObjectWithTag("RM");
             spawnTile.GetComponent<Tile>().obj = this.gameObject;
             spawnTile.GetComponent<Tile>().notWalkable = true;
             

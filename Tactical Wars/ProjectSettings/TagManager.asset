@@ -8,6 +8,8 @@ TagManager:
   - GridPanel
   - Unit
   - Building
+  - UI
+  - RM
   layers:
   - Default
   - TransparentFX
