@@ -39,7 +39,6 @@ public class Spawn : MonoBehaviour
                 Instantiate(EnemyTank);
                 EnemyTank.GetComponent<Unit>().type = 0;
                 EnemyTank.GetComponent<Unit>().playable = false;
-                EnemyTank.GetComponent<Unit>().UI = UI;
                 EnemyTank.GetComponent<Unit>().resourceManager = resourceManager;
                 EnemyTank.GetComponent<Unit>().initialiteUnit(Tile1);
 

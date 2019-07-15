@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour
     public GameObject Tile;
 
     //Usados para la interfaz
-    public GameObject UI;
+    public GameObject interfaz;
 
     public GameObject resourceManager;
 
@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour
             power = TankPower;
             action = false;
             Tile = spawnTile;
-            UI = GameObject.FindGameObjectWithTag("UI");
+            interfaz = GameObject.FindGameObjectWithTag("UI");
             resourceManager = GameObject.FindGameObjectWithTag("RM");
             spawnTile.GetComponent<Tile>().obj = this.gameObject;
             spawnTile.GetComponent<Tile>().notWalkable = true;
@@ -172,7 +172,7 @@ public class Unit : MonoBehaviour
     //Usada para actualizar la interfaz con los datos de esta unidad
     public void Display()
     {
-        UI.GetComponent<UI>().SwitchStatPanelUnit(type,health,steps,power,action,Tile.name);
+        interfaz.GetComponent<UI>().SwitchStatPanelUnit(type,health,steps,power,action,Tile.name);
     }
 
     //Funcion para rotar la unidad

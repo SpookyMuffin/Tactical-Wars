@@ -12,7 +12,7 @@ public class Building : MonoBehaviour
     public int type = 99; //Tipo del edifico  0 = cuartel general, 1 = campamento 2 = pump
 
 
-    public GameObject UI;
+    public GameObject interfaz;
     public GameObject end;
     public GameObject mouse;
     public GameObject panel1;
@@ -86,7 +86,7 @@ public class Building : MonoBehaviour
     //Funcion para refrescar la interfaz con los parametros de este edificio.
     public void Display()
     {
-        UI.GetComponent<UI>().SwitchStatPanelBuilding(type, status, progress, Tile.name);
+        interfaz.GetComponent<UI>().SwitchStatPanelBuilding(type, status, progress, Tile.name);
     }
 
     public Vector2 getPos()

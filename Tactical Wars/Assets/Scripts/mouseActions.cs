@@ -20,7 +20,7 @@ public class mouseActions : MonoBehaviour
     //Comprobador
     bool CompClick2 = false;
     GameObject click1,click2;
-    public GameObject UI;
+    public GameObject interfaz;
 
 
 
