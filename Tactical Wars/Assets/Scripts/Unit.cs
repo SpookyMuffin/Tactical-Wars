@@ -102,11 +102,11 @@ public class Unit : MonoBehaviour
 
         if (playable == true)
         {
-            Target.gameObject.GetComponent<Building>().Conquer(0, mat);
+            Target.gameObject.GetComponent<Building>().Conquer(1, mat);
         }
         else
         {
-            Target.gameObject.GetComponent<Building>().Conquer(1, mat);
+            Target.gameObject.GetComponent<Building>().Conquer(-1, mat);
 
         }
         action = false;

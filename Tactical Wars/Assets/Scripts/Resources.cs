@@ -54,13 +54,13 @@ public class Resources : MonoBehaviour
     //Resta goldmarks por generar una unidad tipo tank
     public bool GenerarTank(int who)
     {
-        if (who == 0 && Goldmarks > PrecioTank)
+        if (who == 0 && Goldmarks >= PrecioTank)
         {
             Goldmarks -= PrecioTank;
             interfaz.GetComponent<Interfaz>().RefreshResources(Goldmarks, Raciones, Combustible);
             return true;
         }
-        else if(who == 1 && EnemyGoldmarks > PrecioTank)
+        else if(who == 1 && EnemyGoldmarks >= PrecioTank)
         {
             EnemyGoldmarks -= PrecioTank;
             return true;

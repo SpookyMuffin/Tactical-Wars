@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    public GameObject AllyTank;
-    public GameObject EnemyTank;
+    public GameObject ATank;
+    public GameObject ETank;
     public GameObject resourceManager;
     public GameObject Tile0;
     public GameObject Tile1;
@@ -20,7 +20,7 @@ public class Spawn : MonoBehaviour
             if (resourceManager.GetComponent<Resources>().GenerarTank(0) == true)
             {
                 Debug.Log("Paso el 2º if");
-                Instantiate(AllyTank);
+                GameObject AllyTank =  Instantiate(ATank);
                 AllyTank.GetComponent<Unit>().type = 0;
                 AllyTank.GetComponent<Unit>().playable = true;
                 AllyTank.GetComponent<Unit>().initialiteUnit(Tile0);
@@ -36,7 +36,7 @@ public class Spawn : MonoBehaviour
             
             if (resourceManager.GetComponent<Resources>().GenerarTank(1) == true)
             {
-                Instantiate(EnemyTank);
+                GameObject EnemyTank = Instantiate(ETank);
                 EnemyTank.GetComponent<Unit>().type = 0;
                 EnemyTank.GetComponent<Unit>().playable = false;
                 EnemyTank.GetComponent<Unit>().resourceManager = resourceManager;

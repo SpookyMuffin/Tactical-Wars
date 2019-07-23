@@ -20,67 +20,48 @@ public class Building : MonoBehaviour
     public GameObject panel3;
 
     //Funcion para conquista de un edificio
-    //Who = 0 es del jugador
-    //Who = 1 es de la IA
+    //Who = 1 es del jugador antes 0
+    //Who = -1 es de la IA antes 1
     public void Conquer(int who, Material mat)
     {
-        if (who == 0 && status == 0)
+        progress += 50 * who;
+        if (progress >= 100)
         {
-            progress += 50;
-            if (progress >= 100)
-            {
-                progress = 100;
-                status = 1;
-                this.GetComponent<Renderer>().material = mat;
-            }
-
+            SetConquered(1, mat);
         }
-        if(who == 0 && status == 2)
+        else if (progress <= -100)
         {
-            progress += 50;
-            if (progress >= 100)
-            {
-                progress = 100;
-                status = 1;
-                this.GetComponent<Renderer>().material = mat;
-                if(type == 0)
-                {
-                    mouse.SetActive(false);
-                    panel1.SetActive(false);
-                    panel2.SetActive(false);
-                    panel3.SetActive(true);
-
-                }
-            }
+            SetConquered(-1,mat);
         }
-        if(who == 1 && status == 0)
-        {
-            progress -= 50;
-            if (progress <= -100)
-            {
-                progress = -100;
-                status = 2;
-                this.GetComponent<Renderer>().material = mat;
-            }
-        }
-        if (who == 1 && status == 1)
-        {
-            progress -= 50;
-            if (progress <= -100)
-            {
-                progress = -100;
-                status = 2;
-                this.GetComponent<Renderer>().material = mat;
-                if (type == 0)
-                {
-                    mouse.SetActive(false);
-                    panel1.SetActive(false);
-                    panel2.SetActive(false);
-                    panel3.SetActive(true);
+    }
 
-                }
-            }
-        }  
+    private void SetConquered(int who, Material mat)
+    {
+        if (who == 1)
+        {
+            progress = 100;
+            status = 1;
+        }
+        else if (who == -1)
+        {
+            progress = -100;
+            status = 2;
+        }
+
+        this.GetComponent<Renderer>().material = mat;
+
+        if (type == 0)
+        {
+            finishGame();
+        }
+    }
+
+    private void finishGame()
+    {
+        mouse.SetActive(false);
+        panel1.SetActive(false);
+        panel2.SetActive(false);
+        panel3.SetActive(true);
     }
 
     //Funcion para refrescar la interfaz con los parametros de este edificio.
