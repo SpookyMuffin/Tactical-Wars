@@ -60,7 +60,7 @@ public class IA : MonoBehaviour
 
             if (nearest.tag == "Building")
             {
-                if (CalculaDistanciaEuclidea(IAUnits[numUnit].GetComponent<Unit>().Tile.GetComponent<Tile>().x, IAUnits[numUnit].GetComponent<Unit>().Tile.GetComponent<Tile>().y,
+                if (CalculaDistancia(IAUnits[numUnit].GetComponent<Unit>().Tile.GetComponent<Tile>().x, IAUnits[numUnit].GetComponent<Unit>().Tile.GetComponent<Tile>().y,
         nearest.GetComponent<Building>().Tile.GetComponent<Tile>().x, nearest.GetComponent<Building>().Tile.GetComponent<Tile>().y) <= 1)
                 {
                     IAUnits[numUnit].GetComponent<Unit>().Conquer(nearest, IAMaterial);
@@ -70,7 +70,7 @@ public class IA : MonoBehaviour
             }
             else if (nearest.tag == "Unit" && nearest != null)
             {
-                if (CalculaDistanciaEuclidea(IAUnits[numUnit].GetComponent<Unit>().Tile.GetComponent<Tile>().x, IAUnits[numUnit].GetComponent<Unit>().Tile.GetComponent<Tile>().y,
+                if (CalculaDistancia(IAUnits[numUnit].GetComponent<Unit>().Tile.GetComponent<Tile>().x, IAUnits[numUnit].GetComponent<Unit>().Tile.GetComponent<Tile>().y,
         nearest.GetComponent<Unit>().Tile.GetComponent<Tile>().x, nearest.GetComponent<Unit>().Tile.GetComponent<Tile>().y) <= 1)
                 {
 
@@ -142,25 +142,26 @@ public class IA : MonoBehaviour
         }
 
     }
-    float CalculaDistanciaEuclidea(int x1, int y1, int x2, int y2)
+    int CalculaDistancia(int x1, int y1, int x2, int y2)
     {
-        return Mathf.Sqrt(Mathf.Pow(x2 - x1, 2f) + Mathf.Pow(y2 - y1, 2f));
+        return Map.GetComponent<Map>().GetPath(new Vector2(x1, y1), new Vector2(x2, y2)).Count;
+
     }
     
     GameObject encuentraMasCercano(GameObject x)
     {
         GameObject nearObject = null;
-        float temp = 999; ;
-        float distNearest = 999;
+        int temp = 999; ;
+        int distNearest = 999;
         if(PlayerUnits.Count > 0)
         {
             foreach (GameObject playerUnit in PlayerUnits)
             {
-                temp = CalculaDistanciaEuclidea(x.GetComponent<Unit>().Tile.GetComponent<Tile>().x, x.GetComponent<Unit>().Tile.GetComponent<Tile>().y,
+                temp = CalculaDistancia(x.GetComponent<Unit>().Tile.GetComponent<Tile>().x, x.GetComponent<Unit>().Tile.GetComponent<Tile>().y,
                     playerUnit.GetComponent<Unit>().Tile.GetComponent<Tile>().x, playerUnit.GetComponent<Unit>().Tile.GetComponent<Tile>().y);
-                if (temp < distNearest)
+                if (temp < distNearest && temp != 0)
                 {
-
+                    
                     distNearest = temp;
                     nearObject = playerUnit;
                 }
@@ -172,9 +173,9 @@ public class IA : MonoBehaviour
         {
             foreach (GameObject pb in PlayerBuildings)
             {
-                temp = CalculaDistanciaEuclidea(x.GetComponent<Unit>().Tile.GetComponent<Tile>().x, x.GetComponent<Unit>().Tile.GetComponent<Tile>().y,
+                temp = CalculaDistancia(x.GetComponent<Unit>().Tile.GetComponent<Tile>().x, x.GetComponent<Unit>().Tile.GetComponent<Tile>().y,
                     pb.GetComponent<Building>().Tile.GetComponent<Tile>().x, pb.GetComponent<Building>().Tile.GetComponent<Tile>().y);
-                if (temp < distNearest)
+                if (temp < distNearest && temp != 0)
                 {
 
                     distNearest = temp;
@@ -188,9 +189,9 @@ public class IA : MonoBehaviour
         {
             foreach (GameObject nb in NeutralBuildings)
             {
-                temp = CalculaDistanciaEuclidea(x.GetComponent<Unit>().Tile.GetComponent<Tile>().x, x.GetComponent<Unit>().Tile.GetComponent<Tile>().y,
+                temp = CalculaDistancia(x.GetComponent<Unit>().Tile.GetComponent<Tile>().x, x.GetComponent<Unit>().Tile.GetComponent<Tile>().y,
                     nb.GetComponent<Building>().Tile.GetComponent<Tile>().x, nb.GetComponent<Building>().Tile.GetComponent<Tile>().y);
-                if (temp < distNearest)
+                if (temp < distNearest && temp != 0)
                 {
 
                     distNearest = temp;
@@ -199,7 +200,6 @@ public class IA : MonoBehaviour
 
             }
         }
-
         return nearObject;
     }
 

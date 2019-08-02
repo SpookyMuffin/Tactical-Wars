@@ -22,6 +22,8 @@ public class Building : MonoBehaviour
     //Funcion para conquista de un edificio
     //Who = 1 es del jugador antes 0
     //Who = -1 es de la IA antes 1
+
+    //TODO arreglar casos para que no se ejecute setconquered cuando no se den las condiciones.
     public void Conquer(int who, Material mat)
     {
         progress += 50 * who;
