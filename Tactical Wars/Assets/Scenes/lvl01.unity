@@ -9770,6 +9770,21 @@ PrefabInstance:
       propertyPath: mapa
       value: 
       objectReference: {fileID: 203793525}
+    - target: {fileID: 8244758801910154894, guid: b754d01755c1689488295edab8dc366a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c39933e60e73205419d1f79a2af1fdac, type: 2}
+    - target: {fileID: 8244758802865923666, guid: b754d01755c1689488295edab8dc366a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c39933e60e73205419d1f79a2af1fdac, type: 2}
+    - target: {fileID: 8244758802867703840, guid: b754d01755c1689488295edab8dc366a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c39933e60e73205419d1f79a2af1fdac, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b754d01755c1689488295edab8dc366a, type: 3}
 --- !u!1001 &911810459
