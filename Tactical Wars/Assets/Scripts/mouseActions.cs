@@ -77,7 +77,7 @@ public class mouseActions : MonoBehaviour
                         && click1.GetComponent<Unit>().playable == true)
                     {
                         click1.GetComponent<Unit>().Conquer(click2, PlayerMat);
-                        click2.GetComponent<Building>().Display();
+                        //click2.GetComponent<Building>().Display();
                     }
 
                     //Movimiento
@@ -92,6 +92,31 @@ public class mouseActions : MonoBehaviour
                         }
 
                     }
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                CompClick2 = true;
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit1, 100)
+                    && !EventSystem.current.IsPointerOverGameObject())
+                {
+                    if (hit1.collider != null) click1 = hit1.collider.gameObject;
+
+                    //Comprobamos que se ha seleccionado y actualizamos la interfaz con sus propiedades
+                    // Debug.Log("Click Izq: " + hit1.collider);
+                    if (click1.tag == "Unit")
+                    {
+                        click1.GetComponent<Unit>().Display();
+                    }
+                    if (click1.tag == "Building")
+                    {
+                        click1.GetComponent<Building>().Display();
+                    }
+
+
                 }
             }
         }

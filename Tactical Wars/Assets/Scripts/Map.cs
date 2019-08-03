@@ -15,6 +15,11 @@ public class Map : MonoBehaviour
     GameObject[] tiles;
     public GameObject[,] mTiles;
 
+    public Material allyMat;
+    public Material enemyMat;
+    public Material defMat;
+
+    public GameObject turno;
 
     void SetMap()
     {
@@ -42,23 +47,6 @@ public class Map : MonoBehaviour
         SetMap();
     }
 
-    /*private void Start()
-    {
-       List<Pathfinding.Node> camino;
-       Pathfinding.ASTAR pathF = new Pathfinding.ASTAR(mTiles, ROWS, COLS);
-        camino = pathF.FindPath(new Vector2(0,0),new Vector2(2,2));
-
-       if (camino != null)
-       {
-           foreach (Pathfinding.Node n in camino)
-           {
-
-               Debug.Log(n.Pos);
-           }
-
-       }
-    }*/
-
     public List<GameObject> GetPath(Vector2 Start, Vector2 End)
     {
         List<Pathfinding.Node> camino;
@@ -79,5 +67,79 @@ public class Map : MonoBehaviour
     public GameObject returnTile(Vector2 x)
     {
         return mTiles[(int)x.x, (int)x.y];
+    }
+
+    public void ColorTiles(bool ally, int steps, int x, int y)
+    {
+        if (ally)
+        {
+            for (int i = 0; i <= steps; i++)
+            {
+                for (int j = steps - i; j >= 0; j--)
+                {
+                    if (x + i < ROWS && y + j < COLS)
+                    {
+                        if (mTiles[x + i, y + j].GetComponent<Tile>().notWalkable == false) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                    }
+                    if (x + i < ROWS && y - j >= 0)
+                    {
+                        if (mTiles[x + i, y - j].GetComponent<Tile>().notWalkable == false) mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                    }
+                    if (x - i >= 0 && y + j < COLS)
+                    {
+                        if (mTiles[x - i, y + j].GetComponent<Tile>().notWalkable == false) mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                    }
+                    if (x - i >= 0 && y - j >= 0)
+                    {
+                        if (mTiles[x - i, y - j].GetComponent<Tile>().notWalkable == false) mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                    }
+                }
+
+            }
+
+            //for (int a = 0, int b = steps; && a <= steps, b >= 0)
+
+        }
+        else if(ally == false)
+        {
+            if (turno.GetComponent<Turns>().turn)
+            {
+
+
+                Debug.Log(turno.GetComponent<Turns>().turn);
+                for (int i = 0; i <= steps; i++)
+                {
+                    for (int j = steps - i; j >= 0; j--)
+                    {
+                        if (x + i < ROWS && y + j < COLS)
+                        {
+                            if (mTiles[x + i, y + j].GetComponent<Tile>().notWalkable == false) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                        }
+                        if (x + i < ROWS && y - j >= 0)
+                        {
+                            if (mTiles[x + i, y - j].GetComponent<Tile>().notWalkable == false) mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                        }
+                        if (x - i >= 0 && y + j < COLS)
+                        {
+                            if (mTiles[x - i, y + j].GetComponent<Tile>().notWalkable == false) mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                        }
+                        if (x - i >= 0 && y - j >= 0)
+                        {
+                            if (mTiles[x - i, y - j].GetComponent<Tile>().notWalkable == false) mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void resetTiles()
+    {
+        for (int i = 0; i < ROWS; i++)
+        {
+            for(int j = 0; j < COLS; j++)
+            {
+                mTiles[i, j].transform.GetChild(0).GetComponent<Renderer>().material = defMat;
+            }
+        }
     }
 }

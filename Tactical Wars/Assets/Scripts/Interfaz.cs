@@ -14,6 +14,21 @@ public class Interfaz : MonoBehaviour
 
     public GameObject passButton, waitButton;
 
+    public GameObject selectedObj = null;
+    GameObject tempObj = null;
+
+
+    public Material selectedMat;
+    Material tempMat;
+
+    public GameObject mapa;
+
+    void Awake()
+    {
+
+
+    }
+
     public void RefreshResources(int G, int R, int C)
     {
         GoldmarkText.GetComponent<Text>().text = "Goldmarks: " + G;
@@ -36,6 +51,7 @@ public class Interfaz : MonoBehaviour
 
     public void SwitchStatPanelBuilding(int type, int status, int progress, string casilla)
     {
+        mapa.GetComponent<Map>().resetTiles();
         info1.GetComponent<Text>().text = "status: " + status;
         info2.GetComponent<Text>().text = "progress: " + progress;
         info3.GetComponent<Text>().text = "type: " + type;
@@ -49,4 +65,64 @@ public class Interfaz : MonoBehaviour
         passButton.SetActive(estado);
         waitButton.SetActive(!estado);
     }
+
+    public void setSelectedObj(GameObject obj)
+    {
+        
+        selectedObj = obj;
+
+        if (tempObj != null)
+        {
+            if(tempObj.tag == "Unit")
+            {
+                
+                tempObj.transform.GetChild(0).transform.GetChild(0).GetComponent<Renderer>().material = tempMat;
+                tempObj.transform.GetChild(0).transform.GetChild(1).GetComponent<Renderer>().material = tempMat;
+                tempObj.transform.GetChild(0).transform.GetChild(2).GetComponent<Renderer>().material = tempMat;
+                tempObj.transform.GetChild(0).transform.GetChild(3).GetComponent<Renderer>().material = tempMat;
+            }
+            else
+            {
+                tempObj.GetComponent<Renderer>().material = tempMat;
+            }
+        }
+
+        if (obj.tag == "Unit")
+        {
+            tempMat = obj.transform.GetChild(0).transform.GetChild(0).GetComponent<Renderer>().material;
+            selectedObj.transform.GetChild(0).transform.GetChild(0).GetComponent<Renderer>().material = selectedMat;
+            selectedObj.transform.GetChild(0).transform.GetChild(1).GetComponent<Renderer>().material = selectedMat;
+            selectedObj.transform.GetChild(0).transform.GetChild(2).GetComponent<Renderer>().material = selectedMat;
+            selectedObj.transform.GetChild(0).transform.GetChild(3).GetComponent<Renderer>().material = selectedMat;
+        }
+        else
+        {
+
+            tempMat = obj.GetComponent<Renderer>().material;
+            selectedObj.GetComponent<Renderer>().material = selectedMat;
+        }
+        tempObj = selectedObj;
+        if(obj.tag == "Unit")
+        {
+            mapa.GetComponent<Map>().resetTiles();
+            mapa.GetComponent<Map>().ColorTiles(obj.GetComponent<Unit>().playable, obj.GetComponent<Unit>().steps, obj.GetComponent<Unit>().Tile.GetComponent<Tile>().x, obj.GetComponent<Unit>().Tile.GetComponent<Tile>().y);
+        }
+
+        
+
+    }
+    
+    void pass()
+    {
+        selectedObj.transform.GetChild(0).transform.GetChild(0).GetComponent<Renderer>().material = tempMat;
+        selectedObj.transform.GetChild(0).transform.GetChild(1).GetComponent<Renderer>().material = tempMat;
+        selectedObj.transform.GetChild(0).transform.GetChild(2).GetComponent<Renderer>().material = tempMat;
+        selectedObj.transform.GetChild(0).transform.GetChild(3).GetComponent<Renderer>().material = tempMat;
+
+        selectedObj = null;
+        tempObj = null;
+        tempMat = null;
+        selectedMat = null;
+    }
+
 }

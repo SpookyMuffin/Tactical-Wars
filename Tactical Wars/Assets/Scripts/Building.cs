@@ -70,6 +70,8 @@ public class Building : MonoBehaviour
     public void Display()
     {
         interfaz.GetComponent<Interfaz>().SwitchStatPanelBuilding(type, status, progress, Tile.name);
+        interfaz.GetComponent<Interfaz>().setSelectedObj(this.gameObject);
+
     }
 
     public Vector2 getPos()

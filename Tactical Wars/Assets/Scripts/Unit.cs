@@ -26,6 +26,7 @@ public class Unit : MonoBehaviour
     public GameObject interfaz;
 
     public GameObject resourceManager;
+    public GameObject mapa;
 
 
     public bool initialiteUnit(GameObject spawnTile)
@@ -78,7 +79,7 @@ public class Unit : MonoBehaviour
         action = false;
         steps = 0;
         RotateUnit(x1, y1, x2, y2);
-
+        mapa.GetComponent<Map>().resetTiles();
     }
 
     //Funcion para conquistar un edificio.
@@ -112,6 +113,7 @@ public class Unit : MonoBehaviour
         action = false;
         steps = 0;
         RotateUnit(x1, y1, x2, y2);
+        mapa.GetComponent<Map>().resetTiles();
 
     }
 
@@ -127,14 +129,14 @@ public class Unit : MonoBehaviour
             return;
 
         }
-        double distancia = 1000f;
+        int distancia;
         int x1, y1, x2, y2;
         x1 = this.Tile.GetComponent<Tile>().x;
         y1 = this.Tile.GetComponent<Tile>().y;
         x2 = Tile.GetComponent<Tile>().x;
         y2 = Tile.GetComponent<Tile>().y;
-        distancia = Mathf.Sqrt(Mathf.Pow(x2 - x1, 2f) + Mathf.Pow(y2 - y1, 2f));
-        if ( distancia > 1 || steps == 0 || Tile.GetComponent<Tile>().notWalkable == true) return;
+        distancia = mapa.GetComponent<Map>().GetPath(new Vector2(x1, y1), new Vector2(x2, y2)).Count;
+        if ( distancia == 0 || (distancia > steps) || steps == 0 || Tile.GetComponent<Tile>().notWalkable == true) return;
 
         //Liberamos la anterior casilla
         this.Tile.GetComponent<Tile>().obj = null;
@@ -149,7 +151,7 @@ public class Unit : MonoBehaviour
         //Rotamos la unida para que no vaya haciendo Deja vu
         RotateUnit(x1, y1, x2, y2);
         //Restamos los movimientos y refrescamos la interfaz
-        steps--;
+        steps-= distancia;
         if (playable == true)
         {
             resourceManager.GetComponent<Resources>().MoverTank(0);
@@ -173,6 +175,7 @@ public class Unit : MonoBehaviour
     public void Display()
     {
         interfaz.GetComponent<Interfaz>().SwitchStatPanelUnit(type,health,steps,power,action,Tile.name);
+        interfaz.GetComponent<Interfaz>().setSelectedObj(this.gameObject);
     }
 
     //Funcion para rotar la unidad

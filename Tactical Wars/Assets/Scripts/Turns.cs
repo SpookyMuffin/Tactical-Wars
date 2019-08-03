@@ -7,7 +7,7 @@ public class Turns : MonoBehaviour
     public bool turn = true; //Lleva el estado del turno
     public GameObject resourceManager; //Gestor de recursos
     public GameObject IA;
-
+    public GameObject mapa;
     public GameObject interfaz;
 
     //Pasamos de turno, y actualizamos los recursos y el turno
@@ -15,6 +15,7 @@ public class Turns : MonoBehaviour
     {
         if (who == 0 && turn == true)
         {
+            mapa.GetComponent<Map>().resetTiles();
             turn = false;
             interfaz.GetComponent<Interfaz>().Pass(false);
             resourceManager.GetComponent<Resources>().EndTurnResources(0);
