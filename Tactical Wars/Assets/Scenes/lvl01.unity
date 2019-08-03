@@ -202,7 +202,7 @@ PrefabInstance:
     - target: {fileID: 3553781884786969982, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
       propertyPath: notWalkable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3553781884786969982, guid: 1044033a8b2adc7488f0851a8e93421f,
         type: 3}
@@ -1623,6 +1623,10 @@ MonoBehaviour:
   emptyTile: {fileID: 2100000, guid: c0d660c0333c4224098a02ecd84d6232, type: 2}
   CanMove: {fileID: 2100000, guid: c39933e60e73205419d1f79a2af1fdac, type: 2}
   cantMove: {fileID: 2100000, guid: 463052f3f7389124f9e7b34b0b931d0d, type: 2}
+  allyMat: {fileID: 2100000, guid: c39933e60e73205419d1f79a2af1fdac, type: 2}
+  enemyMat: {fileID: 2100000, guid: 463052f3f7389124f9e7b34b0b931d0d, type: 2}
+  defMat: {fileID: 2100000, guid: 2ebf33c8c66048e4392138d1501e6be3, type: 2}
+  turno: {fileID: 1011905878}
 --- !u!4 &205406771 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3553781884786969954, guid: 1044033a8b2adc7488f0851a8e93421f,
@@ -1731,6 +1735,11 @@ PrefabInstance:
       propertyPath: Spawn
       value: 
       objectReference: {fileID: 371292271}
+    - target: {fileID: 3591178934942496261, guid: b9cdabc805b89a544a06561fcc23ebd6,
+        type: 3}
+      propertyPath: mapa
+      value: 
+      objectReference: {fileID: 203793525}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdabc805b89a544a06561fcc23ebd6, type: 3}
 --- !u!4 &216233247 stripped
@@ -3676,6 +3685,7 @@ MonoBehaviour:
   Tile0: {fileID: 2125209308}
   Tile1: {fileID: 957170012}
   turnManager: {fileID: 1011905878}
+  mapa: {fileID: 203793525}
 --- !u!4 &379545874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 8f90bdc8aeb4bad4db0cb091100a44f4,
@@ -8294,6 +8304,7 @@ MonoBehaviour:
   waitButton: {fileID: 622678310}
   selectedObj: {fileID: 0}
   selectedMat: {fileID: 2100000, guid: c0d660c0333c4224098a02ecd84d6232, type: 2}
+  mapa: {fileID: 203793525}
 --- !u!4 &817397656
 Transform:
   m_ObjectHideFlags: 0
@@ -9754,6 +9765,11 @@ PrefabInstance:
       propertyPath: Spawn
       value: 
       objectReference: {fileID: 371292271}
+    - target: {fileID: 8244758802663752106, guid: b754d01755c1689488295edab8dc366a,
+        type: 3}
+      propertyPath: mapa
+      value: 
+      objectReference: {fileID: 203793525}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b754d01755c1689488295edab8dc366a, type: 3}
 --- !u!1001 &911810459
@@ -11293,6 +11309,7 @@ MonoBehaviour:
   turn: 1
   resourceManager: {fileID: 1029314598}
   IA: {fileID: 676998048}
+  mapa: {fileID: 203793525}
   interfaz: {fileID: 817397654}
 --- !u!4 &1011905880
 Transform:
