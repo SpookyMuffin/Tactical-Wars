@@ -35,6 +35,7 @@ public class Turns : MonoBehaviour
                 if (x.GetComponent<Unit>().playable == false) x.GetComponent<Unit>().RefreshSteps();
             }
             interfaz.GetComponent<Interfaz>().Pass(true);
+            interfaz.GetComponent<Interfaz>().setSelectedObj(interfaz.GetComponent<Interfaz>().selectedObj);
         }
 
     }
