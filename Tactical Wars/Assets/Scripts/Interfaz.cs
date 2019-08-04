@@ -51,7 +51,6 @@ public class Interfaz : MonoBehaviour
 
     public void SwitchStatPanelBuilding(int type, int status, int progress, string casilla)
     {
-        mapa.GetComponent<Map>().resetTiles();
         info1.GetComponent<Text>().text = "status: " + status;
         info2.GetComponent<Text>().text = "progress: " + progress;
         info3.GetComponent<Text>().text = "type: " + type;
@@ -98,7 +97,7 @@ public class Interfaz : MonoBehaviour
         }
         else
         {
-
+            mapa.GetComponent<Map>().resetTiles();
             tempMat = obj.GetComponent<Renderer>().material;
             selectedObj.GetComponent<Renderer>().material = selectedMat;
             mapa.GetComponent<Map>().ColorTile(selectedObj.GetComponent<Building>().Tile.GetComponent<Tile>().x, selectedObj.GetComponent<Building>().Tile.GetComponent<Tile>().y, selectedObj.GetComponent<Building>().status);
