@@ -70,7 +70,7 @@ public class Interfaz : MonoBehaviour
     {
         
         selectedObj = obj;
-
+        if (selectedObj == null) return;
         if (tempObj != null)
         {
             if(tempObj.tag == "Unit")

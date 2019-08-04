@@ -8,6 +8,7 @@ public class IA : MonoBehaviour
     public GameObject Map;
     public GameObject resourceManager;
     public GameObject spawn;
+    public float waitMoveTime = 1.0f;
 
     List<GameObject> IAUnits = new List<GameObject>();
     List<GameObject> PlayerUnits = new List<GameObject>();
@@ -54,7 +55,7 @@ public class IA : MonoBehaviour
                 IAUnits[numUnit].GetComponent<Unit>().Move(Path[k]);
                 k++;
                 Debug.Log("muevo");
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(waitMoveTime);
             }
            
 
@@ -65,7 +66,7 @@ public class IA : MonoBehaviour
                 {
                     IAUnits[numUnit].GetComponent<Unit>().Conquer(nearest, IAMaterial);
                     Debug.Log("Conquisto");
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(waitMoveTime);
                 }
             }
             else if (nearest.tag == "Unit" && nearest != null)
@@ -76,7 +77,7 @@ public class IA : MonoBehaviour
 
                     IAUnits[numUnit].GetComponent<Unit>().Attack(nearest);
                     Debug.Log("ataco");
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(waitMoveTime);
 
 
                 }
@@ -88,9 +89,10 @@ public class IA : MonoBehaviour
             {
                 if (resourceManager.GetComponent<Resources>().EnemyGoldmarks > resourceManager.GetComponent<Resources>().PrecioTank)
                 {
+                    yield return new WaitForSeconds(waitMoveTime);
                     Debug.Log("Intento Spawnear un tank");
                     spawn.GetComponent<Spawn>().EnemySpawnTank(0);
-                    yield return new WaitForSeconds(1f);
+                    
                 }
                 yield return endTurn();
             }
@@ -102,7 +104,7 @@ public class IA : MonoBehaviour
     {
         TurnManager.GetComponent<Turns>().Pass(1);
         Debug.Log("Pulso el end");
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(waitMoveTime);
 
     }
 
