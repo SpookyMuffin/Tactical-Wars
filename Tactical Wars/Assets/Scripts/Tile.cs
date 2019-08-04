@@ -11,6 +11,6 @@ public class Tile : MonoBehaviour
     public int y;
 
     //Objeto que tiene encima
-    public GameObject obj;
+    public GameObject obj = null;
 
 }

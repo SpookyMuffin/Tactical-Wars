@@ -17,7 +17,9 @@ public class Map : MonoBehaviour
 
     public Material allyMat;
     public Material enemyMat;
+    public Material neutralMat;
     public Material defMat;
+
 
     public GameObject turno;
 
@@ -69,31 +71,93 @@ public class Map : MonoBehaviour
         return mTiles[(int)x.x, (int)x.y];
     }
 
-    public void ColorTiles(bool ally, int steps, int x, int y)
+    public void ColorTiles(bool ally, int steps, int x, int y, bool action)
     {
         if (ally)
         {
-            if (turno.GetComponent<Turns>().turn)
+            mTiles[x, y].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+            if (turno.GetComponent<Turns>().turn && action == true)
             {
-                for (int i = 0; i <= steps; i++)
+                for (int i = 0; i <= (steps+1); i++)
                 {
-                    for (int j = steps - i; j >= 0; j--)
+                    for (int j = (steps+1) - i; j >= 0; j--)
                     {
                         if (x + i < ROWS && y + j < COLS)
                         {
-                            if (mTiles[x + i, y + j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x + i, y + j)).Count <= 3) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                            if (mTiles[x + i, y + j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x + i, y + j)).Count <= steps && GetPath(new Vector2(x, y), new Vector2(x + i, y + j)).Count > 0)
+                            {
+                                mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                            }
+                            else if (mTiles[x + i, y + j].GetComponent<Tile>().notWalkable == true && GetPath(new Vector2(x, y), new Vector2(x + i, y + j)).Count <= (steps + 1) && mTiles[x + i, y + j].GetComponent<Tile>().obj != null
+                                && GetPath(new Vector2(x, y), new Vector2(x + i, y + j)).Count > 0)
+                            {
+                                if (mTiles[x + i, y + j].GetComponent<Tile>().obj.tag == "Unit")
+                                {
+                                    if(mTiles[x + i, y + j].GetComponent<Tile>().obj.GetComponent<Unit>().playable == false) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                                else if(mTiles[x + i, y + j].GetComponent<Tile>().obj.tag == "Building")
+                                {
+                                    if (mTiles[x + i, y + j].GetComponent<Tile>().obj.GetComponent<Building>().status != 1) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                            }
+
                         }
                         if (x + i < ROWS && y - j >= 0)
                         {
-                            if (mTiles[x + i, y - j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x + i, y - j)).Count <= 3) mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                            if (mTiles[x + i, y - j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x + i, y - j)).Count <= steps && GetPath(new Vector2(x, y), new Vector2(x + i, y - j)).Count > 0)
+                            {
+                                mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                            }
+                            else if (mTiles[x + i, y - j].GetComponent<Tile>().notWalkable == true && GetPath(new Vector2(x, y), new Vector2(x + i, y - j)).Count <= (steps + 1) && mTiles[x + i, y - j].GetComponent<Tile>().obj != null
+                                && GetPath(new Vector2(x, y), new Vector2(x + i, y - j)).Count > 0)
+                            {
+                                if (mTiles[x + i, y - j].GetComponent<Tile>().obj.tag == "Unit")
+                                {
+                                    if (mTiles[x + i, y - j].GetComponent<Tile>().obj.GetComponent<Unit>().playable == false) mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                                else if (mTiles[x + i, y - j].GetComponent<Tile>().obj.tag == "Building")
+                                {
+                                    if (mTiles[x + i, y - j].GetComponent<Tile>().obj.GetComponent<Building>().status != 1) mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                            }
                         }
                         if (x - i >= 0 && y + j < COLS)
                         {
-                            if (mTiles[x - i, y + j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count <= 3) mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                            if (mTiles[x - i, y + j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count <= steps && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count > 0)
+                            {
+                                mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                            }
+                            else if (mTiles[x - i, y + j].GetComponent<Tile>().notWalkable == true && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count <= (steps + 1) && mTiles[x - i, y + j].GetComponent<Tile>().obj != null
+                                && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count > 0)
+                            {
+                                if (mTiles[x - i, y + j].GetComponent<Tile>().obj.tag == "Unit")
+                                {
+                                    if (mTiles[x - i, y + j].GetComponent<Tile>().obj.GetComponent<Unit>().playable == false) mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                                else if (mTiles[x - i, y + j].GetComponent<Tile>().obj.tag == "Building")
+                                {
+                                    if (mTiles[x - i, y + j].GetComponent<Tile>().obj.GetComponent<Building>().status != 1) mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                            }
                         }
                         if (x - i >= 0 && y - j >= 0)
                         {
-                            if (mTiles[x - i, y - j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x - i, y - j)).Count <= 3) mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                            if (mTiles[x - i, y - j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x - i, y - j)).Count <= steps && GetPath(new Vector2(x, y), new Vector2(x - i, y - j)).Count > 0)
+                            {
+                                mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                            }
+                            else if (mTiles[x - i, y - j].GetComponent<Tile>().notWalkable == true && GetPath(new Vector2(x, y), new Vector2(x - i, y - j)).Count <= (steps + 1) && mTiles[x - i, y - j].GetComponent<Tile>().obj != null
+                                && GetPath(new Vector2(x, y), new Vector2(x - i, y - j)).Count > 0)
+                            {
+                                if (mTiles[x - i, y - j].GetComponent<Tile>().obj.tag == "Unit")
+                                {
+                                    if (mTiles[x - i, y - j].GetComponent<Tile>().obj.GetComponent<Unit>().playable == false) mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                                else if (mTiles[x - i, y - j].GetComponent<Tile>().obj.tag == "Building")
+                                {
+                                    if (mTiles[x - i, y - j].GetComponent<Tile>().obj.GetComponent<Building>().status != 1) mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                            }
                         }
                     }
                 }
@@ -104,27 +168,95 @@ public class Map : MonoBehaviour
         }
         else if(ally == false)
         {
+
             if (turno.GetComponent<Turns>().turn)
+                mTiles[x, y].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
             {
-                for (int i = 0; i <= steps; i++)
+
+                for (int i = 0; i <= (steps + 1); i++)
                 {
-                    for (int j = steps - i; j >= 0; j--)
+                    for (int j = (steps + 1) - i; j >= 0; j--)
                     {
                         if (x + i < ROWS && y + j < COLS)
                         {
-                            if (mTiles[x + i, y + j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x,y),new Vector2(x+i,y+j)).Count <= 3) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                            if (mTiles[x + i, y + j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x + i, y + j)).Count <= steps && GetPath(new Vector2(x, y), new Vector2(x + i, y + j)).Count > 0)
+                            {
+                                mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material =enemyMat;
+                            }
+                            else if (mTiles[x + i, y + j].GetComponent<Tile>().notWalkable == true && GetPath(new Vector2(x, y), new Vector2(x + i, y + j)).Count <= (steps + 1) && mTiles[x + i, y + j].GetComponent<Tile>().obj != null
+                                 && GetPath(new Vector2(x, y), new Vector2(x + i, y + j)).Count > 0)
+                            {
+                                if (mTiles[x + i, y + j].GetComponent<Tile>().obj.tag == "Unit")
+                                {
+                                    if (mTiles[x + i, y + j].GetComponent<Tile>().obj.GetComponent<Unit>().playable == true) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                                }
+                                else if (mTiles[x + i, y + j].GetComponent<Tile>().obj.tag == "Building")
+                                {
+                                    if (mTiles[x + i, y + j].GetComponent<Tile>().obj.GetComponent<Building>().status == 1) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                                    else if(mTiles[x + i, y + j].GetComponent<Tile>().obj.GetComponent<Building>().status == 0) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                            }
+
                         }
                         if (x + i < ROWS && y - j >= 0)
                         {
-                            if (mTiles[x + i, y - j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x + i, y - j)).Count <= 3) mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                            if (mTiles[x + i, y - j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x + i, y - j)).Count <= steps && GetPath(new Vector2(x, y), new Vector2(x + i, y - j)).Count > 0)
+                            {
+                                mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                            }
+                            else if (mTiles[x + i, y - j].GetComponent<Tile>().notWalkable == true && GetPath(new Vector2(x, y), new Vector2(x + i, y - j)).Count <= (steps + 1) && mTiles[x + i, y - j].GetComponent<Tile>().obj != null
+                                && GetPath(new Vector2(x, y), new Vector2(x + i, y - j)).Count > 0)
+                            {
+                                if (mTiles[x + i, y - j].GetComponent<Tile>().obj.tag == "Unit")
+                                {
+                                    if (mTiles[x + i, y - j].GetComponent<Tile>().obj.GetComponent<Unit>().playable == true) mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                                }
+                                else if (mTiles[x + i, y - j].GetComponent<Tile>().obj.tag == "Building")
+                                {
+                                    if (mTiles[x + i, y - j].GetComponent<Tile>().obj.GetComponent<Building>().status == 1) mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                                    else if (mTiles[x + i, y - j].GetComponent<Tile>().obj.GetComponent<Building>().status == 0) mTiles[x + i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                            }
                         }
                         if (x - i >= 0 && y + j < COLS)
                         {
-                            if (mTiles[x - i, y + j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count <= 3) mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                            if (mTiles[x - i, y + j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count <= steps && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count > 0)
+                            {
+                                mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemy;
+                            }
+                            else if (mTiles[x - i, y + j].GetComponent<Tile>().notWalkable == true && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count <= (steps + 1) && mTiles[x - i, y + j].GetComponent<Tile>().obj != null
+                                && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count > 0)
+                            {
+                                if (mTiles[x - i, y + j].GetComponent<Tile>().obj.tag == "Unit")
+                                {
+                                    if (mTiles[x - i, y + j].GetComponent<Tile>().obj.GetComponent<Unit>().playable == true) mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                                }
+                                else if (mTiles[x - i, y + j].GetComponent<Tile>().obj.tag == "Building")
+                                {
+                                    if (mTiles[x - i, y + j].GetComponent<Tile>().obj.GetComponent<Building>().status == 1) mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                                    else if (mTiles[x - i, y + j].GetComponent<Tile>().obj.GetComponent<Building>().status == 0) mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                            }
                         }
                         if (x - i >= 0 && y - j >= 0)
                         {
-                            if (mTiles[x - i, y - j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x - i, y - j)).Count <= 3) mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                            if (mTiles[x - i, y - j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x - i, y - j)).Count <= steps && GetPath(new Vector2(x, y), new Vector2(x - i, y - j)).Count > 0)
+                            {
+                                mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                            }
+                            else if (mTiles[x - i, y - j].GetComponent<Tile>().notWalkable == true && GetPath(new Vector2(x, y), new Vector2(x - i, y - j)).Count <= (steps + 1) && mTiles[x - i, y - j].GetComponent<Tile>().obj != null
+                                && GetPath(new Vector2(x, y), new Vector2(x - i, y - j)).Count > 0)
+                            {
+                                if (mTiles[x - i, y - j].GetComponent<Tile>().obj.tag == "Unit")
+                                {
+                                    if (mTiles[x - i, y - j].GetComponent<Tile>().obj.GetComponent<Unit>().playable == true) mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                                }
+                                else if (mTiles[x - i, y - j].GetComponent<Tile>().obj.tag == "Building")
+                                {
+                                    if (mTiles[x - i, y - j].GetComponent<Tile>().obj.GetComponent<Building>().status == 1) mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                                    else if (mTiles[x - i, y - j].GetComponent<Tile>().obj.GetComponent<Building>().status == 0) mTiles[x - i, y - j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
+                                }
+                            }
                         }
                     }
                 }
@@ -140,5 +272,12 @@ public class Map : MonoBehaviour
                 mTiles[i, j].transform.GetChild(0).GetComponent<Renderer>().material = defMat;
             }
         }
+    }
+
+    public void ColorTile(int x, int y, int mat)
+    {
+        if(mat == 0) mTiles[x, y].transform.GetChild(0).GetComponent<Renderer>().material = neutralMat;
+        else if(mat == 1) mTiles[x, y].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+        else if (mat == 2) mTiles[x, y].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
     }
 }

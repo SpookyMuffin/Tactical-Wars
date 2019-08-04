@@ -113,7 +113,7 @@ public class Pathfinding : MonoBehaviour
             // construct path, if end was not closed return null
             if (!Closed.Exists(x => x.Pos == end))
             {
-                Debug.Log("No encontre el camino");
+                //Debug.Log("No encontre el camino");
                 return null;
             }
 

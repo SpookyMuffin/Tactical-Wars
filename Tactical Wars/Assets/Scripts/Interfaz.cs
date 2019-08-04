@@ -84,6 +84,7 @@ public class Interfaz : MonoBehaviour
             else
             {
                 tempObj.GetComponent<Renderer>().material = tempMat;
+
             }
         }
 
@@ -100,12 +101,13 @@ public class Interfaz : MonoBehaviour
 
             tempMat = obj.GetComponent<Renderer>().material;
             selectedObj.GetComponent<Renderer>().material = selectedMat;
+            mapa.GetComponent<Map>().ColorTile(selectedObj.GetComponent<Building>().Tile.GetComponent<Tile>().x, selectedObj.GetComponent<Building>().Tile.GetComponent<Tile>().y, selectedObj.GetComponent<Building>().status);
         }
         tempObj = selectedObj;
         if(obj.tag == "Unit")
         {
             mapa.GetComponent<Map>().resetTiles();
-            mapa.GetComponent<Map>().ColorTiles(obj.GetComponent<Unit>().playable, obj.GetComponent<Unit>().steps, obj.GetComponent<Unit>().Tile.GetComponent<Tile>().x, obj.GetComponent<Unit>().Tile.GetComponent<Tile>().y);
+            mapa.GetComponent<Map>().ColorTiles(obj.GetComponent<Unit>().playable, obj.GetComponent<Unit>().steps, obj.GetComponent<Unit>().Tile.GetComponent<Tile>().x, obj.GetComponent<Unit>().Tile.GetComponent<Tile>().y, obj.GetComponent<Unit>().action);
         }
 
         

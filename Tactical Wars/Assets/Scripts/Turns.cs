@@ -16,6 +16,15 @@ public class Turns : MonoBehaviour
         if (who == 0 && turn == true)
         {
             mapa.GetComponent<Map>().resetTiles();
+            if (interfaz.GetComponent<Interfaz>().selectedObj.tag == "Building") interfaz.GetComponent<Interfaz>().setSelectedObj(interfaz.GetComponent<Interfaz>().selectedObj);
+            if (interfaz.GetComponent<Interfaz>().selectedObj.tag == "Unit")
+            {
+                if (interfaz.GetComponent<Interfaz>().selectedObj.GetComponent<Unit>().playable)
+                {
+                    mapa.GetComponent<Map>().ColorTile(interfaz.GetComponent<Interfaz>().selectedObj.GetComponent<Unit>().Tile.GetComponent<Tile>().x, interfaz.GetComponent<Interfaz>().selectedObj.GetComponent<Unit>().Tile.GetComponent<Tile>().y,1);
+                }
+            }
+             
             turn = false;
             interfaz.GetComponent<Interfaz>().Pass(false);
             resourceManager.GetComponent<Resources>().EndTurnResources(0);

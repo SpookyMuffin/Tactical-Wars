@@ -79,7 +79,11 @@ public class Unit : MonoBehaviour
         action = false;
         steps = 0;
         RotateUnit(x1, y1, x2, y2);
-        mapa.GetComponent<Map>().resetTiles();
+        if (playable)
+        {
+            mapa.GetComponent<Map>().resetTiles();
+            mapa.GetComponent<Map>().ColorTiles(playable, steps, x1, y1, action);
+        }
     }
 
     //Funcion para conquistar un edificio.
@@ -113,7 +117,11 @@ public class Unit : MonoBehaviour
         action = false;
         steps = 0;
         RotateUnit(x1, y1, x2, y2);
-        mapa.GetComponent<Map>().resetTiles();
+        if (playable)
+        {
+            mapa.GetComponent<Map>().resetTiles();
+            mapa.GetComponent<Map>().ColorTiles(playable, steps, x1, y1, action);
+        }
 
     }
 
