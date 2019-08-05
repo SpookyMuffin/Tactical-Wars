@@ -16,7 +16,7 @@ public class Interfaz : MonoBehaviour
 
     public GameObject selectedObj = null;
     GameObject tempObj = null;
-
+    public GameObject recursos;
 
     public Material selectedMat;
     Material tempMat;
@@ -105,8 +105,15 @@ public class Interfaz : MonoBehaviour
         tempObj = selectedObj;
         if(obj.tag == "Unit")
         {
+            int steps;
+            int comb;
+            if(obj.GetComponent<Unit>().playable == true) comb= recursos.GetComponent<Resources>().Combustible;
+            else comb = recursos.GetComponent<Resources>().EnemyCombustible;
+            int gasto = recursos.GetComponent<Resources>().gastoCombustibleTank;
+            if ((comb / gasto) > obj.GetComponent<Unit>().steps) steps = obj.GetComponent<Unit>().steps;
+            else steps = comb / gasto;
             mapa.GetComponent<Map>().resetTiles();
-            mapa.GetComponent<Map>().ColorTiles(obj.GetComponent<Unit>().playable, obj.GetComponent<Unit>().steps, obj.GetComponent<Unit>().Tile.GetComponent<Tile>().x, obj.GetComponent<Unit>().Tile.GetComponent<Tile>().y, obj.GetComponent<Unit>().action);
+            mapa.GetComponent<Map>().ColorTiles(obj.GetComponent<Unit>().playable,steps, obj.GetComponent<Unit>().Tile.GetComponent<Tile>().x, obj.GetComponent<Unit>().Tile.GetComponent<Tile>().y, obj.GetComponent<Unit>().action);
         }
 
         

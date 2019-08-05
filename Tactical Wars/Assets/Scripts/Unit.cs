@@ -15,8 +15,8 @@ public class Unit : MonoBehaviour
     public bool action = true; //Si puede atacar o conquistar
     public bool playable = true; //Si la podemos controlar
 
-    int TankPower = 50;
-    int TankSteps = 3;
+    public int TankPower = 50;
+    public int TankSteps = 3;
 
 
     //Casilla en la que se encuentra
@@ -162,11 +162,11 @@ public class Unit : MonoBehaviour
         steps-= distancia;
         if (playable == true)
         {
-            resourceManager.GetComponent<Resources>().MoverTank(0);
+            resourceManager.GetComponent<Resources>().MoverTank(0,distancia);
         }
         else if (playable == false)
         {
-            resourceManager.GetComponent<Resources>().MoverTank(1);
+            resourceManager.GetComponent<Resources>().MoverTank(1,distancia);
 
         }
 

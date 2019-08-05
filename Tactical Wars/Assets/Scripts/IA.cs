@@ -30,7 +30,7 @@ public class IA : MonoBehaviour
 
         
         FindUnitsAndBuildings();
-        Debug.Log(IAUnits[numUnit].name);
+        if (IAUnits.Count > 0)Debug.Log(IAUnits[numUnit].name);
         GameObject nearest = null;
         if(IAUnits.Count > 0)
         {

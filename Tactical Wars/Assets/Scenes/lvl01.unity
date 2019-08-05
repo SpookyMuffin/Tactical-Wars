@@ -1978,6 +1978,7 @@ MonoBehaviour:
   neutralMat: {fileID: 2100000, guid: db9ceca9e86a2724aaa5c3df2991dba7, type: 2}
   defMat: {fileID: 2100000, guid: 2ebf33c8c66048e4392138d1501e6be3, type: 2}
   turno: {fileID: 1011905878}
+  resources: {fileID: 0}
 --- !u!4 &205406771 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3553781884786969954, guid: 1044033a8b2adc7488f0851a8e93421f,
@@ -9287,6 +9288,7 @@ MonoBehaviour:
   passButton: {fileID: 1542003249}
   waitButton: {fileID: 622678310}
   selectedObj: {fileID: 0}
+  recursos: {fileID: 1029314598}
   selectedMat: {fileID: 2100000, guid: c0d660c0333c4224098a02ecd84d6232, type: 2}
   mapa: {fileID: 203793525}
 --- !u!4 &817397656

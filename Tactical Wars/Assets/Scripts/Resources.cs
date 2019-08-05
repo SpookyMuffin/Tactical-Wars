@@ -37,16 +37,16 @@ public class Resources : MonoBehaviour
     //Resta el combustible usado por mover una casilla un tanque
     //Who == 0 jugador
     //Who == 1 IA
-    public void MoverTank(int who)
+    public void MoverTank(int who, int steps)
     {
         if (who == 0)
         {
-            Combustible = Combustible - gastoCombustibleTank;
+            Combustible = Combustible - (steps *gastoCombustibleTank);
             interfaz.GetComponent<Interfaz>().RefreshResources(Goldmarks, Raciones, Combustible);
         }
         else if( who == 1)
         {
-            EnemyCombustible -= gastoCombustibleTank;
+            EnemyCombustible = EnemyCombustible - (steps * gastoCombustibleTank);
         }
         
     }
