@@ -156,8 +156,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.775248, y: 1.4319291, z: 2.5390053}
-  m_Center: {x: 0.064436674, y: 0.8728521, z: -0.18547082}
+  m_Size: {x: 1.9863517, y: 1.9805293, z: 2.7668688}
+  m_Center: {x: 0.022674918, y: 1.1471522, z: -0.071539044}
 --- !u!114 &8244758802663752106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,8 +177,9 @@ MonoBehaviour:
   action: 0
   playable: 1
   Tile: {fileID: 0}
-  UI: {fileID: 0}
+  interfaz: {fileID: 0}
   resourceManager: {fileID: 0}
+  mapa: {fileID: 0}
 --- !u!1 &8244758802865923664
 GameObject:
   m_ObjectHideFlags: 0

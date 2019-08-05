@@ -3911,7 +3911,7 @@ MonoBehaviour:
   Tile1: {fileID: 957170012}
   turnManager: {fileID: 1011905878}
   mapa: {fileID: 203793525}
-  interfaz: {fileID: 0}
+  interfaz: {fileID: 817397654}
 --- !u!4 &379545874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 8f90bdc8aeb4bad4db0cb091100a44f4,

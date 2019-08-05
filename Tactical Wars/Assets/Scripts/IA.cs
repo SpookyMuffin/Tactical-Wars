@@ -30,7 +30,7 @@ public class IA : MonoBehaviour
 
         
         FindUnitsAndBuildings();
-        Debug.Log(numUnit);
+        Debug.Log(IAUnits[numUnit].name);
         GameObject nearest = null;
         if(IAUnits.Count > 0)
         {
@@ -49,13 +49,19 @@ public class IA : MonoBehaviour
             else Path = Map.GetComponent<Map>().GetPath(IAUnits[numUnit].GetComponent<Unit>().getPos(), nearest.GetComponent<Building>().getPos());
             int tempSteps = IAUnits[numUnit].GetComponent<Unit>().steps;
             int k = 0;
-            while (k < Path.Count && IAUnits[numUnit].GetComponent<Unit>().steps > 0 && Path[k].GetComponent<Tile>().notWalkable == false && HasCombustible == true)
+            if (tempSteps > 0 && Path.Count > 0)
             {
+                while (k < Path.Count && IAUnits[numUnit].GetComponent<Unit>().steps > 0 && Path[k].GetComponent<Tile>().notWalkable == false && HasCombustible == true && HasCombustible == true)
+                {
 
-                IAUnits[numUnit].GetComponent<Unit>().Move(Path[k]);
-                k++;
-                Debug.Log("muevo");
-                yield return new WaitForSeconds(waitMoveTime);
+                    Debug.Log(" voy a moverme y tengo " + IAUnits[numUnit].GetComponent<Unit>().steps+"me dirijo a "+ Path[k].name);
+                    IAUnits[numUnit].GetComponent<Unit>().Move(Path[k]);
+                    k++;
+                   
+                    yield return new WaitForSeconds(waitMoveTime);
+                    if (resourceManager.GetComponent<Resources>().EnemyCombustible >= resourceManager.GetComponent<Resources>().gastoCombustibleTank) HasCombustible = true;
+                    else HasCombustible = false;
+                }
             }
            
 

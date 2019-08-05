@@ -12,15 +12,18 @@ public class Spawn : MonoBehaviour
     public GameObject turnManager;
     public GameObject mapa;
     public GameObject interfaz;
+
     
 
     public void AllySpawnTank(int spawn)
     {
         mapa.GetComponent<Map>().resetTiles();
+        interfaz.GetComponent<Interfaz>().setSelectedObj(interfaz.GetComponent<Interfaz>().selectedObj);
         if (turnManager.GetComponent<Turns>().turn == true && Tile0.GetComponent<Tile>().notWalkable == false)
         {
             if (resourceManager.GetComponent<Resources>().GenerarTank(0) == true)
             {
+               
                 GameObject AllyTank =  Instantiate(ATank);
                 AllyTank.GetComponent<Unit>().type = 0;
                 AllyTank.GetComponent<Unit>().playable = true;
@@ -41,6 +44,7 @@ public class Spawn : MonoBehaviour
             if (resourceManager.GetComponent<Resources>().GenerarTank(1) == true)
             {
                 GameObject EnemyTank = Instantiate(ETank);
+                EnemyTank.gameObject.name = ""+GameObject.FindGameObjectsWithTag("Unit").Length;
                 EnemyTank.GetComponent<Unit>().type = 0;
                 EnemyTank.GetComponent<Unit>().playable = false;
                 EnemyTank.GetComponent<Unit>().resourceManager = resourceManager;
