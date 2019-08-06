@@ -27,7 +27,7 @@ public class Unit : MonoBehaviour
 
     public GameObject resourceManager;
     public GameObject mapa;
-
+    public GameObject audioData;
 
     public bool initialiteUnit(GameObject spawnTile)
     {
@@ -72,8 +72,11 @@ public class Unit : MonoBehaviour
 
         if (Target.GetComponent<Unit>().health < 1)
         {
+            if(playable == false)interfaz.GetComponent<Interfaz>().setSelectedObj(this.gameObject);
             Target.GetComponent<Unit>().Tile.GetComponent<Tile>().notWalkable = false;
             Target.GetComponent<Unit>().Tile.GetComponent<Tile>().obj = null;
+            audioData.transform.GetChild(5).gameObject.SetActive(false);
+            audioData.transform.GetChild(5).gameObject.SetActive(true);
             Destroy(Target);
         }
         action = false;
@@ -83,6 +86,13 @@ public class Unit : MonoBehaviour
         {
             mapa.GetComponent<Map>().resetTiles();
             mapa.GetComponent<Map>().ColorTiles(playable, steps, x1, y1, action);
+            
+        }
+
+        if (Target != null)
+        {
+            audioData.transform.GetChild(1).gameObject.SetActive(false);
+            audioData.transform.GetChild(1).gameObject.SetActive(true);
         }
     }
 
@@ -122,6 +132,8 @@ public class Unit : MonoBehaviour
             mapa.GetComponent<Map>().resetTiles();
             mapa.GetComponent<Map>().ColorTiles(playable, steps, x1, y1, action);
         }
+        audioData.transform.GetChild(4).gameObject.SetActive(false);
+        audioData.transform.GetChild(4).gameObject.SetActive(true);
 
     }
 
@@ -169,6 +181,8 @@ public class Unit : MonoBehaviour
             resourceManager.GetComponent<Resources>().MoverTank(1,distancia);
 
         }
+        audioData.transform.GetChild(2).gameObject.SetActive(false);
+        audioData.transform.GetChild(2).gameObject.SetActive(true);
 
     }
 
@@ -182,7 +196,7 @@ public class Unit : MonoBehaviour
     //Usada para actualizar la interfaz con los datos de esta unidad
     public void Display()
     {
-        interfaz.GetComponent<Interfaz>().SwitchStatPanelUnit(type,health,steps,power,action,Tile.name);
+        interfaz.GetComponent<Interfaz>().SwitchStatPanelUnit(type,health,steps,power,action,playable);
         interfaz.GetComponent<Interfaz>().setSelectedObj(this.gameObject);
     }
 

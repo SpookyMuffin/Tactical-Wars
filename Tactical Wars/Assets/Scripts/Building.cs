@@ -15,9 +15,10 @@ public class Building : MonoBehaviour
     public GameObject interfaz;
     public GameObject end;
     public GameObject mouse;
-    public GameObject panel1;
-    public GameObject panel2;
-    public GameObject panel3;
+    public GameObject passturn;
+    public GameObject spawn;
+    public GameObject endpanel;
+    public GameObject menu;
 
     //Funcion para conquista de un edificio
     //Who = 1 es del jugador antes 0
@@ -61,15 +62,17 @@ public class Building : MonoBehaviour
     private void finishGame()
     {
         mouse.SetActive(false);
-        panel1.SetActive(false);
-        panel2.SetActive(false);
-        panel3.SetActive(true);
-    }
+        passturn.SetActive(false);
+        spawn.SetActive(false);
+        menu.SetActive(false);
+        endpanel.SetActive(true);
+
+}
 
     //Funcion para refrescar la interfaz con los parametros de este edificio.
     public void Display()
     {
-        interfaz.GetComponent<Interfaz>().SwitchStatPanelBuilding(type, status, progress, Tile.name);
+        interfaz.GetComponent<Interfaz>().SwitchStatPanelBuilding(type, status, progress);
         interfaz.GetComponent<Interfaz>().setSelectedObj(this.gameObject);
 
     }

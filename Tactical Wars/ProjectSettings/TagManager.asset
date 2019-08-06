@@ -12,6 +12,7 @@ TagManager:
   - RM
   - Spawn
   - init
+  - Audio
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,7 @@ public class Spawn : MonoBehaviour
     public GameObject turnManager;
     public GameObject mapa;
     public GameObject interfaz;
+    public GameObject audioData;
 
     
 
@@ -29,6 +30,7 @@ public class Spawn : MonoBehaviour
                 AllyTank.GetComponent<Unit>().playable = true;
                 AllyTank.GetComponent<Unit>().mapa = mapa;
                 AllyTank.GetComponent<Unit>().interfaz = interfaz;
+                AllyTank.GetComponent<Unit>().audioData = audioData;
                 AllyTank.GetComponent<Unit>().initialiteUnit(Tile0);
 
 
@@ -50,6 +52,7 @@ public class Spawn : MonoBehaviour
                 EnemyTank.GetComponent<Unit>().resourceManager = resourceManager;
                 EnemyTank.GetComponent<Unit>().mapa = mapa;
                 EnemyTank.GetComponent<Unit>().interfaz = interfaz;
+                EnemyTank.GetComponent<Unit>().audioData = audioData;
                 EnemyTank.GetComponent<Unit>().initialiteUnit(Tile1);
                 
 

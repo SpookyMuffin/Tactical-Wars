@@ -20,6 +20,7 @@ public class Interfaz : MonoBehaviour
 
     public Material selectedMat;
     Material tempMat;
+    public GameObject audioData;
 
     public GameObject mapa;
 
@@ -31,32 +32,50 @@ public class Interfaz : MonoBehaviour
 
     public void RefreshResources(int G, int R, int C)
     {
-        GoldmarkText.GetComponent<Text>().text = "Goldmarks: " + G;
-        RacionesText.GetComponent<Text>().text = "Raciones: " + R;
-        CombustibleText.GetComponent<Text>().text = "Combustible: " + C;
+        GoldmarkText.GetComponent<Text>().text = "GM: " + G;
+        RacionesText.GetComponent<Text>().text = "Rations: " + R;
+        CombustibleText.GetComponent<Text>().text = "Gas: " + C;
 
     }
 
-    public void SwitchStatPanelUnit(int type, int health, int steps, int power, bool action, string Casilla)
+    public void SwitchStatPanelUnit(int type, int health, int steps, int power, bool action, bool Playable)
     {
-
-        info1.GetComponent<Text>().text = " Tipo de unidad " + type;
-        info2.GetComponent<Text>().text = "Vida " + health;
-        info3.GetComponent<Text>().text = "Pasos " + steps;
-        info4.GetComponent<Text>().text = "Poder " + power;
-        info5.GetComponent<Text>().text = "Accion? " + action;
-        info6.GetComponent<Text>().text = "Casilla " + Casilla;
+        if (Playable)info1.GetComponent<Text>().text = "Faction: " + "Ally";
+        else info1.GetComponent<Text>().text = "Faction: " + "Enemy";
+        info2.GetComponent<Text>().text = "Unit: " + "Tank";
+        info3.GetComponent<Text>().text = "Health: " + health;
+        info4.GetComponent<Text>().text = "Action: " + action;
+        info5.GetComponent<Text>().text = "Moves: " + steps;
+        info6.GetComponent<Text>().text = "Action power: " + power;
+       
+        
 
     }
 
-    public void SwitchStatPanelBuilding(int type, int status, int progress, string casilla)
+    public void SwitchStatPanelBuilding(int type, int status, int progress)
     {
-        info1.GetComponent<Text>().text = "status: " + status;
-        info2.GetComponent<Text>().text = "progress: " + progress;
-        info3.GetComponent<Text>().text = "type: " + type;
-        info4.GetComponent<Text>().text = "casilla: " + casilla;
-        info5.GetComponent<Text>().text = "GM: " + 20;
-        info6.GetComponent<Text>().text = "Recurso " + 20;
+        if(status == 0) info1.GetComponent<Text>().text = "Faction: " + "Neutral";
+        else if(status == 1) info1.GetComponent<Text>().text = "Faction: " + "Ally";
+        else if (status == 2) info1.GetComponent<Text>().text = "Faction: " + "Enemy";
+
+       
+
+        if (type == 0) info2.GetComponent<Text>().text = "Type: " + "Main base";
+        else if (type == 2) info2.GetComponent<Text>().text = "Type: " + "Plumpjack";
+        else if (type == 1) info2.GetComponent<Text>().text = "Type: " + "Camp";
+
+        info3.GetComponent<Text>().text = "Conquer progress: " + progress;
+
+        if (type == 0) info4.GetComponent<Text>().text = "Resource: " + "GM";
+        else if (type == 2) info4.GetComponent<Text>().text = "Resource: " + "Gas";
+        else if (type == 1) info4.GetComponent<Text>().text = "Resource: " + "Rations";
+
+        if (type == 0) info5.GetComponent<Text>().text = "GM per turn: " + recursos.GetComponent<Resources>().goldmarkTurno;
+        else if (type == 2) info5.GetComponent<Text>().text = "Gas per turn: " + recursos.GetComponent<Resources>().combustiblePump;
+        else if (type == 1) info5.GetComponent<Text>().text = "Rations per turn: " + recursos.GetComponent<Resources>().racionesCamp;
+
+        if (type != 0) info6.GetComponent<Text>().text = "GM per turn " + recursos.GetComponent<Resources>().goldmarkEdificio;
+        else info6.GetComponent<Text>().text = "Important building!";
     }
 
     public void Pass(bool estado)
@@ -67,7 +86,8 @@ public class Interfaz : MonoBehaviour
 
     public void setSelectedObj(GameObject obj)
     {
-        
+        bool suena = true;
+        if (obj == selectedObj) suena = false;
         selectedObj = obj;
         if (selectedObj == null) return;
         if (tempObj != null)
@@ -97,6 +117,11 @@ public class Interfaz : MonoBehaviour
         }
         else
         {
+            if (suena)
+            {
+                audioData.transform.GetChild(6).gameObject.SetActive(false);
+                audioData.transform.GetChild(6).gameObject.SetActive(true);
+            }
             mapa.GetComponent<Map>().resetTiles();
             tempMat = obj.GetComponent<Renderer>().material;
             selectedObj.GetComponent<Renderer>().material = selectedMat;
@@ -105,6 +130,12 @@ public class Interfaz : MonoBehaviour
         tempObj = selectedObj;
         if(obj.tag == "Unit")
         {
+            Debug.Log("selecciono");
+            if (suena)
+            {
+                audioData.transform.GetChild(3).gameObject.SetActive(false);
+                audioData.transform.GetChild(3).gameObject.SetActive(true);
+            }
             int steps;
             int comb;
             if(obj.GetComponent<Unit>().playable == true) comb= recursos.GetComponent<Resources>().Combustible;

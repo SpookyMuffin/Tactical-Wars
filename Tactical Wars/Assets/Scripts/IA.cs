@@ -8,7 +8,7 @@ public class IA : MonoBehaviour
     public GameObject Map;
     public GameObject resourceManager;
     public GameObject spawn;
-    public float waitMoveTime = 1.0f;
+    public float waitMoveTime = 0.5f;
 
     List<GameObject> IAUnits = new List<GameObject>();
     List<GameObject> PlayerUnits = new List<GameObject>();
@@ -19,7 +19,17 @@ public class IA : MonoBehaviour
 
     public Material IAMaterial;
 
-
+    public void changeMoveSpeed(bool more)
+    {
+        if(more && waitMoveTime < 2.0f)
+        {
+            waitMoveTime += 0.1f;
+        }
+        else if(!more && waitMoveTime > 0.1f)
+        {
+            waitMoveTime -= 0.1f;
+        }
+    }
 
     public void IATurn()
     {
