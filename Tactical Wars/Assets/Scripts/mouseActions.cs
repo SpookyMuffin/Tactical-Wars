@@ -18,7 +18,7 @@ public class mouseActions : MonoBehaviour
     //Mapa
     public GameObject map;
     //Comprobador
-    bool CompClick2 = false;
+    bool CompClick2 = false, CompClick1 = false;
     GameObject click1,click2;
     public GameObject interfaz;
 
@@ -30,9 +30,9 @@ public class mouseActions : MonoBehaviour
         if (turnManager.GetComponent<Turns>().turn)
         {
             //Esperamos a que se presione el click izquierdo y almacenamos en hit1 lo que se ha clickado
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetAxis("Click1") > 0)
             {
-                CompClick2 = true;
+                CompClick1 = true;
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit1, 100)
                     && !EventSystem.current.IsPointerOverGameObject())
                 {
@@ -52,7 +52,8 @@ public class mouseActions : MonoBehaviour
 
                 }
             }
-            if (Input.GetMouseButtonDown(1) && CompClick2)
+            if (Input.GetAxis("Click2") > 0) CompClick2 = true;
+            if (CompClick1 && CompClick2)
             {
                 //Pasamos a clickar el segundo objeto con el click derecho
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit2, 100) &&
@@ -93,11 +94,13 @@ public class mouseActions : MonoBehaviour
 
                     }
                 }
+                //CompClick1 = false;
+                CompClick2 = false;
             }
         }
         else
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetAxis("Click1") > 0)
             {
                 CompClick2 = true;
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit1, 100)

@@ -23,11 +23,11 @@ public class IA : MonoBehaviour
     {
         if(more && waitMoveTime < 2.0f)
         {
-            waitMoveTime += 0.1f;
+            waitMoveTime += 0.25f;
         }
-        else if(!more && waitMoveTime > 0.1f)
+        else if(!more && waitMoveTime > 0.25f)
         {
-            waitMoveTime -= 0.1f;
+            waitMoveTime -= 0.25f;
         }
     }
 
