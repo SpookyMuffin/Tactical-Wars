@@ -13,10 +13,6 @@ public class Building : MonoBehaviour
 
 
     public GameObject interfaz;
-    public GameObject end;
-    public GameObject mouse;
-    public GameObject passturn;
-    public GameObject spawn;
     public GameObject endpanel;
     public GameObject menu;
 
@@ -61,9 +57,6 @@ public class Building : MonoBehaviour
 
     private void finishGame()
     {
-        mouse.SetActive(false);
-        passturn.SetActive(false);
-        spawn.SetActive(false);
         menu.SetActive(false);
         endpanel.SetActive(true);
 
