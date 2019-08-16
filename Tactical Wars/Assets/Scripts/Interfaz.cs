@@ -38,13 +38,13 @@ public class Interfaz : MonoBehaviour
 
     }
 
-    public void SwitchStatPanelUnit(int type, int health, int steps, int power, bool action, bool Playable)
+    public void SwitchStatPanelUnit(int type, int health, int steps, int power, bool action, bool Playable, bool feeded)
     {
         if (Playable)info1.GetComponent<Text>().text = "Faction: " + "Ally";
         else info1.GetComponent<Text>().text = "Faction: " + "Enemy";
-        info2.GetComponent<Text>().text = "Unit: " + "Tank";
-        info3.GetComponent<Text>().text = "Health: " + health;
-        info4.GetComponent<Text>().text = "Action: " + action;
+        info2.GetComponent<Text>().text = "Health: " + health;
+        info3.GetComponent<Text>().text = "Action: " + action;
+        info4.GetComponent<Text>().text = "Feeded: " + feeded;
         info5.GetComponent<Text>().text = "Moves: " + steps;
         info6.GetComponent<Text>().text = "Action power: " + power;
        

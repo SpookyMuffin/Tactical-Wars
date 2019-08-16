@@ -59,7 +59,7 @@ public class IA : MonoBehaviour
             else Path = Map.GetComponent<Map>().GetPath(IAUnits[numUnit].GetComponent<Unit>().getPos(), nearest.GetComponent<Building>().getPos());
             int tempSteps = IAUnits[numUnit].GetComponent<Unit>().steps;
             int k = 0;
-            if (tempSteps > 0 && Path.Count > 0)
+            if (tempSteps > 0 && Path.Count > 0 && resourceManager.GetComponent<Resources>().EnemyRaciones > 0)
             {
                 while (k < Path.Count && IAUnits[numUnit].GetComponent<Unit>().steps > 0 && Path[k].GetComponent<Tile>().notWalkable == false && HasCombustible == true && HasCombustible == true)
                 {

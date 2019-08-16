@@ -18,6 +18,8 @@ public class Unit : MonoBehaviour
     public int TankPower = 50;
     public int TankSteps = 3;
 
+    bool feeded = false;
+
 
     //Casilla en la que se encuentra
     public GameObject Tile;
@@ -28,6 +30,21 @@ public class Unit : MonoBehaviour
     public GameObject resourceManager;
     public GameObject mapa;
     public GameObject audioData;
+
+    public bool feedUnit()
+    {
+        if (!feeded)
+        {
+            if (resourceManager.GetComponent<Resources>().feedTank(playable))
+            {
+                feeded = true;
+                return true;
+            }
+            else return false;
+            
+        }
+        return true;
+    }
 
     public bool initialiteUnit(GameObject spawnTile)
     {
@@ -44,6 +61,7 @@ public class Unit : MonoBehaviour
             resourceManager = GameObject.FindGameObjectWithTag("RM");
             spawnTile.GetComponent<Tile>().obj = this.gameObject;
             spawnTile.GetComponent<Tile>().notWalkable = true;
+            feeded = false;
             
             return true;
         }
@@ -54,6 +72,7 @@ public class Unit : MonoBehaviour
     //Ataca a otra unidad
     public void Attack(GameObject Target)
     {
+        if (!feedUnit()) return;
         double distancia = 99;
         int x1, y1, x2, y2;
         //Si es ya esta conquistado, impedimos conquista
@@ -101,6 +120,7 @@ public class Unit : MonoBehaviour
     //Material con el que se reemplazara el actual al conquistar.
     public void Conquer(GameObject Target, Material mat)
     {
+        if (!feedUnit()) return;
         double distancia = 99;
         int x1, y1, x2, y2;
         //Si es ya esta conquistado, impedimos conquista
@@ -140,6 +160,7 @@ public class Unit : MonoBehaviour
     //Mover a una casilla adyacente
     public void Move(GameObject Tile)
     {
+        if (!feedUnit()) return;
         if (playable == true && resourceManager.GetComponent<Resources>().Combustible < resourceManager.GetComponent<Resources>().gastoCombustibleTank)
         {
             return;
@@ -191,12 +212,13 @@ public class Unit : MonoBehaviour
     {
         if (type == 0) steps = TankSteps;
         action = true;
+        feeded = false;
     }
 
     //Usada para actualizar la interfaz con los datos de esta unidad
     public void Display()
     {
-        interfaz.GetComponent<Interfaz>().SwitchStatPanelUnit(type,health,steps,power,action,playable);
+        interfaz.GetComponent<Interfaz>().SwitchStatPanelUnit(type,health,steps,power,action,playable,feeded);
         interfaz.GetComponent<Interfaz>().setSelectedObj(this.gameObject);
     }
 

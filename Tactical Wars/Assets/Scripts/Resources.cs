@@ -34,6 +34,24 @@ public class Resources : MonoBehaviour
         interfaz.GetComponent<Interfaz>().RefreshResources(Goldmarks,Raciones,Combustible);
     }
 
+    public bool feedTank(bool playable)
+    {
+        if(playable && Raciones > 0)
+        {
+            Raciones--;
+            return true;
+        }
+        if (playable && Raciones < 0) return false;
+
+        if (!playable && EnemyRaciones > 0)
+        {
+            EnemyRaciones--;
+            return true;
+        }
+        if (!playable && EnemyRaciones < 0) return false;
+        return false;
+    }
+
     //Resta el combustible usado por mover una casilla un tanque
     //Who == 0 jugador
     //Who == 1 IA

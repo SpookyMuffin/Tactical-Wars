@@ -69,7 +69,7 @@ public class mouseActions : MonoBehaviour
                         //Si es una infanteria o opuede que meta un ingeniero puede que repare el tank si el objetivo es aliado
 
                         click1.GetComponent<Unit>().Attack(click2);
-                        //click2.GetComponent<Unit>().Display();
+                        click1.GetComponent<Unit>().Display();
                     }
 
                     //Conquista
@@ -78,7 +78,7 @@ public class mouseActions : MonoBehaviour
                         && click1.GetComponent<Unit>().playable == true)
                     {
                         click1.GetComponent<Unit>().Conquer(click2, PlayerMat);
-                        //click2.GetComponent<Building>().Display();
+                        click1.GetComponent<Unit>().Display();
                     }
 
                     //Movimiento

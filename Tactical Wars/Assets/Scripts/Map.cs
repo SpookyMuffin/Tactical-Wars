@@ -22,6 +22,7 @@ public class Map : MonoBehaviour
 
 
     public GameObject turno;
+    public GameObject resourceManager;
 
     void SetMap()
     {
@@ -76,7 +77,7 @@ public class Map : MonoBehaviour
         if (ally)
         {
             mTiles[x, y].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
-            if (turno.GetComponent<Turns>().turn && action == true)
+            if (turno.GetComponent<Turns>().turn && action == true && resourceManager.GetComponent<Resources>().Raciones > 0)
             {
                 for (int i = 0; i <= (steps+1); i++)
                 {
