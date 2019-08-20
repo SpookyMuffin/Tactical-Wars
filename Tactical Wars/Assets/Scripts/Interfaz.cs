@@ -11,7 +11,7 @@ public class Interfaz : MonoBehaviour
 
     public GameObject infoPanel;
     public GameObject info1, info2, info3, info4, info5, info6;
-
+    public GameObject WaitTime;
     public GameObject passButton, waitButton;
 
     public GameObject selectedObj = null;
@@ -24,10 +24,9 @@ public class Interfaz : MonoBehaviour
 
     public GameObject mapa;
 
-    void Awake()
+    public void waitTimeIA(float time)
     {
-
-
+        WaitTime.GetComponent<Text>().text = "Current: " + time + "s";
     }
 
     public void RefreshResources(int G, int R, int C)

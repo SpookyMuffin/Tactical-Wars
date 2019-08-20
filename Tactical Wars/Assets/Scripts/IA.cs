@@ -8,6 +8,7 @@ public class IA : MonoBehaviour
     public GameObject Map;
     public GameObject resourceManager;
     public GameObject spawn;
+    public GameObject interfaz;
     public float waitMoveTime = 0.5f;
 
     List<GameObject> IAUnits = new List<GameObject>();
@@ -24,10 +25,12 @@ public class IA : MonoBehaviour
         if(more && waitMoveTime < 2.0f)
         {
             waitMoveTime += 0.25f;
+            interfaz.GetComponent<Interfaz>().waitTimeIA(waitMoveTime);
         }
         else if(!more && waitMoveTime > 0.25f)
         {
             waitMoveTime -= 0.25f;
+            interfaz.GetComponent<Interfaz>().waitTimeIA(waitMoveTime);
         }
     }
 
@@ -64,16 +67,16 @@ public class IA : MonoBehaviour
                 while (k < Path.Count && IAUnits[numUnit].GetComponent<Unit>().steps > 0 && Path[k].GetComponent<Tile>().notWalkable == false && HasCombustible == true && HasCombustible == true)
                 {
 
-                    Debug.Log(" voy a moverme y tengo " + IAUnits[numUnit].GetComponent<Unit>().steps+"me dirijo a "+ Path[k].name);
+                    Debug.Log(" voy a moverme y tengo " + IAUnits[numUnit].GetComponent<Unit>().steps + "me dirijo a " + Path[k].name);
                     IAUnits[numUnit].GetComponent<Unit>().Move(Path[k]);
                     k++;
-                   
+
                     yield return new WaitForSeconds(waitMoveTime);
                     if (resourceManager.GetComponent<Resources>().EnemyCombustible >= resourceManager.GetComponent<Resources>().gastoCombustibleTank) HasCombustible = true;
                     else HasCombustible = false;
                 }
             }
-           
+
 
             if (nearest.tag == "Building")
             {
@@ -108,16 +111,28 @@ public class IA : MonoBehaviour
                     yield return new WaitForSeconds(waitMoveTime);
                     Debug.Log("Intento Spawnear un tank");
                     spawn.GetComponent<Spawn>().EnemySpawnTank(0);
-                    
+
                 }
                 yield return endTurn();
             }
         }
-        else yield return endTurn();
+        else
+        {
+            if (resourceManager.GetComponent<Resources>().EnemyGoldmarks > resourceManager.GetComponent<Resources>().PrecioTank)
+            {
+                yield return new WaitForSeconds(waitMoveTime);
+                Debug.Log("Intento Spawnear un tank");
+                spawn.GetComponent<Spawn>().EnemySpawnTank(0);
+
+            }
+            yield return endTurn();
+        }
+
 
     }
     IEnumerator endTurn()
     {
+
         TurnManager.GetComponent<Turns>().Pass(1);
         Debug.Log("Pulso el end");
         yield return new WaitForSeconds(waitMoveTime);

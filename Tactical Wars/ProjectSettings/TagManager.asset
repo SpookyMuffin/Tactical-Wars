@@ -13,6 +13,7 @@ TagManager:
   - Spawn
   - init
   - Audio
+  - AudioLevels
   layers:
   - Default
   - TransparentFX

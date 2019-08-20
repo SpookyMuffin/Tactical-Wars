@@ -5,9 +5,14 @@ using UnityEngine;
 public class Audio : MonoBehaviour
 {
     AudioSource audioData;
-    private void OnEnable()
+    private void Awake()
     {
         audioData = this.gameObject.GetComponent<AudioSource>();
+    }
+    private void OnEnable()
+    {
+
         audioData.Play(0);
     }
 }
+
