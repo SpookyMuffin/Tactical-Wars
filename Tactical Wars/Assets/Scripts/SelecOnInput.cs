@@ -9,13 +9,7 @@ public class SelecOnInput : MonoBehaviour
     public GameObject selectedObject;
 
     private bool buttonSelected;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetAxisRaw("Vertical") != 0 && buttonSelected == false)

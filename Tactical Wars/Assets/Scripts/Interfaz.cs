@@ -108,6 +108,8 @@ public class Interfaz : MonoBehaviour
 
         if (obj.tag == "Unit")
         {
+            SwitchStatPanelUnit(obj.GetComponent<Unit>().type, obj.GetComponent<Unit>().health, obj.GetComponent<Unit>().steps, obj.GetComponent<Unit>().power, obj.GetComponent<Unit>().action,
+                obj.GetComponent<Unit>().playable, obj.GetComponent<Unit>().feeded);
             tempMat = obj.transform.GetChild(0).transform.GetChild(0).GetComponent<Renderer>().material;
             selectedObj.transform.GetChild(0).transform.GetChild(0).GetComponent<Renderer>().material = selectedMat;
             selectedObj.transform.GetChild(0).transform.GetChild(1).GetComponent<Renderer>().material = selectedMat;
