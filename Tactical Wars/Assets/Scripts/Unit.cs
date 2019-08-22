@@ -18,7 +18,7 @@ public class Unit : MonoBehaviour
     public int TankPower = 50;
     public int TankSteps = 3;
 
-    bool feeded = false;
+    public bool feeded = false;
 
 
     //Casilla en la que se encuentra

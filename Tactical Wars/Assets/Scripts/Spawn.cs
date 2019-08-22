@@ -32,6 +32,7 @@ public class Spawn : MonoBehaviour
                 AllyTank.GetComponent<Unit>().interfaz = interfaz;
                 AllyTank.GetComponent<Unit>().audioData = audioData;
                 AllyTank.GetComponent<Unit>().initialiteUnit(Tile0);
+                AllyTank.GetComponent<Unit>().feeded = false;
 
 
             }
@@ -54,7 +55,8 @@ public class Spawn : MonoBehaviour
                 EnemyTank.GetComponent<Unit>().interfaz = interfaz;
                 EnemyTank.GetComponent<Unit>().audioData = audioData;
                 EnemyTank.GetComponent<Unit>().initialiteUnit(Tile1);
-                
+                EnemyTank.GetComponent<Unit>().feeded = false;
+
 
 
             }
