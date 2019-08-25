@@ -99,7 +99,7 @@ public class Map : MonoBehaviour
                                 else if(mTiles[x + i, y + j].GetComponent<Tile>().obj.tag == "Building")
                                 {
                                     if (mTiles[x + i, y + j].GetComponent<Tile>().obj.GetComponent<Building>().status == 0) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = neutralMat;
-                                    else if (mTiles[x + i, y + j].GetComponent<Tile>().obj.GetComponent<Building>().status == 2) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
+                                    else if (mTiles[x + i, y + j].GetComponent<Tile>().obj.GetComponent<Building>().status == 2) mTiles[x + i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
                                 }
                             }
 

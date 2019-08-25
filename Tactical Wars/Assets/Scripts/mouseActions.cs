@@ -36,7 +36,7 @@ public class mouseActions : MonoBehaviour
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit1, 100)
                     && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    if (hit1.collider != null) click1 = hit1.collider.gameObject;
+                    if (hit1.collider != null && hit1.collider.gameObject.tag != "Tile") click1 = hit1.collider.gameObject;
 
                     //Comprobamos que se ha seleccionado y actualizamos la interfaz con sus propiedades
                    // Debug.Log("Click Izq: " + hit1.collider);

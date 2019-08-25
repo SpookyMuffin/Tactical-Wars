@@ -10,10 +10,11 @@ public class cameraMov : MonoBehaviour
     public float turnSpeed = 20;
     Vector3 initialRotation;
     Vector3 initialPosition;
+
     private void Start()
     {
         initialRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
-        initialPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        initialPosition = new Vector3(20.84f, 30.06f, 34.11f);
     }
     // Update is called once per frame
     void Update()
