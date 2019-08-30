@@ -24,7 +24,9 @@ public class Spawn : MonoBehaviour
         {
             if (resourceManager.GetComponent<Resources>().GenerarTank(0) == true)
             {
-               
+                audioData.transform.GetChild(7).gameObject.SetActive(false);
+                audioData.transform.GetChild(7).gameObject.SetActive(true);
+
                 GameObject AllyTank =  Instantiate(ATank);
                 AllyTank.GetComponent<Unit>().type = 0;
                 AllyTank.GetComponent<Unit>().playable = true;
@@ -33,6 +35,7 @@ public class Spawn : MonoBehaviour
                 AllyTank.GetComponent<Unit>().audioData = audioData;
                 AllyTank.GetComponent<Unit>().initialiteUnit(Tile0);
                 AllyTank.GetComponent<Unit>().feeded = false;
+
 
 
             }
@@ -46,6 +49,9 @@ public class Spawn : MonoBehaviour
             
             if (resourceManager.GetComponent<Resources>().GenerarTank(1) == true)
             {
+                audioData.transform.GetChild(7).gameObject.SetActive(false);
+                audioData.transform.GetChild(7).gameObject.SetActive(true);
+
                 GameObject EnemyTank = Instantiate(ETank);
                 EnemyTank.gameObject.name = ""+GameObject.FindGameObjectsWithTag("Unit").Length;
                 EnemyTank.GetComponent<Unit>().type = 0;
