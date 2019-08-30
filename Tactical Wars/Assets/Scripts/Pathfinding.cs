@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
 {
+    /* Clase nodo */
     public class Node
     {
+        /* Nodo padre */
         public Node Parent;
+        /* Posición que ocupa en la matriz */
         public Vector2 Pos;
+        /* Parametros */
         public float G, H, F;
+        /* Si se puede caminar sobre el nodo */
         public bool Walkable;
 
+        /* Constructor de la clase */
         public Node(Vector2 posicion, bool valido)
         {
             Parent = null;
@@ -21,12 +27,15 @@ public class Pathfinding : MonoBehaviour
             Pos = posicion;
             Walkable = valido;
         }
+        /* Asigna F y lo devuelve dependiendo de un vector */
         public float GetAndSetFValue(Vector2 End)
         {
             SetHValue(End);
             F = G + H;
             return F;
         }
+
+        /* Asigna el parametro H */
         public void SetHValue(Vector2 end)
         {
             float distance;
@@ -35,13 +44,19 @@ public class Pathfinding : MonoBehaviour
             H = distance;
         }
     }
+    /* Clase A* */
     public class ASTAR
     {
+        /* Mapa en forma de nodos */
         Node[,] Map;
+
+        /* Filas del mapa */
         int MapRows;
+
+        /* Columnas del mapa */
         int MapCols;
        
-
+        /* Convierte el mapa de GameObject en nodo */
         public void SetMap(GameObject[,] Tiles, int ROWS, int COLS)
         {
             Map = new Node[ROWS, COLS];
@@ -58,6 +73,7 @@ public class Pathfinding : MonoBehaviour
             }
         }
 
+        /* Constructor de clase */
         public ASTAR(GameObject[,] Tiles, int r, int c)
         {
             SetMap(Tiles, r, c);
@@ -65,6 +81,7 @@ public class Pathfinding : MonoBehaviour
             MapCols = c;
         }
 
+        /* Función que ejecuta el el algoritmo */
         public List<Node> FindPath(Vector2 start, Vector2 end)
         {
             Map[(int)end.x, (int)end.y].Walkable = true;
@@ -87,10 +104,6 @@ public class Pathfinding : MonoBehaviour
                 Open.Remove(Q);
                 temp = GetAdjacentNodes(Q);
 
-
-
-                //SetPartentToList(temp, Q);
-
                 foreach(Node n in temp)
                 {
                     if (!Closed.Contains(n) && n.Walkable)
@@ -110,18 +123,14 @@ public class Pathfinding : MonoBehaviour
             }
             List<Node> Path = new List<Node>();
 
-            // construct path, if end was not closed return null
             if (!Closed.Exists(x => x.Pos == end))
             {
-                //Debug.Log("No encontre el camino");
                 return null;
             }
 
-            // if all good, return path
             Node tempNode = Closed[Closed.IndexOf(Q)];
             while (tempNode.Parent != null)
             {
-               // Path.Add(tempNode);
                 Path.Insert(0, tempNode);
 
                 tempNode = tempNode.Parent;
@@ -131,6 +140,7 @@ public class Pathfinding : MonoBehaviour
             return Path;
         }
 
+        /* Devuelve los nodos adyacentes de un nodo dado */
         private List<Node> GetAdjacentNodes(Node n)
         {
             List<Node> lista = new List<Node>();

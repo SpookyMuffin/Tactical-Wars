@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class buildingManager : MonoBehaviour
 {
-    //Lista de edificios
+    /* Lista de edificios */
     public List<GameObject> edificios;
 
-    //Devuelve entero con el numero de campamentos aliados
+    /* Devuelve entero con el numero de campamentos aliados */
    public int AllyCamps()
    {
         int campCount = 0;
@@ -16,7 +16,7 @@ public class buildingManager : MonoBehaviour
         }
         return campCount;
    }
-    //Devuelve entero con el numero de campamentos enemigos
+    /* Devuelve entero con el numero de campamentos enemigos */
     public int EnemyCamps()
     {
         int campCount = 0;
@@ -27,7 +27,7 @@ public class buildingManager : MonoBehaviour
         return campCount;
     }
 
-    //Devuelve el numero de edificios que obtienen petroleo aliadas
+    /* Devuelve el numero de edificios que obtienen petroleo aliadas */
     public int AllyPumps()
     {
        int pumpCount = 0;
@@ -38,7 +38,7 @@ public class buildingManager : MonoBehaviour
         return pumpCount;
     }
 
-    //Similar a la funcion anterior pero del enemigo.
+    /* Similar a la funcion anterior pero del enemigo */
     public int EnemyPumps()
     {
         int pumpCount = 0;

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public bool notWalkable; //Si se puede mover a esta casilla
+    /* Indica si se puede posicionar o caminar 
+     * sobre esta casilla */
+    public bool notWalkable; 
 
-    //Posicion en la matriz
+    /* Posición X e Y en el tablero */
     public int x;
     public int y;
 
-    //Objeto que tiene encima
+    /* Objeto que se encuentra sobre ella */
     public GameObject obj = null;
 
 }

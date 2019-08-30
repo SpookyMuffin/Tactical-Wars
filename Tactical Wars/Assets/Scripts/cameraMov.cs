@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class cameraMov : MonoBehaviour
 {
-
+    /* Velocidades en los ejes */
     public float speedLeftRight = 40;
     public float speedUpDown = 20;
-    public float turnSpeed = 20;
-    Vector3 initialRotation;
+
+    /* Posición inicial de la camara */
     Vector3 initialPosition;
 
+    /* Inicializa las posición y rotación */
     private void Start()
     {
-        initialRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
         initialPosition = new Vector3(20.84f, 30.06f, 34.11f);
     }
-    // Update is called once per frame
+    /*  En cada frame se detecta si se esta pulsado una tecla de moviento de la camara y mueve esta
+     *  dentro de unos limites */
     void Update()
     {
         if (Input.GetAxis("Horizontal1") > 0 && this.transform.position.z < (initialPosition.z + 40))
@@ -43,17 +44,5 @@ public class cameraMov : MonoBehaviour
         {
             transform.Translate(Vector3.down * speedUpDown * Time.deltaTime);
         }
-       /* if (Input.GetAxis("Rotate") > 0)
-        {
-            this.transform.Rotate(Vector3.down, turnSpeed * Time.deltaTime);
-        }
-        if (Input.GetAxis("Rotate") < 0)
-        {
-            this.transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
-        }
-        if (Input.GetAxis("Reset") > 0)
-        {
-            this.transform.eulerAngles = initialRotation;
-        }*/
     }
 }

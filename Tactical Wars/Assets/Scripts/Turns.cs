@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Turns : MonoBehaviour
 {
-    public bool turn = true; //Lleva el estado del turno
-    public GameObject resourceManager; //Gestor de recursos
+    /* Turno de actual de la partida */
+    public bool turn = true; 
+
+    /* Referencias a otros objetos */
+    public GameObject resourceManager; 
     public GameObject IA;
     public GameObject mapa;
     public GameObject interfaz;
 
-    //Pasamos de turno, y actualizamos los recursos y el turno
+   /* Función que cambia de turno */
     public void Pass(int who)
     {
         if (who == 0 && turn == true)

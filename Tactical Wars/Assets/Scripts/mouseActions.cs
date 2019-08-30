@@ -5,31 +5,35 @@ using UnityEngine.EventSystems;
 
 public class mouseActions : MonoBehaviour
 {
-    //Raycast
-    RaycastHit hit1; //Informacion del rayo que seleccionaremos con el click izquierdo
-    RaycastHit hit2; //Informacion del rayo que seleccionaremos con el click derecho
+    /* Objetos de tipo raycast que almacenan ambos clics */
+    RaycastHit hit1; 
+    RaycastHit hit2;
 
-    //Gestores de turno y recursos
-    public GameObject resourceManager; //Informacion de los recursos y sus funciones
-    public GameObject turnManager; //Informacion del turno y sus funciones
-
-    //Material aliado
-    public Material PlayerMat;
-    //Mapa
-    public GameObject map;
-    //Comprobador
-    bool CompClick2 = false, CompClick1 = false;
-    GameObject click1,click2;
+    /* Referencias a otros objetos */
     public GameObject interfaz;
+    public GameObject resourceManager; 
+    public GameObject turnManager; 
+    public GameObject map;
 
+    /* Comprueban si se ha hecho clic */
+    bool CompClick2 = false, CompClick1 = false;
 
+    /* Almacenan el gameobject unido al collider del raycast */
+    GameObject click1,click2;
 
+    /* Material utilizado por el jugador */
+    public Material PlayerMat;
+
+    /* Funcion que se ejecuta cada frame, dependiendo del turno registra
+     * el clic derecho e izquierdo o solo el izquiero, en caso de turno del jugador, 
+     * se selecciona la unidad con el clic izquierdo refrescando la interfaz y en el
+     * momento que el jugador pulse clic derecho en un objeto con posible acción esta 
+     * se ejecutará. En caso de no ser su turno, solo ser registrará el clic izquiero,
+     * permitiendo solamente seleccionar unidades */
     void Update()
     {
-        //Comprobamos que sea nuestro turno
         if (turnManager.GetComponent<Turns>().turn)
         {
-            //Esperamos a que se presione el click izquierdo y almacenamos en hit1 lo que se ha clickado
             if (Input.GetAxis("Click1") > 0)
             {
                 CompClick1 = true;
@@ -38,8 +42,6 @@ public class mouseActions : MonoBehaviour
                 {
                     if (hit1.collider != null && hit1.collider.gameObject.tag != "Tile") click1 = hit1.collider.gameObject;
 
-                    //Comprobamos que se ha seleccionado y actualizamos la interfaz con sus propiedades
-                   // Debug.Log("Click Izq: " + hit1.collider);
                     if (click1.tag == "Unit")
                     {
                         click1.GetComponent<Unit>().Display();
@@ -55,25 +57,16 @@ public class mouseActions : MonoBehaviour
             if (Input.GetAxis("Click2") > 0) CompClick2 = true;
             if (CompClick1 && CompClick2)
             {
-                //Pasamos a clickar el segundo objeto con el click derecho
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit2, 100) &&
                     !EventSystem.current.IsPointerOverGameObject())
                 {
                     if(hit2.collider != null) click2 = hit2.collider.gameObject;
-                    // Debug.Log("Click Derecho: " + hit2.collider);
-                    //Combate
-                    //Si lo que seleccionamos con el click derecho es una unidad, haremos la accion de combatir
                     if (click2.gameObject.tag == "Unit" && click1.gameObject.GetComponent<Unit>().playable == true)
                     {
-                        //Si es una unidad aliada a una enemiga atacara
-                        //Si es una infanteria o opuede que meta un ingeniero puede que repare el tank si el objetivo es aliado
-
                         click1.GetComponent<Unit>().Attack(click2);
                         click1.GetComponent<Unit>().Display();
                     }
 
-                    //Conquista
-                    //Si lo segundo que seleccionamos es un edificio procederemos a la conquista si es posible
                     if (click2.tag == "Building" &&click1.gameObject.tag == "Unit" 
                         && click1.GetComponent<Unit>().playable == true)
                     {
@@ -81,9 +74,6 @@ public class mouseActions : MonoBehaviour
                         click1.GetComponent<Unit>().Display();
                     }
 
-                    //Movimiento
-                    //Si lo segundo que seleccionamos es una casilla, haremos el proceso de movernos
-                    //siempre que sea una posicion permitida
                     if (click1.tag == "Unit")
                     {
                         if(click2.tag == "Tile" && click1.GetComponent<Unit>().playable == true)
@@ -94,7 +84,6 @@ public class mouseActions : MonoBehaviour
 
                     }
                 }
-                //CompClick1 = false;
                 CompClick2 = false;
             }
         }
@@ -108,8 +97,6 @@ public class mouseActions : MonoBehaviour
                 {
                     if (hit1.collider != null) click1 = hit1.collider.gameObject;
 
-                    //Comprobamos que se ha seleccionado y actualizamos la interfaz con sus propiedades
-                    // Debug.Log("Click Izq: " + hit1.collider);
                     if (click1.tag == "Unit")
                     {
                         click1.GetComponent<Unit>().Display();

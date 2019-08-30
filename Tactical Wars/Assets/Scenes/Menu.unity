@@ -298,8 +298,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 237.35, y: -471}
-  m_SizeDelta: {x: 380.7, y: 237.6}
+  m_AnchoredPosition: {x: 237.35, y: -490.1}
+  m_SizeDelta: {x: 380.7, y: 275.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &18471246
 MonoBehaviour:
@@ -340,7 +340,7 @@ MonoBehaviour:
     Unity sample UI by Unity
 
 
-    Interface art "paperUI by lynda MC Donald
+    Interface art "paperUI" by lynda MC Donald
 
 
     Main menu music "mission" Free Creative Commons BGM collected by lunalucid
@@ -1523,8 +1523,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: THE OBJECTIVE OF THE GAME IS TO DEFend this green BUilding and attack that
-    red one. EASY right?
+  m_Text: THE OBJECTIVE OF THE GAME IS TO DEFend this green BUilding and attack the
+    red one. EASY, right?
 --- !u!222 &260177216
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2820,7 +2820,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'To attack or conquer an enemy, you have to be in the adjacent tile. then
-    whith the unit selected (left click on it) right click on the target.
+    with the unit selected (left click on it) right click on the target.
 
     TO spawn an unit or pass turn just hit on that buttons. EZPZ'
 --- !u!222 &648575296
@@ -3682,7 +3682,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'There are 3 types of buildings
 
-    All buildings provide of golmarks, the pump gas and the camp rations
+    All buildings provide goldmarks, the pump gas and the camp rations
 
     there are 3 factions:
 
@@ -16319,10 +16319,10 @@ MonoBehaviour:
     GAs: Each tile you move, 5 gas it takes. 3 tiles 15 gas. quick maths
 
 
-    rations: Units use 1 rations per turn when it attacks, conquers or moves
+    rations: Units use 1 rations per turn when attack, conquer or move
 
 
-    GM: THe goldmarks or GM is the "coin" of the game. Use coin to spawn units
+    GM: THe goldmarks or GM are the currency of the game. Use coin to spawn units
 
 
     dont ran out of resources or you will loose!'
@@ -17617,8 +17617,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: To move your unit left click on the unit and then right click on a green
-    tile. Are you new to games like this?
+  m_Text: To move an unit, left click on the unit and then right click on a green
+    tile. Are you new to this type of games?
 --- !u!222 &1368111425
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20692,8 +20692,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You can change the input settings, on the input option of the game launcher
-    when you start the game
+  m_Text: You can change the input settings, on the input option in the game launcher
 --- !u!222 &1955665015
 CanvasRenderer:
   m_ObjectHideFlags: 0

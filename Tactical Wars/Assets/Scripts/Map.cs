@@ -5,25 +5,27 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public int ROWS = 4; //Numero de filas de casillas
-    public int COLS = 5; //Numero de columnas de casillas
+    /* Número de filas del mapa */
+    public int ROWS = 4; 
+    /* Número de columnas del mapa */
+    public int COLS = 5; 
 
-    //Materiales para indicar las casillas y enemigso
-    public Material neutral, enemy, ally;
-    public Material emptyTile, CanMove, cantMove;
-    //Vectores de casillas y grids
+    /* Vector y matriz de objetos de tipo casillas */
     GameObject[] tiles;
     public GameObject[,] mTiles;
 
+    /* Materiales usados en las casillas */
     public Material allyMat;
     public Material enemyMat;
     public Material neutralMat;
     public Material defMat;
 
 
+    /* Referencias a otros objetos */
     public GameObject turno;
     public GameObject resourceManager;
 
+    /* Inicializa el mapa de la escena */
     void SetMap()
     {
         mTiles = new GameObject[ROWS, COLS]; //Matirz de casillas
@@ -45,11 +47,14 @@ public class Map : MonoBehaviour
             }
         }
     }
+
+    /* LLama a la función anterior */
     private void Awake()
     {
         SetMap();
     }
 
+    /* Ejecuta el algoritmo A* dado dos posiciones en el mapa */
     public List<GameObject> GetPath(Vector2 Start, Vector2 End)
     {
         List<Pathfinding.Node> camino;
@@ -67,17 +72,19 @@ public class Map : MonoBehaviour
         return ruta;
     }
 
+    /* Retorna una casilla dada una posicion */
     public GameObject returnTile(Vector2 x)
     {
         return mTiles[(int)x.x, (int)x.y];
     }
 
+    /* Colorea las casillas dependiendo de los movimientos restantes o disponibles de una unidad */
     public void ColorTiles(bool ally, int steps, int x, int y, bool action)
     {
         if (ally)
         {
             mTiles[x, y].transform.GetChild(0).GetComponent<Renderer>().material = allyMat;
-            if (turno.GetComponent<Turns>().turn && action == true && resourceManager.GetComponent<Resources>().Raciones > 0)
+            if (turno.GetComponent<Turns>().turn && action == true && (resourceManager.GetComponent<Resources>().Raciones > 0 || mTiles[x, y].GetComponent<Tile>().obj.GetComponent<Unit>().feeded == true))
             {
                 for (int i = 0; i <= (steps+1); i++)
                 {
@@ -169,7 +176,6 @@ public class Map : MonoBehaviour
                 }
             }
 
-            //for (int a = 0, int b = steps; && a <= steps, b >= 0)
 
         }
         else if(ally == false)
@@ -228,7 +234,7 @@ public class Map : MonoBehaviour
                         {
                             if (mTiles[x - i, y + j].GetComponent<Tile>().notWalkable == false && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count <= steps && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count > 0)
                             {
-                                mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemy;
+                                mTiles[x - i, y + j].transform.GetChild(0).GetComponent<Renderer>().material = enemyMat;
                             }
                             else if (mTiles[x - i, y + j].GetComponent<Tile>().notWalkable == true && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count <= (steps + 1) && mTiles[x - i, y + j].GetComponent<Tile>().obj != null
                                 && GetPath(new Vector2(x, y), new Vector2(x - i, y + j)).Count > 0)
@@ -269,6 +275,8 @@ public class Map : MonoBehaviour
             }
         }
     }
+
+    /* Vuelve de color inicial todas las casillas */
     public void resetTiles()
     {
         for (int i = 0; i < ROWS; i++)
@@ -280,6 +288,7 @@ public class Map : MonoBehaviour
         }
     }
 
+    /* Colorea una sola casillas */
     public void ColorTile(int x, int y, int mat)
     {
         if(mat == 0) mTiles[x, y].transform.GetChild(0).GetComponent<Renderer>().material = neutralMat;

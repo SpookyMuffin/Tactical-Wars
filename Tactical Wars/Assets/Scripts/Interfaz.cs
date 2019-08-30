@@ -5,30 +5,29 @@ using UnityEngine.UI;
 
 public class Interfaz : MonoBehaviour
 {
+    /* referencias a otros objetos */
     public GameObject GoldmarkText;
     public GameObject RacionesText;
     public GameObject CombustibleText;
-
     public GameObject infoPanel;
     public GameObject info1, info2, info3, info4, info5, info6;
     public GameObject WaitTime;
     public GameObject passButton, waitButton;
-
     public GameObject selectedObj = null;
     GameObject tempObj = null;
     public GameObject recursos;
-
     public Material selectedMat;
     Material tempMat;
     public GameObject audioData;
-
     public GameObject mapa;
 
+    /* Actualiza el tiempo de espera en el panel correspondiente */
     public void waitTimeIA(float time)
     {
         WaitTime.GetComponent<Text>().text = "Current: " + time + "s";
     }
 
+    /* Refresca el panel de recursos */
     public void RefreshResources(int G, int R, int C)
     {
         GoldmarkText.GetComponent<Text>().text = "GM: " + G;
@@ -37,6 +36,7 @@ public class Interfaz : MonoBehaviour
 
     }
 
+    /* Actualiza el panel de información cuando se selecciona una unidad */
     public void SwitchStatPanelUnit(int type, int health, int steps, int power, bool action, bool Playable, bool feeded)
     {
         if (Playable)info1.GetComponent<Text>().text = "Faction: " + "Ally";
@@ -51,6 +51,7 @@ public class Interfaz : MonoBehaviour
 
     }
 
+    /* Actualiza el panel de inforamción cuando se selecciona un edificio */
     public void SwitchStatPanelBuilding(int type, int status, int progress)
     {
         if(status == 0) info1.GetComponent<Text>().text = "Faction: " + "Neutral";
@@ -77,12 +78,14 @@ public class Interfaz : MonoBehaviour
         else info6.GetComponent<Text>().text = "Important building!";
     }
 
+    /* Esconde o muestra el botón de pasar turno */
     public void Pass(bool estado)
     {
         passButton.SetActive(estado);
         waitButton.SetActive(!estado);
     }
 
+    /* Asigna un objeto seleccionado */
     public void setSelectedObj(GameObject obj)
     {
         bool suena = true;
@@ -131,7 +134,6 @@ public class Interfaz : MonoBehaviour
         tempObj = selectedObj;
         if(obj.tag == "Unit")
         {
-            Debug.Log("selecciono");
             if (suena)
             {
                 audioData.transform.GetChild(3).gameObject.SetActive(false);
@@ -151,18 +153,4 @@ public class Interfaz : MonoBehaviour
         
 
     }
-    
-    void pass()
-    {
-        selectedObj.transform.GetChild(0).transform.GetChild(0).GetComponent<Renderer>().material = tempMat;
-        selectedObj.transform.GetChild(0).transform.GetChild(1).GetComponent<Renderer>().material = tempMat;
-        selectedObj.transform.GetChild(0).transform.GetChild(2).GetComponent<Renderer>().material = tempMat;
-        selectedObj.transform.GetChild(0).transform.GetChild(3).GetComponent<Renderer>().material = tempMat;
-
-        selectedObj = null;
-        tempObj = null;
-        tempMat = null;
-        selectedMat = null;
-    }
-
 }

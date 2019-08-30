@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
-    //Caracteristicas de la unidad
-    public int type; //Tipo de la unidad 0 = tank, 1  = infanteria
-    public int health = 100; //Vida de la unidad
+    /* Caracteristicas de la unidad */
+    /* Tipo de la unidad 
+     * Tanque  = 0 */
+    public int type; 
+
+    /* Vida de la unidad */
+    public int health = 100;
     public int steps = 3; //Numero de movimientos que puede realizar
     public int power = 50; //Daño que inflnge nuestra unidad
 

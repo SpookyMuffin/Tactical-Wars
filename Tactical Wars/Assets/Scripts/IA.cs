@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class IA : MonoBehaviour
 {
+    /* Referencias a otros objetos */
     public GameObject TurnManager;
     public GameObject Map;
     public GameObject resourceManager;
     public GameObject spawn;
     public GameObject interfaz;
+
+    /* Timepo de espera entre acciones */
     public float waitMoveTime = 0.5f;
 
+    /* Listas con unidades de cada bando */
     List<GameObject> IAUnits = new List<GameObject>();
     List<GameObject> PlayerUnits = new List<GameObject>();
 
+    /* Listas de edificios de los 3 bandos */
     List<GameObject> IABuildings = new List<GameObject>();
     List<GameObject> PlayerBuildings = new List<GameObject>();
     List<GameObject> NeutralBuildings = new List<GameObject>();
 
+    /* Material enemigo */
     public Material IAMaterial;
 
+    /* Cambia el tiempo de espera */
     public void changeMoveSpeed(bool more)
     {
         if(more && waitMoveTime < 2.0f)
@@ -34,16 +41,18 @@ public class IA : MonoBehaviour
         }
     }
 
+    /* Inicia el turno de la IA */
     public void IATurn()
     {
         StartCoroutine(Move(0)); 
     }
+
+    /* Subrutina que hace que mueva las unidades y realice una serie de acciones */
     IEnumerator Move(int numUnit)
     {
 
         
         FindUnitsAndBuildings();
-        if (IAUnits.Count > 0)Debug.Log(IAUnits[numUnit].name);
         GameObject nearest = null;
         if(IAUnits.Count > 0)
         {
@@ -56,7 +65,6 @@ public class IA : MonoBehaviour
 
         if (nearest != null)
         {
-            Debug.Log("Nearest tag: " + nearest.tag);
             List<GameObject> Path;
             if (nearest.tag == "Unit") Path = Map.GetComponent<Map>().GetPath(IAUnits[numUnit].GetComponent<Unit>().getPos(), nearest.GetComponent<Unit>().getPos());
             else Path = Map.GetComponent<Map>().GetPath(IAUnits[numUnit].GetComponent<Unit>().getPos(), nearest.GetComponent<Building>().getPos());
@@ -67,7 +75,6 @@ public class IA : MonoBehaviour
                 while (k < Path.Count && IAUnits[numUnit].GetComponent<Unit>().steps > 0 && Path[k].GetComponent<Tile>().notWalkable == false && HasCombustible == true && HasCombustible == true)
                 {
 
-                    Debug.Log(" voy a moverme y tengo " + IAUnits[numUnit].GetComponent<Unit>().steps + "me dirijo a " + Path[k].name);
                     IAUnits[numUnit].GetComponent<Unit>().Move(Path[k]);
                     k++;
 
@@ -84,7 +91,6 @@ public class IA : MonoBehaviour
         nearest.GetComponent<Building>().Tile.GetComponent<Tile>().x, nearest.GetComponent<Building>().Tile.GetComponent<Tile>().y) <= 1)
                 {
                     IAUnits[numUnit].GetComponent<Unit>().Conquer(nearest, IAMaterial);
-                    Debug.Log("Conquisto");
                     yield return new WaitForSeconds(waitMoveTime);
                 }
             }
@@ -95,7 +101,6 @@ public class IA : MonoBehaviour
                 {
 
                     IAUnits[numUnit].GetComponent<Unit>().Attack(nearest);
-                    Debug.Log("ataco");
                     yield return new WaitForSeconds(waitMoveTime);
 
 
@@ -109,7 +114,6 @@ public class IA : MonoBehaviour
                 if (resourceManager.GetComponent<Resources>().EnemyGoldmarks > resourceManager.GetComponent<Resources>().PrecioTank)
                 {
                     yield return new WaitForSeconds(waitMoveTime);
-                    Debug.Log("Intento Spawnear un tank");
                     spawn.GetComponent<Spawn>().EnemySpawnTank(0);
 
                 }
@@ -121,7 +125,6 @@ public class IA : MonoBehaviour
             if (resourceManager.GetComponent<Resources>().EnemyGoldmarks > resourceManager.GetComponent<Resources>().PrecioTank)
             {
                 yield return new WaitForSeconds(waitMoveTime);
-                Debug.Log("Intento Spawnear un tank");
                 spawn.GetComponent<Spawn>().EnemySpawnTank(0);
 
             }
@@ -130,15 +133,16 @@ public class IA : MonoBehaviour
 
 
     }
+    /* Subrutina que acaba el turno */
     IEnumerator endTurn()
     {
 
         TurnManager.GetComponent<Turns>().Pass(1);
-        Debug.Log("Pulso el end");
         yield return new WaitForSeconds(waitMoveTime);
 
     }
 
+    /* Encuentra y asigna las unidades y edificios en sus listas correspondientes */
     void FindUnitsAndBuildings()
     {
         IAUnits.Clear();
@@ -175,6 +179,8 @@ public class IA : MonoBehaviour
         }
 
     }
+
+    /* Calcula la distancia en casillas de dos posiciones del mapa */
     int CalculaDistancia(int x1, int y1, int x2, int y2)
     {
         return Map.GetComponent<Map>().GetPath(new Vector2(x1, y1), new Vector2(x2, y2)).Count;

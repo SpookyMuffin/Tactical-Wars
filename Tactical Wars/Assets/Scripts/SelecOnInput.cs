@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class SelecOnInput : MonoBehaviour
 {
+    /* Referencias a otros objetos */
     public EventSystem eventSystem;
     public GameObject selectedObject;
 

@@ -5,35 +5,51 @@ using UnityEngine.UI;
 
 public class Resources : MonoBehaviour
 {
-    //Recursos del jugador
-    public int Goldmarks = 100; //Moneda del juego
-    public int Raciones = 100; //Token que utiliza la infanteria en cada turno
-    public int Combustible = 100; //Token que utiliza el tank por cada movimiento
+    /* Recursos del jugador */
+    /* Moneda del juego */
+    public int Goldmarks = 100;
 
-    //Mismo que las variables anterior pero para el enemigo
+    /* Token que utiliza la infanteria en cada turno */
+    public int Raciones = 100;
+
+    /* Token que utiliza el tank por cada movimiento */
+    public int Combustible = 100; 
+
+    /* Mismo que las variables anterior pero para el enemigo */
     public int EnemyGoldmarks = 100;
     public int EnemyRaciones = 100;
     public int EnemyCombustible = 100;
 
-    //Precio y coste de unidades y acciones
-    public int PrecioTank = 20; //Precio en monedas que cuesta cada tanque
-    public int gastoCombustibleTank = 5; //Combustible usado por cada movimiento de los tanques
-    public int combustiblePump = 5; //Petroleo ganado cada turno por los edificios que generar este recurso
-    public int racionesCamp = 10; //Raciones ganadas cada turno por los edificios que generan este recurso
-    public int goldmarkEdificio = 1; //Monedas generadas por cada edificio al final de turno
-    public int goldmarkTurno = 1; //Monedas por defecto ganada cada turno
+    /* Precio y coste de unidades y acciones */
+    /* Precio en monedas que cuesta cada tanque */ 
+    public int PrecioTank = 20;
 
-    //Usados para actualizar la interfaz
+    /* Combustible usado por cada movimiento de los tanques */
+    public int gastoCombustibleTank = 5;
+
+    /* Petroleo ganado cada turno por los edificios que generar este recurso */
+    public int combustiblePump = 5;
+
+    /* Raciones ganadas cada turno por los edificios que generan este recurso */
+    public int racionesCamp = 10; 
+
+    /* Monedas generadas por cada edificio al final de turno */
+    public int goldmarkEdificio = 1; 
+
+    /* Monedas por defecto ganada cada turno */
+    public int goldmarkTurno = 1; 
+
+   /* referencias a otros objetos */
     public GameObject interfaz;
-
-    //Usado para los edificios
     public GameObject buildingManager;
 
+    /* Actualiza el panel de recursos al principio de partida */
     private void Start()
     {
         interfaz.GetComponent<Interfaz>().RefreshResources(Goldmarks,Raciones,Combustible);
     }
 
+    /* Alimenta a un tanque */
     public bool feedTank(bool playable)
     {
         if(playable && Raciones > 0)
@@ -52,9 +68,7 @@ public class Resources : MonoBehaviour
         return false;
     }
 
-    //Resta el combustible usado por mover una casilla un tanque
-    //Who == 0 jugador
-    //Who == 1 IA
+    /* Resta el combustible usado por mover una casilla un tanque */
     public void MoverTank(int who, int steps)
     {
         if (who == 0)
@@ -69,7 +83,7 @@ public class Resources : MonoBehaviour
         
     }
 
-    //Resta goldmarks por generar una unidad tipo tank
+    /* Resta goldmarks por generar una unidad tipo tank */
     public bool GenerarTank(int who)
     {
         if (who == 0 && Goldmarks >= PrecioTank)
@@ -88,7 +102,7 @@ public class Resources : MonoBehaviour
 
     }
 
-    //Añade el combustible por acabar el turno por cada edificio pumps que controlemos
+    /* Añade el combustible por acabar el turno por cada edificio pumps que controlemos */
     public void EndTurnPump(int who)
     {
         if(who == 0)
@@ -105,7 +119,7 @@ public class Resources : MonoBehaviour
         }
     }
 
-    //Añade las raciones y el goldmark generado por los edificios Camp que controlemos
+    /* Añade las raciones y el goldmark generado por los edificios Camp que controlemos */
     public void EndTurnCamp(int who)
     {
         if (who == 0)
@@ -123,7 +137,7 @@ public class Resources : MonoBehaviour
 
     }
 
-    //Añadimos y actualizamos los recursos por acabar la ronda
+    /* Añadimos y actualizamos los recursos por acabar la ronda */
     public void EndTurnResources(int who)
     {
         if(who == 0)

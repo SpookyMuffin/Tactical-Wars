@@ -5,22 +5,33 @@ using UnityEngine.UI;
 
 public class Building : MonoBehaviour
 {
-    public GameObject Tile; //Casilla en la que esta el edificio
-    public int status = 0; // Estado del edificio 0 = netrual \\ 1 = conquistado\\ 2 = enemigo lo ha conquistado
-    public int progress = 0; // Progreso de conquista de un edificio, si llega a -100 se pone a propiedad del enemigo, 100 de alidado.
-                             //Tiene que llegar a -100 o a 100 para cambiar de bando, si esta entre 100 y -100, es del ultimo propietario
-    public int type = 99; //Tipo del edifico  0 = cuartel general, 1 = campamento 2 = pump
+    /* Casilla en la que se encuentra el edificio */
+    public GameObject Tile;
 
+    /* Estado del edificion
+     * Neutral = 0
+     * Conquistado por el jugador = 1
+     * Conquistado por el enemigo = 2 */
+    public int status = 0;
 
+    /* Progreso de conquista de un edificio
+     * progress = 100 edificio pasa a ser aliado
+     * progress = -100 pasa a ser enemigo */
+    public int progress = 0;
+
+    /* Tipo de edificio
+     * Base principal = 0
+     * Campamento = 1
+     * Bomba de petroleo = 2 */
+    public int type = 99; 
+
+    /* Referencias a otros objetos */
     public GameObject interfaz;
     public GameObject endpanel;
     public GameObject menu;
 
-    //Funcion para conquista de un edificio
-    //Who = 1 es del jugador antes 0
-    //Who = -1 es de la IA antes 1
+    /* Función para conquistar un edificio */
 
-    //TODO arreglar casos para que no se ejecute setconquered cuando no se den las condiciones.
     public void Conquer(int who, Material mat)
     {
         progress += 50 * who;
@@ -33,7 +44,7 @@ public class Building : MonoBehaviour
             SetConquered(-1,mat);
         }
     }
-
+    /* Función para asignar bando a un edificio */
     private void SetConquered(int who, Material mat)
     {
         if (who == 1)
@@ -54,7 +65,8 @@ public class Building : MonoBehaviour
             finishGame();
         }
     }
-
+    /* Función que determina si se ha acabado la partida
+     * por conquista de la base principal de algun bando */
     private void finishGame()
     {
         menu.SetActive(false);
@@ -62,14 +74,14 @@ public class Building : MonoBehaviour
 
 }
 
-    //Funcion para refrescar la interfaz con los parametros de este edificio.
+    /*Funcion para refrescar la interfaz con los parametros de este edificio */
     public void Display()
     {
         interfaz.GetComponent<Interfaz>().SwitchStatPanelBuilding(type, status, progress);
         interfaz.GetComponent<Interfaz>().setSelectedObj(this.gameObject);
 
     }
-
+    /* Devuelve un vector2 con las coordenadas x e y de la casilla en la que se encuentra */
     public Vector2 getPos()
     {
         return new Vector2(Tile.GetComponent<Tile>().x, Tile.GetComponent<Tile>().y);
