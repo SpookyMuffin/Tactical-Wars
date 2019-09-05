@@ -134,7 +134,6 @@ public class Resources : MonoBehaviour
             EnemyGoldmarks = EnemyGoldmarks + (goldmarkEdificio * camps);
             EnemyRaciones = EnemyRaciones + (racionesCamp * camps);
         }
-
     }
 
     /* Añadimos y actualizamos los recursos por acabar la ronda */
@@ -153,8 +152,5 @@ public class Resources : MonoBehaviour
             EndTurnCamp(1);
             EnemyGoldmarks += goldmarkTurno;
         }
-
     }
-
-
 }

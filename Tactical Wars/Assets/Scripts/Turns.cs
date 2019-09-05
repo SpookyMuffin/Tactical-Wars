@@ -53,7 +53,5 @@ public class Turns : MonoBehaviour
             interfaz.GetComponent<Interfaz>().Pass(true);
             interfaz.GetComponent<Interfaz>().setSelectedObj(interfaz.GetComponent<Interfaz>().selectedObj);
         }
-
     }
-
 }

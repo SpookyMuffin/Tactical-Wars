@@ -12,29 +12,31 @@ public class Unit : MonoBehaviour
 
     /* Vida de la unidad */
     public int health = 100;
-    public int steps = 3; //Numero de movimientos que puede realizar
-    public int power = 50; //Daño que inflnge nuestra unidad
-
-    //Si le quedan acciones y si el jugador la puede controlar
-    public bool action = true; //Si puede atacar o conquistar
-    public bool playable = true; //Si la podemos controlar
-
+    /* Numero de movimientos que puede realizar */
+    public int steps = 3; 
+    /* Daño que inflinge la unidad */
+    public int power = 50;
+    /*Si le quedan acciones */
+    public bool action = true;
+    /* Si es controlable por el jugador */
+    public bool playable = true;
+    /*Movimientos y daño base de un tanque */
     public int TankPower = 50;
     public int TankSteps = 3;
-
+    /* Si ha comido este turno */
     public bool feeded = false;
 
 
-    //Casilla en la que se encuentra
+    /* Casilla en la que se encuentra */
     public GameObject Tile;
 
-    //Usados para la interfaz
+   /* Referencias a otros objetos */
     public GameObject interfaz;
-
     public GameObject resourceManager;
     public GameObject mapa;
     public GameObject audioData;
 
+    /* Alimentar a la unidad */
     public bool feedUnit()
     {
         if (!feeded)
@@ -50,6 +52,7 @@ public class Unit : MonoBehaviour
         return true;
     }
 
+    /* Inicializa la unidad despues de ser generada */
     public bool initialiteUnit(GameObject spawnTile)
     {
         if (spawnTile.GetComponent<Tile>().notWalkable == true) return false;
@@ -73,7 +76,7 @@ public class Unit : MonoBehaviour
     }
 
 
-    //Ataca a otra unidad
+    /* Ataca a otra unidad */
     public void Attack(GameObject Target)
     {
         if (!feedUnit()) return;
@@ -119,9 +122,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    //Funcion para conquistar un edificio.
-    //Recibe el gameobject que debe ser un edificio
-    //Material con el que se reemplazara el actual al conquistar.
+    /* Conquista a otra unidad */
     public void Conquer(GameObject Target, Material mat)
     {
         if (!feedUnit()) return;
@@ -161,7 +162,7 @@ public class Unit : MonoBehaviour
 
     }
 
-    //Mover a una casilla adyacente
+    /* Mueve la unidad */
     public void Move(GameObject Tile)
     {
         if (!feedUnit()) return;
@@ -183,19 +184,16 @@ public class Unit : MonoBehaviour
         distancia = mapa.GetComponent<Map>().GetPath(new Vector2(x1, y1), new Vector2(x2, y2)).Count;
         if ( distancia == 0 || (distancia > steps) || steps == 0 || Tile.GetComponent<Tile>().notWalkable == true) return;
 
-        //Liberamos la anterior casilla
+
         this.Tile.GetComponent<Tile>().obj = null;
         this.Tile.GetComponent<Tile>().notWalkable = false;
 
-        //Asignamos y bloqueamos la nueva
         this.transform.position = Tile.transform.position;
         this.Tile = Tile;
         Tile.GetComponent<Tile>().obj = this.gameObject;
         Tile.GetComponent<Tile>().notWalkable = true;
 
-        //Rotamos la unida para que no vaya haciendo Deja vu
         RotateUnit(x1, y1, x2, y2);
-        //Restamos los movimientos y refrescamos la interfaz
         steps-= distancia;
         if (playable == true)
         {
@@ -211,7 +209,7 @@ public class Unit : MonoBehaviour
 
     }
 
-    //Para refrescar al final de turnos los movimientos de cada unidad
+    /* Inicia la unidad para el siguiente turno */
     public void RefreshSteps()
     {
         if (type == 0) steps = TankSteps;
@@ -219,14 +217,14 @@ public class Unit : MonoBehaviour
         feeded = false;
     }
 
-    //Usada para actualizar la interfaz con los datos de esta unidad
+    /* Usada para actualizar la interfaz con los datos de esta unidad */
     public void Display()
     {
         interfaz.GetComponent<Interfaz>().SwitchStatPanelUnit(type,health,steps,power,action,playable,feeded);
         interfaz.GetComponent<Interfaz>().setSelectedObj(this.gameObject);
     }
 
-    //Funcion para rotar la unidad
+    /* Funcion para rotar la unidad */
     void RotateUnit(int x1, int y1, int x2, int y2)
     {
         if (y2 > y1)
@@ -248,6 +246,7 @@ public class Unit : MonoBehaviour
         }
     }
 
+    /* Devuelve la posicion */
     public Vector2 getPos()
     {
         return new Vector2(Tile.GetComponent<Tile>().x, Tile.GetComponent<Tile>().y);

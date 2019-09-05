@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
+    /* Referencias a otros objetos */
     public GameObject ATank;
     public GameObject ETank;
     public GameObject resourceManager;
@@ -14,8 +15,7 @@ public class Spawn : MonoBehaviour
     public GameObject interfaz;
     public GameObject audioData;
 
-    
-
+    /* Genera un tanque para el jugador */
     public void AllySpawnTank(int spawn)
     {
         mapa.GetComponent<Map>().resetTiles();
@@ -35,13 +35,11 @@ public class Spawn : MonoBehaviour
                 AllyTank.GetComponent<Unit>().audioData = audioData;
                 AllyTank.GetComponent<Unit>().initialiteUnit(Tile0);
                 AllyTank.GetComponent<Unit>().feeded = false;
-
-
-
             }
         }
     }
-
+    
+    /* Genera un tanque para el enemigo */
     public void EnemySpawnTank(int spawn)
     {
         if (turnManager.GetComponent<Turns>().turn == false && Tile1.GetComponent<Tile>().notWalkable == false)
@@ -62,11 +60,7 @@ public class Spawn : MonoBehaviour
                 EnemyTank.GetComponent<Unit>().audioData = audioData;
                 EnemyTank.GetComponent<Unit>().initialiteUnit(Tile1);
                 EnemyTank.GetComponent<Unit>().feeded = false;
-
-
-
             }
         }
     }
-
 }

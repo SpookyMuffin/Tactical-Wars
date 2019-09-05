@@ -49,6 +49,4 @@ public class buildingManager : MonoBehaviour
         }
         return pumpCount;
     }
-
-
 }
