@@ -55,6 +55,7 @@ public class Resources : MonoBehaviour
         if(playable && Raciones > 0)
         {
             Raciones--;
+            interfaz.GetComponent<Interfaz>().RefreshResources(Goldmarks,Raciones,Combustible);
             return true;
         }
         if (playable && Raciones < 0) return false;

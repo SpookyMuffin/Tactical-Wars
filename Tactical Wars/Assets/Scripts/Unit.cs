@@ -165,7 +165,6 @@ public class Unit : MonoBehaviour
     /* Mueve la unidad */
     public void Move(GameObject Tile)
     {
-        if (!feedUnit()) return;
         if (playable == true && resourceManager.GetComponent<Resources>().Combustible < resourceManager.GetComponent<Resources>().gastoCombustibleTank)
         {
             return;
@@ -175,6 +174,7 @@ public class Unit : MonoBehaviour
             return;
 
         }
+
         int distancia;
         int x1, y1, x2, y2;
         x1 = this.Tile.GetComponent<Tile>().x;
@@ -184,6 +184,7 @@ public class Unit : MonoBehaviour
         distancia = mapa.GetComponent<Map>().GetPath(new Vector2(x1, y1), new Vector2(x2, y2)).Count;
         if ( distancia == 0 || (distancia > steps) || steps == 0 || Tile.GetComponent<Tile>().notWalkable == true) return;
 
+        if (!feedUnit()) return;
 
         this.Tile.GetComponent<Tile>().obj = null;
         this.Tile.GetComponent<Tile>().notWalkable = false;
